@@ -406,6 +406,7 @@ loadout-name-LoadoutLegionVenatorLightReconnaissanceArmor = Legion venator light
 loadout-name-LoadoutLegionCloakBlack = Legion black cloak
 loadout-name-LoadoutNeckCloakLegionWhite = Legion white cloak
 loadout-name-LoadoutNeckCloakLegionRed = Legion red cloak
+loadout-name-LoadoutLegionPrimeHeavyArmor = Legion Gravis pattern armor
 
 # Miscellaneous eyes
 loadout-name-ClothingEyesGlassesChemist = chemist glasses
