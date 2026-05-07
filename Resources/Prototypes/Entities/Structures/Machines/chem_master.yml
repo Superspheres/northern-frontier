@@ -85,10 +85,8 @@
           - PillCanister
   - type: SolutionContainerManager
     solutions:
-      buffer:
-        canReact: false
-      pillBuffer:
-        canReact: false
+      buffer: {}
+      pillBuffer: {}
   - type: DumpableSolution
     solution: buffer
     unlimited: true
