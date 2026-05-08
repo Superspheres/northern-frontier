@@ -79,6 +79,115 @@
   items:
     - N14WeaponPistol9mm
 
+  - type: loadout
+  id: N14WeaponPistol45Colt
+  category: Weapons
+  cost: 3
+  requirements:
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutGuns
+    - !type:CharacterDepartmentRequirement # Corvax-Change
+      inverted: true
+      departments:
+      - Vault
+    - !type:CharacterJobRequirement # Forge-Change
+      inverted: true
+      jobs:
+      - BoSMidSerf
+      - CaesarLegionSlave
+      - NCRPisoner
+  items:
+    - N14WeaponPistol45Colt
+
+  - type: loadout
+  id: N14WeaponPistol12mm
+  category: Weapons
+  cost: 3
+  requirements:
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutGuns
+    - !type:CharacterDepartmentRequirement # Corvax-Change
+      inverted: true
+      departments:
+      - Vault
+    - !type:CharacterJobRequirement # Forge-Change
+      inverted: true
+      jobs:
+      - BoSMidSerf
+      - CaesarLegionSlave
+      - NCRPisoner
+  items:
+    - N14WeaponPistol12mm
+
+
+  - type: loadout
+  id: N14WeaponPistol9mmChinese
+  category: Weapons
+  cost: 3
+  requirements:
+    - !type:CharacterTraitRequirement
+      traits:
+      - LanguageChinese
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutGuns
+    - !type:CharacterDepartmentRequirement # Corvax-Change
+      inverted: true
+      departments:
+      - Vault
+    - !type:CharacterJobRequirement # Forge-Change
+      inverted: true
+      jobs:
+      - BoSMidSerf
+      - CaesarLegionSlave
+      - NCRPisoner
+  items:
+    - N14WeaponPistol9mmChinese
+
+  - type: loadout
+  id: N14WeaponPistolWebley
+  category: Weapons
+  cost: 3
+  requirements:
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutGuns
+    - !type:CharacterDepartmentRequirement # Corvax-Change
+      inverted: true
+      departments:
+      - Vault
+    - !type:CharacterJobRequirement # Forge-Change
+      inverted: true
+      jobs:
+      - BoSMidSerf
+      - CaesarLegionSlave
+      - NCRPisoner
+  items:
+    - N14WeaponPistolWebley
+
+
+- type: loadout
+  id: N14WeaponRevolver44Magnun
+  category: Weapons
+  cost: 3
+  requirements:
+    - !type:OverallTimeRequirement
+      min: 6800
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutGuns
+    - !type:CharacterDepartmentRequirement # Corvax-Change
+      inverted: true
+      departments:
+      - Vault
+    - !type:CharacterJobRequirement # Forge-Change
+      inverted: true
+      jobs:
+      - BoSMidSerf
+      - CaesarLegionSlave
+      - NCRPisoner
+  items:
+    - N14WeaponRevolver44Magnun
+
+
+
 ## Shotguns
 - type: loadout
   id: N14WeaponShotgunDoubleBarrel
