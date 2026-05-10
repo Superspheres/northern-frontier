@@ -86,11 +86,11 @@
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutGuns
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement 
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement 
       inverted: true
       jobs:
       - BoSMidSerf
@@ -100,25 +100,6 @@
     - N14WeaponPistol45Colt
 
 
-- type: loadout
-  id: N14WeaponPistol12mm
-  category: Weapons
-  cost: 3
-  requirements:
-    - !type:CharacterItemGroupRequirement
-      group: N14LoadoutGuns
-    - !type:CharacterDepartmentRequirement # Corvax-Change
-      inverted: true
-      departments:
-      - Vault
-    - !type:CharacterJobRequirement # Forge-Change
-      inverted: true
-      jobs:
-      - BoSMidSerf
-      - CaesarLegionSlave
-      - NCRPisoner
-  items:
-    - N14WeaponPistol12mm
 
 
 - type: loadout
@@ -132,11 +113,11 @@
       - LanguageNerd 
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutGuns
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement
       inverted: true
       jobs:
       - BoSMidSerf
@@ -152,11 +133,11 @@
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutGuns
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement 
       inverted: true
       jobs:
       - BoSMidSerf
@@ -175,11 +156,11 @@
       min: 6800
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutGuns
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement 
       inverted: true
       jobs:
       - BoSMidSerf
@@ -265,11 +246,11 @@
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutAmmo
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement 
       inverted: true
       jobs:
       - BoSMidSerf
@@ -287,11 +268,11 @@
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutAmmo
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement
       inverted: true
       jobs:
       - BoSMidSerf
@@ -307,11 +288,11 @@
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutAmmo
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement 
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement 
       inverted: true
       jobs:
       - BoSMidSerf
@@ -328,11 +309,11 @@
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutAmmo
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement 
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement
       inverted: true
       jobs:
       - BoSMidSerf
@@ -342,25 +323,6 @@
     - N14MagazinePistol10mm
 
 
-- type: loadout
-  id: N14MagazinePistol12mm
-  category: Weapons
-  cost: 1
-  requirements:
-    - !type:CharacterItemGroupRequirement
-      group: N14LoadoutAmmo
-    - !type:CharacterDepartmentRequirement # Corvax-Change
-      inverted: true
-      departments:
-      - Vault
-    - !type:CharacterJobRequirement # Forge-Change
-      inverted: true
-      jobs:
-      - BoSMidSerf
-      - CaesarLegionSlave
-      - NCRPisoner
-  items:
-    - N14MagazinePistol12mm
 
 - type: loadout
   id: N14MagazinePistol45
@@ -369,11 +331,11 @@
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutAmmo
-    - !type:CharacterDepartmentRequirement # Corvax-Change
+    - !type:CharacterDepartmentRequirement 
       inverted: true
       departments:
       - Vault
-    - !type:CharacterJobRequirement # Forge-Change
+    - !type:CharacterJobRequirement
       inverted: true
       jobs:
       - BoSMidSerf
