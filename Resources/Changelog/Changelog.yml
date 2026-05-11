@@ -4878,3 +4878,10 @@ Entries:
   id: 5863
   time: '2026-05-11T21:47:45.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/479
+- author: Dpellowski
+  changes:
+    - type: Add
+      message: Enclave Job Icons (some pls implement)
+  id: 5864
+  time: '2026-05-11T22:48:37.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/484
