@@ -4804,3 +4804,10 @@ Entries:
   id: 5856
   time: '2026-05-10T19:38:44.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/466
+- author: Bradysgaming
+  changes:
+    - type: Add
+      message: Added 10 hour time req for squire to be a paladin
+  id: 5857
+  time: '2026-05-11T17:35:43.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/470
