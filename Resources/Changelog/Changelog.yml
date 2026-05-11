@@ -4818,3 +4818,19 @@ Entries:
   id: 5858
   time: '2026-05-11T17:36:06.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/468
+- author: Bill
+  changes:
+    - type: Fix
+      message: >-
+        Fixed PA issue. PA no longer absorbs literal dozens of rounds for
+        absolutely free after integrity breaks. You may lynch me AFTER my finals
+        are done.
+    - type: Tweak
+      message: bullets are more lethal now, a little.
+    - type: Tweak
+      message: >-
+        made gunpowder chemical reaction less efficient holy shit you do NOT
+        need this much gunpowder gng.
+  id: 5859
+  time: '2026-05-11T17:54:41.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/471
