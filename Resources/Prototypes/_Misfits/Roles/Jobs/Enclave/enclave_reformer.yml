@@ -23,7 +23,7 @@
       department: Enclave
       min: 252000 # 70 hours — admin role
   startingGear: EnclaveCommanderGear # reuse Commander gear as base
-  icon: "JobIconCaptain"
+  icon: "JobIconEnclaveReformer"
   supervisors: job-supervisors-enclave-reformer
   requireAdminNotify: true
   hideIfPlaytimeRequirementsNotMet: false
