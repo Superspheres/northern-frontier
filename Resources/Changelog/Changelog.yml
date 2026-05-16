@@ -5186,3 +5186,20 @@ Entries:
   id: 5897
   time: '2026-05-16T03:43:42.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/525
+- author: HungryCuban
+  changes:
+    - type: Add
+      message: Added 80s sign armors pieces (three variations)
+    - type: Add
+      message: Added 80s pants
+    - type: Add
+      message: Added 80s spiked biker helmets (multiple colors)
+    - type: Add
+      message: >-
+        Added Legion Explorer veteran armor piece, upcoming loadout option for
+        veteran explorers
+    - type: Tweak
+      message: AM-180 sprites to behave like regular guns.
+  id: 5898
+  time: '2026-05-16T18:20:04.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/532
