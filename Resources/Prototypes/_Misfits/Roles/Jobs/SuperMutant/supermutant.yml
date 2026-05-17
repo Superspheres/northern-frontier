@@ -390,6 +390,10 @@
   playTimeTracker: SuperMutantFollowerDoctor
   icon: JobIconBorg
   supervisors: job-supervisors-follower-head
+  accessGroups:
+  - FollowersApocalypse
+  - FotADoctor
+  - FotA
   canBeAntag: false
   setPreference: true
   overrideConsoleVisibility: true
