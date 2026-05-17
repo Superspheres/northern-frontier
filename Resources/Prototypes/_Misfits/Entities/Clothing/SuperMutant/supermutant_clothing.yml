@@ -394,6 +394,28 @@
     tags:
     - SuperMutantWearable
 
+# #Misfits Add - Supermutant headgear tribal
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingSuperMutantSkullHelmetTribal
+  name: super mutant muffolo skull
+  description: A crude helmet assembled from scrap metal and leather, shaped to fit a super mutant's oversized skull.
+  components:
+  - type: Sprite
+    sprite: _Misfits/Clothing/SuperMutant/supermutant_muffolo_skull.rsi
+  - type: Clothing
+    sprite: _Misfits/Clothing/SuperMutant/supermutant_muffolo_skull.rsi
+  - type: Tag
+    tags:
+    - SuperMutantWearable
+  -type: Armor # #Misfits Add - 50% physical damage resistance (head protection)
+  modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+
 # Misfits Add - Follower Supermutant sprites.
 - type: entity
   parent: ClothingHandsBase
