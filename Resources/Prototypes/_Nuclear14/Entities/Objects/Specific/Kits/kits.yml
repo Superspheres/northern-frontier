@@ -552,7 +552,6 @@
     items:
       - id: N14ClothingHeadHatNCRHelmetMetalDesert # Forge-Change
       - id: ClothingBeltNCR
-      - id: ClothingNeckPinNCRSergeant
       - id: N14WeaponRifle556Carbine
       - id: LongMagazine556Rifle
         amount: 3
@@ -581,7 +580,6 @@
     items:
       - id: N14ClothingHeadHatNCRHelmetMetalDesert # Forge-Change
       - id: ClothingBeltNCR
-      - id: ClothingNeckPinNCRSergeant
       # Misfits Tweak: AutoRifle was too powerful at roundstart; downgraded to standard LMG.
       - id: N14WeaponLMG
       - id: LMGMagazine556Rifle
@@ -611,7 +609,6 @@
     items:
       - id: N14ClothingHeadHatNCRBeretRecon
       - id: ClothingBeltNCR
-      - id: ClothingNeckPinNCRSergeant
       - id: N14WeaponRifle308Battle
       - id: ClipMagazine308Rifle
         amount: 6
@@ -640,7 +637,6 @@
     items:
       - id: N14ClothingHeadHatNCRHelmetMetalDesert # Forge-Change
       - id: ClothingBeltNCR
-      - id: ClothingNeckPinNCRSergeant
       - id: N14WeaponShotgunAuto
       - id: N14MagazineShotgun12
         amount: 3
