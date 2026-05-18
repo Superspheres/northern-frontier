@@ -5301,3 +5301,12 @@ Entries:
   id: 5907
   time: '2026-05-18T16:12:43.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/548
+- author: Tytos
+  changes:
+    - type: Tweak
+      message: sewer between ncr and town now has real walls instead of gaslight walls
+    - type: Tweak
+      message: raider bunker has less insane loot.
+  id: 5908
+  time: '2026-05-18T16:13:38.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/549
