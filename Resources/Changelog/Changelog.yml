@@ -5354,3 +5354,10 @@ Entries:
   id: 5912
   time: '2026-05-19T22:27:39.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/555
+- author: Oli
+  changes:
+    - type: Tweak
+      message: Scissors to 2 from 4
+  id: 5913
+  time: '2026-05-19T22:28:26.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/557
