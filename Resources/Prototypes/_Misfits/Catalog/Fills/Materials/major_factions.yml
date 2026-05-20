@@ -111,11 +111,14 @@
       amount: 4
     - id: Pen
     - id: BoxFolderGrey
+    - id: BoxFolderRed
     - id: SyndicateWhistle
+      amount: 2
     - id: RadioHandheld
       amount: 3
     - id: N14WeaponShotgunCaravan
     - id: MisfitsMagazineBox20GaugeBeanbag
     - id: BoxHandcuff
-    - id: N14PoliceBaton
       amount: 2
+    - id: N14PoliceBaton
+      amount: 3

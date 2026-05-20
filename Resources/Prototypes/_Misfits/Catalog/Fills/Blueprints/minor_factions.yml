@@ -2,9 +2,9 @@
 # blueprints
 
 - type: entity
-  id: MisfitsCrateMilitaryBlueprintsTribe
+  id: MisfitsCrateAluminiumBlueprintsTribe
   suffix: Filled, Blueprints, Tribe
-  parent: N14CrateMilitary
+  parent: N14CrateAluminium
   components:
   - type: StorageFill
     contents:
@@ -24,9 +24,19 @@
     - id: TribalLegendaryArmorHeadBlueprint
 
 - type: entity
-  id: MisfitsCrateMilitaryBlueprints80s
+  id: MisfitsCrateAluminiumBlueprints80s
   suffix: Filled, Blueprints, 80s
-  parent: N14CrateMilitary
+  parent: N14CrateAluminium
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxFolderGrey
+
+
+- type: entity
+  id: MisfitsCrateAluminiumBlueprintsEnclave
+  suffix: Filled, Blueprints, Enclave
+  parent: N14CrateAluminium
   components:
   - type: StorageFill
     contents:

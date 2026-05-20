@@ -1,9 +1,9 @@
 ﻿# blueprints
 
 - type: entity
-  id: MisfitsCrateMilitaryBlueprintsNCR
+  id: MisfitsCrateAluminiumBlueprintsNCR
   suffix: Filled, Blueprints, NCR
-  parent: N14CrateMilitary
+  parent: N14CrateAluminium
   components:
   - type: StorageFill
     contents:
@@ -22,9 +22,9 @@
     - id: N14BlueprintC27ArmorNCR
 
 - type: entity
-  id: MisfitsCrateMilitaryBlueprintsLegion
+  id: MisfitsCrateAluminiumBlueprintsLegion
   suffix: Filled, Blueprints, Legion
-  parent: N14CrateMilitary
+  parent: N14CrateAluminium
   components:
   - type: StorageFill
     contents:
@@ -42,9 +42,9 @@
     - id: N14BlueprintLegionArmorT1
 
 - type: entity
-  id: MisfitsCrateMilitaryBlueprintsBoS
+  id: MisfitsCrateAluminiumBlueprintsBoS
   suffix: Filled, Blueprints, BoS
-  parent: N14CrateMilitary
+  parent: N14CrateAluminium
   components:
   - type: StorageFill
     contents:
@@ -63,9 +63,9 @@
       - id: N14BlueprintC27ArmorBoS
 
 - type: entity
-  id: MisfitsCrateMilitaryBlueprintsVault
+  id: MisfitsCrateAluminiumBlueprintsVault
   suffix: Filled, Blueprints, Vault
-  parent: N14CrateMilitary
+  parent: N14CrateAluminium
   components:
   - type: StorageFill
     contents:
