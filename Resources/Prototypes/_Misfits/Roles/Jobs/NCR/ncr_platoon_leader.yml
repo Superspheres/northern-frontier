@@ -1,24 +1,24 @@
 - type: job
-  id: NCRCommander
+  id: NCRPlatoonLeader
   setPreference: true
   hideWithoutJobWhitelist: false
   hideIfPlaytimeRequirementsNotMet: false
   jobWhitelistBypassesRoleTimers: true
   overrideConsoleVisibility: false
   canBeAntag: true
-  name: job-name-ncr-commander
-  description: job-description-ncr-commander
-  playTimeTracker: NCRCommander
+  name: job-name-ncr-platoon-leader
+  description: job-description-ncr-platoon-leader
+  playTimeTracker: NCRPlatoonLeader
   requirements:
     - !type:CharacterSpeciesRequirement
       species:
       - Human
       - Ghoul
-    - !type:CharacterDepartmentTimeRequirement # T7 faction timelock (40h NCR)
+    - !type:CharacterDepartmentTimeRequirement # T6 faction timelock (20h NCR)
       department: NCR
-      min: 144000 # 40 hours
-  weight: 120
-  startingGear: NCRCommanderGear
+      min: 72000 # 20 hours
+  weight: 105
+  startingGear: NCRPlatoonLeaderGear
   icon: "JobIconNcrLeader"
   supervisors: job-supervisors-ncr-commander
   requireAdminNotify: true
@@ -28,7 +28,6 @@
   - NCRSGT
   - NCRMedic
   - NCRLT
-  - NCRCaptain
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,20 +37,20 @@
           - NCR
 
 - type: startingGear
-  id: NCRCommanderGear
+  id: NCRPlatoonLeaderGear
   equipment:
     head: N14ClothingHeadHatNCRBeretOfficer
     back: N14ClothingBackpackNCR
     jumpsuit: N14ClothingOfficerUniformNCRDesert
-    outerClothing: N14ClothingOuterNCRDressJacketCO
+    outerClothing: N14ClothingOuterNCRDressJacket
     shoes: N14ClothingBootsCombatFilled
 
     belt: ClothingBeltNCR
     eyes: ClothingEyesGlassesSunglasses
     ears: N14ClothingHeadsetNCR
-    pocket1: NCRcaptainloadoutkits
-    pocket2: TrainingManualPowerArmorOperation
-    id: N14IDNCRDogtagCaptain
+    pocket1: NCRLTloadoutkits
+    pocket2: RadioHandheld
+    id: N14IDNCRDogtagOfficer
   innerClothingSkirt: N14ClothingOfficerUniformNCRDesert
   satchel: N14ClothingBackpackSatchelNCRFilled
   storage:
@@ -59,4 +58,4 @@
     - N14BoxPlasticFilledMilitaryNCR
 
 - type: playTimeTracker
-  id: NCRCommander
+  id: NCRPlatoonLeader
