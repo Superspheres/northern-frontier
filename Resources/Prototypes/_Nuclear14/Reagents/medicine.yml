@@ -26,8 +26,8 @@
         - !type:HealthChange
           damage:
             groups:
-              Burn: -9 # 9/3 = 3 | 3*25 = 75 of every type in 25 seconds. 
-              Brute: -9 # 9/3 = 3 | 3*25 = 75 of every type in 25 seconds. 
+              Burn: -9 # 9/3 = 3 | 3*25 = 75 of every type in 25 seconds.
+              Brute: -9 # 9/3 = 3 | 3*25 = 75 of every type in 25 seconds.
               Airloss: -3
         - !type:ModifyBleedAmount
           amount: -2
@@ -612,7 +612,6 @@
   group: Medicine
   desc: reagent-desc-beta-epoetine
   physicalDesc: reagent-physical-desc-tangy
-  flavor: medicine
   color: "#4da0bd"
   metabolisms:
     Medicine:
