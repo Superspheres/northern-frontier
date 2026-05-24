@@ -5595,3 +5595,27 @@ Entries:
   id: 5936
   time: '2026-05-24T14:18:19.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/581
+- author: Bill
+  changes:
+    - type: Tweak
+      message: 'nerfed veteran explorer armor. '
+    - type: Tweak
+      message: >-
+        made phlog/napalm mix incredibly difficult to produce, so difficult that
+        its unobtainable.
+    - type: Tweak
+      message: >-
+        Added very light doafters to injectors. chemical syringes do not have a
+        doafter but cannot be crafted anymore. These are special items meant for
+        medics to use for quick healing. 
+    - type: Fix
+      message: >-
+        chance asked for 80s to just need waster playtime so I obliged. Road
+        Rash now only needs 10 hours of  wastelander playtime. 
+    - type: Add
+      message: NCR now gets a 40mm grenade in their T3 ammo BP
+    - type: Tweak
+      message: legion veteran armor nerfed ever so slightly.
+  id: 5937
+  time: '2026-05-24T17:26:39.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/564
