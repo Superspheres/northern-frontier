@@ -5842,3 +5842,20 @@ Entries:
   id: 5961
   time: '2026-05-26T20:00:23.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/607
+- author: Bradysgaming
+  changes:
+    - type: Tweak
+      message: The Eighties can now be glowing ghouls ( Still not ready though)
+    - type: Tweak
+      message: All of town can now be glowing ghouls
+    - type: Fix
+      message: >-
+        Fixed C27 wastelanders spawning without ID and Farmer Species lock is no
+        longer inverted, No more extra C27's!!!
+    - type: Fix
+      message: >-
+        Fixed Sierra PA having storage causing topicals to be eaten and not
+        used.
+  id: 5962
+  time: '2026-05-26T20:47:50.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/610
