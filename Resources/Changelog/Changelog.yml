@@ -6127,3 +6127,10 @@ Entries:
   id: 5987
   time: '2026-05-30T05:09:36.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/639
+- author: Vixting
+  changes:
+    - type: Add
+      message: Pointing at mob will make your neutral followers attack
+  id: 5988
+  time: '2026-05-31T03:01:24.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/640
