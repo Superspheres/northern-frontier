@@ -6273,3 +6273,26 @@ Entries:
   id: 6000
   time: '2026-06-01T01:46:54.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/643
+- author: Squagg
+  changes:
+    - type: Add
+      message: >-
+        Added automatic wasteland weather events with announcements and
+        randomized timing.
+    - type: Add
+      message: Added radioactive weather radiation exposure for players caught outside.
+    - type: Add
+      message: Added dense-weather visibility limits for sandstorms and snowstorms.
+    - type: Fix
+      message: >-
+        NPCs can no longer see, target, or shoot players through
+        sandstorms/snowstorms past the visibility limit.
+    - type: Tweak
+      message: Weather now occurs every 30-60 minutes and lasts 5-10 minutes.
+    - type: Tweak
+      message: Radioactive weather now lasts at most 3 minutes.
+    - type: Tweak
+      message: Snowfall is now admin-only and excluded from random weather.
+  id: 6001
+  time: '2026-06-01T01:47:05.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/644
