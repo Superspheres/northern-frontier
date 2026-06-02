@@ -6371,3 +6371,12 @@ Entries:
   id: 6008
   time: '2026-06-02T20:08:33.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/663
+- author: Vixting
+  changes:
+    - type: Tweak
+      message: Radsuit slowdown has been removed
+    - type: Fix
+      message: Radsuit mask now acts as a mask
+  id: 6009
+  time: '2026-06-02T20:09:47.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/662
