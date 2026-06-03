@@ -10,6 +10,5 @@
   - type: Physics
     bodyType: Dynamic
     canCollide: false
-    mass: 5
   - type: Strap
     buckleOnInteractHand: false
