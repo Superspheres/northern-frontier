@@ -1071,8 +1071,8 @@
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: ClothingSpeedModifier
-    walkModifier: 1.1 # same as legion recon armor
-    sprintModifier: 1.1
+    walkModifier: 1.05
+    sprintModifier: 1.05
 
 #MARK: Veteran
 
