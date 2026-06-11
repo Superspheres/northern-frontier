@@ -6792,3 +6792,12 @@ Entries:
   id: 6048
   time: '2026-06-11T20:08:35.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/750
+- author: Cythisiax
+  changes:
+    - type: Fix
+      message: >-
+        Radiation no longer drains power armor integrity. It only affects the
+        wearer, reduced by armor coefficients.
+  id: 6049
+  time: '2026-06-11T20:11:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/757
