@@ -340,6 +340,7 @@
         - NCRCommander
         - NCRMajor
         - NCRDoctor
+        - NCRRO
   items:
     - N14ClothingHandsGlovesNCR
 
@@ -532,6 +533,7 @@
         - NCRCommander
         - NCRMajor
         - NCRDoctor
+        - NCRRO
   items:
     - N14ClothingHeadHatNCRSidecap
 
@@ -614,6 +616,7 @@
         - NCRVeteranRanger
         - NCRCitizen
         - NCRTrader
+        - NCRRO
   items:
     - N14ClothingHeadHatNCRSlouch
 
@@ -936,6 +939,7 @@
         - NCRCommander
         - NCRMajor
         - NCRDoctor
+        - NCRRO
   items:
     - N14ClothingNeckCloakNCR
 
@@ -963,6 +967,7 @@
         - NCRCommander
         - NCRMajor
         - NCRDoctor
+        - NCRRO
   items:
     - N14ClothingNeckCloakNCRSnow
 
