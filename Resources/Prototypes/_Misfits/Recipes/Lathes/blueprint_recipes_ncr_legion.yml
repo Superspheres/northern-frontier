@@ -644,6 +644,20 @@
 
     Leather: 500
 
+- type: latheRecipe
+  id: MisfitsShackledBoots
+  result: MisfitsShackledBoots
+  category: N14BlueprintNCRArmorT1
+  completetime: 6
+  requiresBlueprint: true
+  availableFaction:
+  - NCR
+  materials:
+    Cloth: 800
+
+    Thread: 500
+
+    Steel: 500
 
 - type: latheRecipe
   id: N14BPNCRArmorVestWoods

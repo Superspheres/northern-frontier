@@ -121,6 +121,7 @@
   components:
   - type: Blueprint
     recipes:
+    - MisfitsShackledBoots
     - N14BPNCRArmorVestSnow
     - N14BPNCRArmorVestWoods
     - N14BPNCRArmorVestDesert
