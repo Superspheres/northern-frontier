@@ -540,7 +540,7 @@
 - type: loadout
   id: N14LoadoutOuterCombatArmorRaider
   category: Outer
-  cost: 6
+  cost: 5
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -555,12 +555,12 @@
       - CaesarLegionSlave
       - NCRPrisoner
   items:
-    - N14ClothingOuterCombatArmorRaider
+    - N14ClothingOuterCombatRaider
 
 - type: loadout
   id: N14LoadoutOuterPoliceCombat
   category: Outer
-  cost: 8
+  cost: 6
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -581,7 +581,7 @@
 - type: loadout
   id: N14LoadoutOuterPressArmor
   category: Outer
-  cost: 8
+  cost: 6
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -601,7 +601,7 @@
 - type: loadout
   id: N14LoadoutOuterCombatArmor
   category: Outer
-  cost: 12
+  cost: 10
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -621,7 +621,7 @@
 - type: loadout
   id: N14LoadoutOuterCombatArmorPainspike
   category: Outer
-  cost: 12
+  cost: 10
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -636,13 +636,13 @@
       - CaesarLegionSlave
       - NCRPrisoner
   items:
-    - N14ClothingOuterCombatArmorPainspike
+    - N14ClothingOuterCombatPainspike
 
 
 - type: loadout
   id: N14LoadoutOuterRaiderCombat1
   category: Outer
-  cost: 12
+  cost: 10
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -662,7 +662,7 @@
 - type: loadout
   id: N14LoadoutOuterCombatArmorChinese
   category: Outer
-  cost: 12
+  cost: 10
   requirements:
     - !type:CharacterTraitRequirement
       traits:
@@ -686,7 +686,7 @@
 - type: loadout
   id: N14LoadoutOuterVestChinese
   category: Outer
-  cost: 11
+  cost: 9
   requirements:
     - !type:CharacterTraitRequirement
       traits:
