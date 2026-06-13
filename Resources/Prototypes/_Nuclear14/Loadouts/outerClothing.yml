@@ -519,7 +519,7 @@
 - type: loadout
   id: N14LoadoutOuterCoatFollowersArmored
   category: Outer
-  cost: 9
+  cost: 7
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -536,26 +536,6 @@
   items:
     - N14ClothingOuterCoatFollowersArmored
 
-
-- type: loadout
-  id: N14LoadoutOuterMetalArmor
-  category: Outer
-  cost: 6
-  requirements:
-    - !type:CharacterItemGroupRequirement
-      group: N14LoadoutOuter
-    - !type:CharacterDepartmentRequirement
-      inverted: true
-      departments:
-      - Vault
-    - !type:CharacterJobRequirement 
-      inverted: true
-      jobs:
-      - BoSMidSerf
-      - CaesarLegionSlave
-      - NCRPrisoner
-  items:
-    - N14ClothingOuterMetalArmor
 
 - type: loadout
   id: N14LoadoutOuterCombatArmorRaider
@@ -621,7 +601,7 @@
 - type: loadout
   id: N14LoadoutOuterCombatArmor
   category: Outer
-  cost: 13
+  cost: 12
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -641,7 +621,7 @@
 - type: loadout
   id: N14LoadoutOuterCombatArmorPainspike
   category: Outer
-  cost: 13
+  cost: 12
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -662,7 +642,7 @@
 - type: loadout
   id: N14LoadoutOuterRaiderCombat1
   category: Outer
-  cost: 13
+  cost: 12
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
@@ -682,7 +662,7 @@
 - type: loadout
   id: N14LoadoutOuterCombatArmorChinese
   category: Outer
-  cost: 13
+  cost: 12
   requirements:
     - !type:CharacterTraitRequirement
       traits:
@@ -706,7 +686,7 @@
 - type: loadout
   id: N14LoadoutOuterVestChinese
   category: Outer
-  cost: 12
+  cost: 11
   requirements:
     - !type:CharacterTraitRequirement
       traits:
