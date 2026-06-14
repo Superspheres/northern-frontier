@@ -14,7 +14,4 @@ public sealed partial class PipBoyHubCartridgeComponent : Component
 
     // #Misfits Add - Track dead drop IDs already notified so we don't spam on every UI update
     public HashSet<uint> NotifiedDeadDropIds = new();
-
-    // #Misfits Add - Track faction alert IDs already notified to this cartridge holder.
-    public HashSet<uint> NotifiedFactionAlertIds = new();
 }
