@@ -7046,3 +7046,12 @@ Entries:
   id: 6072
   time: '2026-06-15T01:15:51.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/784
+- author: Wazura
+  changes:
+    - type: Add
+      message: >-
+        Two Midwest pas to loadout for Paladin and Senior Paladin as Playtime
+        Rewards
+  id: 6073
+  time: '2026-06-15T01:16:19.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/802
