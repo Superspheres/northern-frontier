@@ -427,6 +427,9 @@
     - id: N14MaterialBrahminHide1
       amount: 1
       prob: 0.95
+    - id: N14MiscBrahminSkull
+      amount: 1
+      prob: 0.75
   - type: SolutionContainerManager
     solutions:
       udder:
@@ -525,6 +528,9 @@
       amount: 4
     - id: N14MaterialRawLeather1
       amount: 4
+    - id: N14MiscBighornerSkull
+      amount: 1
+      prob: 0.75
   - type: MeleeWeapon
     range: 3 # big horn
     altDisarm: false
