@@ -661,6 +661,30 @@
 
 
 - type: loadout
+  id: N14ClothingOuterCombatArmorChinese
+  category: Outer
+  cost: 18
+  requirements:
+    - !type:CharacterTraitRequirement
+      traits:
+      - LanguageChinese
+      - LanguageNerd
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutOuter
+    - !type:CharacterDepartmentRequirement
+      inverted: true
+      departments:
+      - Vault
+    - !type:CharacterJobRequirement
+      inverted: true
+      jobs:
+      - BoSMidSerf
+      - CaesarLegionSlave
+      - NCRPrisoner
+  items:
+    - N14ClothingOuterCombatArmorChinese
+
+- type: loadout
   id: N14LoadoutOuterVestChinese
   category: Outer
   cost: 17
