@@ -7214,3 +7214,10 @@ Entries:
   id: 6085
   time: '2026-06-16T21:53:02.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/826
+- author: HungryCuban
+  changes:
+    - type: Add
+      message: Added oiled pants and biker jacket to 80s loadouts
+  id: 6086
+  time: '2026-06-16T21:59:38.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/830
