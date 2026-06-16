@@ -22,7 +22,7 @@ loadout-name-N14ClothingBackpackSatchelTribal = tribal satchel
 loadout-name-N14ClothingBackpackSatchelMilitary = military satchel
 loadout-name-N14ClothingBackpackSatchelTrekker = trekker satchel
 loadout-name-M14ClothingBackpackSatchelMarching = marching satchel
-loading-name-M14ClothingBackpackSatchelOld = old satchel
+loadout-name-M14ClothingBackpackSatchelOld = old satchel
 
 # Uniforms
 loadout-name-ClothingUniformJumpsuitOliveSweaterVault = olive sweater
