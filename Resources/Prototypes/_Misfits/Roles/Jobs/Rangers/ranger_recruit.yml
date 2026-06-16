@@ -32,7 +32,7 @@
 - type: startingGear
   id: NCRPatrolRangerGear
   equipment:
-    head: N14ClothingHeadHatRanger # Misfits Tweak - patrol rangers use the standard ranger hat
+    head: N14ClothingHeadHatNCRPatrolRangerCampaign # Misfits Tweak - patrol rangers are given a campaign hat.
     back: N14ClothingBackpackMilitary # Corvax-Change
     jumpsuit: N14ClothingUniformRangerV1
     ears: N14ClothingHeadsetNCR
@@ -41,7 +41,7 @@
     pocket1: MagazineBox45-70
     pocket2: NCRpatrolrangerloadoutkits
     eyes: ClothingEyesGlassesSunglasses
-    outerClothing: N14ClothingOuterNCRCombatArmor # Misfits Tweak - patrol rangers should start in NCR combat armor, not ranger combat armor
+    outerClothing: N14ClothingOuterNCRPatrolRangerArmorVariant # Misfits Change - patrol rangers will start with a unique sidegrade.
     id: N14IDBadgeNCRDesertRangerRecruit
   innerClothingSkirt: N14ClothingUniformRangerV1 #placeholder
   satchel: N14ClothingBackpackSatchelMilitaryFilled

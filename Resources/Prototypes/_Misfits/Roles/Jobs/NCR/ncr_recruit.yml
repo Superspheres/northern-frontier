@@ -40,7 +40,7 @@
     shoes: N14ClothingBootsLeatherFilled
     ears: N14ClothingHeadsetNCR # #Misfits Add - NCR radio earpiece
 
-    belt: ClothingBeltNCR
+    #belt: ClothingBeltNCR #Misfits Change - Belts spawn in loadouts now, so Recruit doesn't get one in their starting gear to avoid inventory clutter for new players.
     pocket1: NCRtrooperloadoutkits
     id: N14IDNCRDogtag
   innerClothingSkirt: N14ClothingUniformNCRDesert # Corvax-Change

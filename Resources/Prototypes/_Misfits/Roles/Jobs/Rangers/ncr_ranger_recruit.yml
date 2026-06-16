@@ -42,7 +42,7 @@
     shoes: N14ClothingBootsLeather
     belt: ClothingBeltRevolverdesertfilled
     pocket1: MagazineBox45-70
-    outerClothing: N14ClothingOuterNCRCombatArmor
+    outerClothing: N14ClothingOuterNCRFlakVestOpen # Misfits Change - recruit starts with a combat armor side grade flak vest.
     id: N14IDBadgeNCRDesertRangerRecruit
   innerClothingSkirt: N14ClothingUniformRangerV1
   satchel: N14ClothingBackpackSatchelMilitaryFilled

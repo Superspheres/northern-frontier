@@ -32,7 +32,7 @@
     sprite: _Nuclear14/Clothing/OuterClothing/Armor/falloutncrassault.rsi
 
 - type: entity
-  parent: N14ClothingOuterNCRCombatArmor
+  parent: N14ClothingOuterNCRPouchedVestDesert
   id: N14ClothingOuterNCREngineerVest
   name: NCR engineer vest
   description: A sidegrade NCR armored vest for engineers and field support crews.
@@ -76,7 +76,7 @@
     sprite: _Nuclear14/Clothing/OuterClothing/Armor/falloutncrpatrolrangerarmor.rsi
 
 - type: entity
-  parent: N14ClothingOuterNCRCombatArmor
+  parent: N14ClothingOuterNCRVestDesert
   id: N14ClothingOuterNCRTrenchRaider
   name: NCR trench raider vest
   description: A stripped-down NCR armored vest intended for aggressive close-range patrol work.
