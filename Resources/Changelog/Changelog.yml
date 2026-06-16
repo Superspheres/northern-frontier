@@ -6608,7 +6608,7 @@ Entries:
     - type: Add
       message: >-
         A vinyl record player and radio station setup was added to the
-        broadcasting room for town reporters. 
+        broadcasting room for town reporters.
     - type: Add
       message: >-
         A stage for live performances was added to the bar, a second bar counter
@@ -7120,7 +7120,7 @@ Entries:
     - type: Fix
       message: >-
         [@Paige404's](https://github.com/Misfit-Sanctuary/nuclear-14/issues?q=is%3Apr+author%3Apaige404)'s
-        #804 
+        #804
     - type: Fix
       message: >-
         [@WazuraWasTaken](https://github.com/Misfit-Sanctuary/nuclear-14/issues?q=is%3Apr+author%3AWazuraWasTaken)'s
@@ -7207,3 +7207,31 @@ Entries:
   id: 6084
   time: '2026-06-16T02:33:10.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/821
+- author: Vixting
+  changes:
+    - type: Fix
+      message: 'Fixed revolvers '
+  id: 6085
+  time: '2026-06-16T21:53:02.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/826
+- author: HungryCuban
+  changes:
+    - type: Add
+      message: Added oiled pants and biker jacket to 80s loadouts
+  id: 6086
+  time: '2026-06-16T21:59:38.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/830
+- author: Squagg
+  changes:
+    - type: Fix
+      message: Fixed NCR Weapon Specialist rank pins not progressing with playtime.
+  id: 6087
+  time: '2026-06-16T22:00:45.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/822
+- author: Oli
+  changes:
+    - type: Tweak
+      message: old + marching satchel file fixes.
+  id: 6088
+  time: '2026-06-16T22:05:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/825

@@ -106,7 +106,7 @@
   id: NCRSpecialistPins
   jobs:
     - NCRWS
-  tracker: NCRWeaponsSpecialist
+  tracker: NCRWeaponSpecialist
   departmentTracker: false
   thresholds:
     - min: 0
