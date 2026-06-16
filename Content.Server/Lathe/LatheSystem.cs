@@ -456,6 +456,12 @@ namespace Content.Server.Lathe
             if (!HasComp<MaterialComponent>(args.Entity) && !HasComp<BlueprintComponent>(args.Entity))
                 return;
 
+            // #Misfits Fix - Rebuild material whitelist when a blueprint is inserted so
+            // materials from blueprint recipes (e.g. Brass for ammo bench BPs) are accepted
+            // into the internal MaterialStorage pool instead of being silently rejected.
+            if (HasComp<BlueprintComponent>(args.Entity))
+                _materialStorage.UpdateMaterialWhitelist(uid);
+
             UpdateUserInterfaceState(uid, component);
         }
 
@@ -467,6 +473,11 @@ namespace Content.Server.Lathe
             // disappear from the available list.
             if (!HasComp<MaterialComponent>(args.Entity) && !HasComp<BlueprintComponent>(args.Entity))
                 return;
+
+            // #Misfits Fix - Rebuild material whitelist when a blueprint is removed so
+            // materials exclusive to that blueprint are no longer accepted into storage.
+            if (HasComp<BlueprintComponent>(args.Entity))
+                _materialStorage.UpdateMaterialWhitelist(uid);
 
             UpdateUserInterfaceState(uid, component);
         }

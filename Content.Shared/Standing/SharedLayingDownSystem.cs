@@ -131,6 +131,11 @@ public abstract class SharedLayingDownSystem : EntitySystem
             return;
 
         var modifier = component.LyingSpeedModifier * (component.IsCrawlingUnder ? component.CrawlingUnderSpeedModifier : 1);
+
+        // Misfits Add: apply additional speed penalty when crawling while in Critical state
+        if (_mobState.IsCritical(uid))
+            modifier *= component.CritCrawlSpeedModifier;
+
         args.ModifySpeed(modifier, modifier);
     }
 

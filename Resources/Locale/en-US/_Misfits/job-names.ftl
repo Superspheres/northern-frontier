@@ -138,6 +138,8 @@ job-name-bos-scribe = Brotherhood Scribe
 job-description-bos-scribe = Support the chapter with research, medicine, and technical expertise.
 job-name-bos-initiate = Brotherhood Initiate
 job-description-bos-initiate = Learn the Brotherhood's code, follow orders, and earn your place in the chapter.
+job-name-bos-eyebot = Brotherhood Eyebot
+job-description-bos-eyebot = Serve the Brotherhood of Steel as a loyal robotic companion.
 
 # #Misfits Add — Squire loadout kit locale for new Misfits_SqrBasic_Set.
 # #Misfits Tweak: Removed rank prefix so the kit name is role-neutral.

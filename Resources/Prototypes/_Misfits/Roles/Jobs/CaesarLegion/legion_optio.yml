@@ -25,7 +25,7 @@
   startingGear: CaesarLegionOptioGear
   alwaysUseSpawner: true
   icon: "JobIconlegionerVenator"
-  supervisors: job-name-caesar-legion-other
+  supervisors: job-name-caesar-legion-supervisors # #Misfits Fix - Optio outranks Decanus, should not be listed as obeying Decani
   canBeAntag: false
   accessGroups:
   - CaesarLegionOptio

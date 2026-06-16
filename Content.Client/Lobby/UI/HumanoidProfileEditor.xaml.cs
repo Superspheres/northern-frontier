@@ -112,6 +112,14 @@ namespace Content.Client.Lobby.UI
                 ("RobotProtectronFire", "humanoid-profile-editor-robot-model-protectron-fire"),
                 ("RobotProtectronTribal", "humanoid-profile-editor-robot-model-protectron-tribal"),
             },
+            ["RobotSecuritron"] = new[]
+            {
+                ("RobotSecuritron", "humanoid-profile-editor-robot-model-securitron-gray"),
+                ("RobotSecuritronBlue", "humanoid-profile-editor-robot-model-securitron-blue"),
+                ("RobotSecuritronBrown", "humanoid-profile-editor-robot-model-securitron-brown"),
+                ("RobotSecuritronRed", "humanoid-profile-editor-robot-model-securitron-red"),
+                ("RobotSecuritronYellow", "humanoid-profile-editor-robot-model-securitron-yellow"),
+            },
             ["RobotAssaultron"] = new[]
             {
                 ("RobotAssaultron", "humanoid-profile-editor-robot-model-assaultron-beam"),
@@ -1802,6 +1810,11 @@ namespace Content.Client.Lobby.UI
                 || speciesId == "RobotProtectronPolice"
                 || speciesId == "RobotProtectronBuilder"
                 || speciesId == "RobotProtectronFire"
+                || speciesId == "RobotSecuritron"
+                || speciesId == "RobotSecuritronBlue"
+                || speciesId == "RobotSecuritronBrown"
+                || speciesId == "RobotSecuritronRed"
+                || speciesId == "RobotSecuritronYellow"
                 || speciesId == "RobotMrGutsy"
                 || speciesId == "RobotAssaultron"
                 || speciesId == "RobotAssaultronTesla"
@@ -1818,6 +1831,10 @@ namespace Content.Client.Lobby.UI
             return speciesId == "RobotProtectronPolice"
                 || speciesId == "RobotProtectronBuilder"
                 || speciesId == "RobotProtectronFire"
+                || speciesId == "RobotSecuritronBlue"
+                || speciesId == "RobotSecuritronBrown"
+                || speciesId == "RobotSecuritronRed"
+                || speciesId == "RobotSecuritronYellow"
                 || speciesId == "RobotAssaultronTesla"
                 || speciesId == "RobotSentryBotLaser"
                 || speciesId == "RobotRobobrainLaser"

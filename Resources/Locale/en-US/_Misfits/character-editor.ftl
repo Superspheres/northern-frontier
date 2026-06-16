@@ -41,6 +41,11 @@ humanoid-profile-editor-robot-model-protectron-police = Police
 humanoid-profile-editor-robot-model-protectron-builder = Builder
 humanoid-profile-editor-robot-model-protectron-fire = Firefighter
 humanoid-profile-editor-robot-model-protectron-tribal = Tribal Spirit-Tender
+humanoid-profile-editor-robot-model-securitron-gray = Gray
+humanoid-profile-editor-robot-model-securitron-blue = Blue
+humanoid-profile-editor-robot-model-securitron-brown = Brown
+humanoid-profile-editor-robot-model-securitron-red = Red
+humanoid-profile-editor-robot-model-securitron-yellow = Yellow
 
 # Robot model selector labels for Assaultron variants.
 humanoid-profile-editor-robot-model-assaultron-beam = Beam

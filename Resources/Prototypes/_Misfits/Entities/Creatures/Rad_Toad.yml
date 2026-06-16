@@ -37,6 +37,12 @@
       components:
       - HumanoidAppearance
       - TribalHuntParticipant
+    # #Misfits Fix - Super Mutants and Power Armor wearers are too heavy to ride
+    blacklist:
+      tags:
+      - CannotRide
+      components:
+      - PowerArmorWorn
   - type: Mountable
   - type: MovementSpeedModifier
     baseWalkSpeed: 4.5

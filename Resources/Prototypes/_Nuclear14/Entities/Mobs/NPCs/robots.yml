@@ -468,6 +468,87 @@
 
 
 - type: entity
+  parent: N14MobRobotProtectronPoliceHostile
+  id: N14MobRobotSecuritronHostile
+  name: Securitron
+  description: A securitron rolling patrol looking for a fight.
+  components:
+  - type: SpamEmitSound
+    minInterval: 12
+    maxInterval: 45
+    sound:
+      collection: N14SecuritronIdle
+      params:
+        volume: -7
+        maxDistance: 6
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-gray.rsi
+    layers:
+    - state: icon
+      map: ["movement"]
+    - state: icon
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: icon
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: walking
+    noMovementLayers:
+      movement:
+        state: icon
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5
+  - type: AggroSound
+    sound:
+      collection: N14SecuritronAttack
+      params:
+        volume: -3
+        maxDistance: 12
+
+- type: entity
+  parent: N14MobRobotSecuritronHostile
+  id: N14MobRobotSecuritronBlueHostile
+  name: Securitron
+  description: A blue securitron rolling patrol looking for a fight.
+  components:
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-blue.rsi
+
+- type: entity
+  parent: N14MobRobotSecuritronHostile
+  id: N14MobRobotSecuritronBrownHostile
+  name: Securitron
+  description: A brown securitron rolling patrol looking for a fight.
+  components:
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-brown.rsi
+
+- type: entity
+  parent: N14MobRobotSecuritronHostile
+  id: N14MobRobotSecuritronRedHostile
+  name: Securitron
+  description: A red securitron rolling patrol looking for a fight.
+  components:
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-red.rsi
+
+- type: entity
+  parent: N14MobRobotSecuritronHostile
+  id: N14MobRobotSecuritronYellowHostile
+  name: Securitron
+  description: A yellow securitron rolling patrol looking for a fight.
+  components:
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-yellow.rsi
+
+
+- type: entity
   parent: N14MobRobotHostileMelee
   id: N14MobRobotMrHandyClaw
   name: Mr Handy

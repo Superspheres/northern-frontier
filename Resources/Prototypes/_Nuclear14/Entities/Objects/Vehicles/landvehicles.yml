@@ -6,12 +6,18 @@
   components:
   - type: Vehicle
   - type: Strap
-    # #Misfits Change - brahdo riding now requires the shared riding perk instead of any humanoid.
+    # #Misfits Change - vehicle riding requires the shared riding perk instead of any humanoid.
     whitelist:
       requireAll: true
       components:
       - HumanoidAppearance
       - RidingPerk
+    # #Misfits Fix - Super Mutants and Power Armor wearers are too heavy to ride motorbikes
+    blacklist:
+      tags:
+      - CannotRide
+      components:
+      - PowerArmorWorn
   - type: Sprite
     sprite: _Nuclear14/Objects/Vehicles/bikesbuggy.rsi
     layers:

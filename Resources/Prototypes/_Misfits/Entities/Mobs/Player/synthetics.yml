@@ -574,6 +574,80 @@
     handCount: 1
 
 - type: entity
+  parent: N14PlayerSyntheticProtectron
+  id: N14PlayerSyntheticSecuritronGray
+  name: securitron
+  suffix: player, synthetic
+  description: A securitron chassis adapted for a living mind. This gray model uses the same general-purpose synthetic loadout as a baseline protectron.
+  components:
+  - type: HumanoidAppearance
+    species: RobotSecuritron
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-gray.rsi
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base", "movement"]
+    - state: icon
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: icon
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: walking
+    noMovementLayers:
+      movement:
+        state: icon
+
+- type: entity
+  parent: N14PlayerSyntheticSecuritronGray
+  id: N14PlayerSyntheticSecuritronBlue
+  name: securitron
+  suffix: player, synthetic, blue
+  components:
+  - type: HumanoidAppearance
+    species: RobotSecuritronBlue
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-blue.rsi
+
+- type: entity
+  parent: N14PlayerSyntheticSecuritronGray
+  id: N14PlayerSyntheticSecuritronBrown
+  name: securitron
+  suffix: player, synthetic, brown
+  components:
+  - type: HumanoidAppearance
+    species: RobotSecuritronBrown
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-brown.rsi
+
+- type: entity
+  parent: N14PlayerSyntheticSecuritronGray
+  id: N14PlayerSyntheticSecuritronRed
+  name: securitron
+  suffix: player, synthetic, red
+  components:
+  - type: HumanoidAppearance
+    species: RobotSecuritronRed
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-red.rsi
+
+- type: entity
+  parent: N14PlayerSyntheticSecuritronGray
+  id: N14PlayerSyntheticSecuritronYellow
+  name: securitron
+  suffix: player, synthetic, yellow
+  components:
+  - type: HumanoidAppearance
+    species: RobotSecuritronYellow
+  - type: Sprite
+    sprite: _Nuclear14/Mobs/Robots/securitron-yellow.rsi
+
+- type: entity
   parent: N14BasePlayerSynthetic
   id: N14PlayerSyntheticAssaultron
   name: assaultron

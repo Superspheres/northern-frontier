@@ -53,7 +53,7 @@
         - NCRPrivateFirstClass
         - NCRSoldier
         - NCRCadet
-        - NCRCitizen
+        # - NCRCitizen # #Misfits Fix - NCR Citizens should be able to select the Pacifist trait
         - NCRTrader
 #        - CaravanGuard
         #- BoSWashingtonCommander #Misfits Change /Comment-out/: Washington BoS removed

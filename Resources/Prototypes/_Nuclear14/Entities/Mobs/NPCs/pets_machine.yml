@@ -88,6 +88,8 @@
     attributes:
       proper: true
   - type: ZombieImmune # #Misfits Fix - robots should not be zombifiable; matches silicon_base, borg chassis, and NPC silicon patterns
+  - type: LanguageSpeaker # #Misfits Fix - required for LanguageSystem to initialize cached language lists on MapInit, otherwise CanUnderstand()/CanSpeak() always return false
+    currentLanguage: N14Robot
 # Let's see how much this remains functional, butchered MobSiliconBase, it is.
 
 - type: entity
@@ -272,13 +274,15 @@
   components:
   - type: NpcFactionMember
     factions:
-    - SimpleNeutral
+    - BrotherhoodOfSteel # #Misfits Fix - Eyebot should be in the BoS faction for playtime tracking and faction relations
   - type: GhostRole
     name: ghost-role-information-n14pet-eyebot-mbos-name
     description: ghost-role-information-n14pet-eyebot-description
     rules: ghost-role-component-default-rules
     makeSentient: false
     allowMovement: true
+  - type: GhostRoleJob # #Misfits Add - Attribute BoS playtime when a player takes this ghost role
+    job: BoSEyebot
   - type: Sprite
     sprite: _Nuclear14/Mobs/Pets/eyebot_mbos.rsi
     layers:
