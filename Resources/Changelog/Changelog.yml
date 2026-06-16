@@ -7228,3 +7228,10 @@ Entries:
   id: 6087
   time: '2026-06-16T22:00:45.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/822
+- author: Oli
+  changes:
+    - type: Tweak
+      message: old + marching satchel file fixes.
+  id: 6088
+  time: '2026-06-16T22:05:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/825
