@@ -135,26 +135,44 @@ namespace Content.Server.Pointing.EntitySystems
                 return false;
             }
 
-            if (!CanPoint(player))
-            {
-                return false;
-            }
+            // [Changed by MisfitsCrew/Operator] Lets systems such as Station AI replace
+            // the visual point source, validate remote-vision reach, and prevent proxy rotation.
+            var sourceEv = new GetPointingSourceEvent(player, coordsPointed, pointed);
+            // [Changed by MisfitsCrew/Operator] Broadcasts the source query as well so
+            // systems can resolve relayed actors such as AI cores, brains, and camera eyes.
+            RaiseLocalEvent(player, ref sourceEv, true);
 
-            if (!InRange(player, coordsPointed))
+            if (sourceEv.Cancelled)
             {
                 _popup.PopupEntity(Loc.GetString("pointing-system-try-point-cannot-reach"), player, player);
                 return false;
             }
 
+            var pointingSource = sourceEv.Handled ? sourceEv.Source : player;
+
+            if (!Exists(pointingSource) || !CanPoint(pointingSource))
+            {
+                return false;
+            }
+
+            if (!sourceEv.Handled && !InRange(pointingSource, coordsPointed))
+            {
+                _popup.PopupEntity(Loc.GetString("pointing-system-try-point-cannot-reach"), player, player);
+                return false;
+            }
+
+            // [Changed by MisfitsCrew/Operator] Uses the resolved visual source for arrow
+            // animation, visibility, and nearby-viewer checks while preserving actor identity.
             var mapCoordsPointed = coordsPointed.ToMap(EntityManager, _transform);
-            _rotateToFaceSystem.TryFaceCoordinates(player, mapCoordsPointed.Position);
+            if (sourceEv.RotateSource)
+                _rotateToFaceSystem.TryFaceCoordinates(pointingSource, mapCoordsPointed.Position);
 
             var arrow = EntityManager.SpawnEntity("PointingArrow", coordsPointed);
 
             if (TryComp<PointingArrowComponent>(arrow, out var pointing))
             {
-                if (TryComp(player, out TransformComponent? xformPlayer))
-                    pointing.StartPosition = EntityCoordinates.FromMap(arrow, xformPlayer.Coordinates.ToMap(EntityManager, _transform), _transform).Position;
+                if (TryComp(pointingSource, out TransformComponent? xformSource))
+                    pointing.StartPosition = EntityCoordinates.FromMap(arrow, xformSource.Coordinates.ToMap(EntityManager, _transform), _transform).Position;
 
                 pointing.EndTime = _gameTiming.CurTime + PointDuration;
 
@@ -170,7 +188,7 @@ namespace Content.Server.Pointing.EntitySystems
             }
 
             var layer = (int) VisibilityFlags.Normal;
-            if (TryComp(player, out VisibilityComponent? playerVisibility))
+            if (TryComp(pointingSource, out VisibilityComponent? playerVisibility))
             {
                 var arrowVisibility = EntityManager.EnsureComponent<VisibilityComponent>(arrow);
                 layer = playerVisibility.Layer;
@@ -186,7 +204,7 @@ namespace Content.Server.Pointing.EntitySystems
                     (eyeComp.VisibilityMask & layer) == 0)
                     return false;
 
-                return _transform.GetMapCoordinates(ent).InRange(_transform.GetMapCoordinates(player), PointingRange);
+                return _transform.GetMapCoordinates(ent).InRange(_transform.GetMapCoordinates(pointingSource), PointingRange);
             }
 
             var viewers = Filter.Empty()
