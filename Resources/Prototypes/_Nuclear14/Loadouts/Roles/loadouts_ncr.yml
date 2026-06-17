@@ -589,6 +589,7 @@
         - NCRFieldRanger
         - NCRPatrolRanger
         - NCRVeteranRanger
+        - NCRRO
     - !type:CharacterDepartmentTimeRequirement
       department: NCR
       min: 144000 # 40 hours, work for that hat!

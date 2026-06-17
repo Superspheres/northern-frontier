@@ -1101,6 +1101,16 @@
     damageCoefficient: 0.7
   - type: ClothingSpeedModifier
 
+- type: entity
+  parent: N14ClothingOuterRangerCoat
+  id: N14ClothingOuterRangerFieldArmor
+  name: NCR field ranger armor
+  description: A set of combat armor refurbished from old national guard stock, issued to Field Rangers.
+  components:
+  - type: Sprite
+    sprite: _Nuclear14/Clothing/OuterClothing/Armor/falloutrangerfieldarmor.rsi
+  - type: Clothing
+    sprite: _Nuclear14/Clothing/OuterClothing/Armor/falloutrangerfieldarmor.rsi
 
 
 - type: entity
