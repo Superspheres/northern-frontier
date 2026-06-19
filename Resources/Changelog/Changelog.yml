@@ -7498,3 +7498,10 @@ Entries:
   id: 6105
   time: '2026-06-19T16:39:32.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/848
+- author: Squagg
+  changes:
+    - type: Tweak
+      message: All Eighties roles now receive the Riding trait by default.
+  id: 6106
+  time: '2026-06-19T16:48:30.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/854
