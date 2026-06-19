@@ -7549,3 +7549,14 @@ Entries:
   id: 6112
   time: '2026-06-19T21:45:32.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/858
+- author: Tytos
+  changes:
+    - type: Add
+      message: Added Houndmaster cloak courtesy of Pinky
+    - type: Tweak
+      message: changed legion sm job slot limit, vex hood now has armor value
+    - type: Fix
+      message: ncr and legion civis having trait blacklists they shouldn't
+  id: 6113
+  time: '2026-06-19T21:51:11.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/846
