@@ -1,11 +1,7 @@
-using Content.Server.Movement.Systems;
 using Content.Shared._Misfits.CCVar;
-using Content.Shared._Misfits.Movement;
 using Content.Shared.Actions;
-using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Configuration;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -14,8 +10,7 @@ namespace Content.Server._Misfits.Movement;
 
 /// <summary>
 /// Server-side lag compensation system. Piggybacks on the <c>LastRealTick</c> field
-/// already stamped on <see cref="RequestShootEvent"/>, melee attack events, and
-/// <see cref="RequestPerformActionEvent"/>
+/// already stamped on <see cref="RequestShootEvent"/> and <see cref="RequestPerformActionEvent"/>
 /// by the client, storing it per-session. Range-validation calls can then apply a small
 /// tolerance margin when a player's action was sent from a behind-tick snapshot.
 ///
@@ -23,29 +18,31 @@ namespace Content.Server._Misfits.Movement;
 /// latency-sensitive event the player raised. This avoids the "Got late MsgEntity" spam
 /// that arises when sending tick-stamped entity events on a periodic timer.
 /// </summary>
-public sealed class ServerMisfitsLagCompensationSystem : SharedMisfitsLagCompensationSystem
+public sealed class ServerMisfitsLagCompensationSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly LagCompensationSystem _lagCompensation = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     // Per-session last-real-tick extracted from the client's stamped events.
     private readonly Dictionary<NetUserId, GameTick> _lastRealTicks = new();
+
+    /// <summary>Additional range buffer (tiles) applied when client is behind the server.</summary>
+    public float MarginTiles { get; private set; }
+
+    /// <summary>Maximum lag window (ms) the server compensates for.</summary>
+    public int MaxCompensationMs { get; private set; }
 
     public override void Initialize()
     {
         base.Initialize();
 
-        Subs.CVar(_config,
-            PerformanceCVars.LagCompensationMs,
-            v => _lagCompensation.BufferTime = TimeSpan.FromMilliseconds(v),
-            true);
+        Subs.CVar(_config, PerformanceCVars.LagCompensationMarginTiles, v => MarginTiles = v, true);
+        Subs.CVar(_config, PerformanceCVars.LagCompensationMs, v => MaxCompensationMs = v, true);
 
         // Read LastRealTick directly from the events the client already sends for game actions.
         // This avoids needing a separate periodic heartbeat message (which caused "Got late MsgEntity" spam).
         SubscribeNetworkEvent<RequestShootEvent>(OnReceiveShootEvent);
-        SubscribeNetworkEvent<LightAttackEvent>(OnReceiveMeleeAttackEvent);
-        SubscribeNetworkEvent<HeavyAttackEvent>(OnReceiveMeleeAttackEvent);
-        SubscribeNetworkEvent<DisarmAttackEvent>(OnReceiveMeleeAttackEvent);
         SubscribeNetworkEvent<RequestPerformActionEvent>(OnReceiveActionEvent);
 
         // Clean up stored ticks when a player disconnects to prevent a slow memory leak.
@@ -67,7 +64,7 @@ public sealed class ServerMisfitsLagCompensationSystem : SharedMisfitsLagCompens
             return;
 
         // Store tick - 1: the last fully-received world state the client acted on.
-        SetLastRealTick(args.SenderSession.UserId, tick - 1);
+        _lastRealTicks[args.SenderSession.UserId] = tick - 1;
     }
 
     private void OnReceiveActionEvent(RequestPerformActionEvent msg, EntitySessionEventArgs args)
@@ -75,28 +72,26 @@ public sealed class ServerMisfitsLagCompensationSystem : SharedMisfitsLagCompens
         if (msg.LastRealTick is not { } tick)
             return;
 
-        SetLastRealTick(args.SenderSession.UserId, tick - 1);
+        _lastRealTicks[args.SenderSession.UserId] = tick - 1;
     }
 
-    private void OnReceiveMeleeAttackEvent(AttackEvent msg, EntitySessionEventArgs args)
+    /// <summary>
+    /// Returns the last confirmed engine tick for <paramref name="session"/>,
+    /// or the current server tick if the client has not yet sent a heartbeat.
+    /// </summary>
+    public GameTick GetLastRealTick(ICommonSession session) =>
+        _lastRealTicks.GetValueOrDefault(session.UserId, _timing.CurTick);
+
+    /// <summary>
+    /// Returns the last confirmed engine tick for the entity's controlling player session,
+    /// or the current server tick if the entity has no player or has not sent a heartbeat.
+    /// </summary>
+    public GameTick GetLastRealTick(EntityUid ent)
     {
-        if (msg.LastRealTick is not { } tick)
-            return;
+        if (!TryComp<ActorComponent>(ent, out var actor))
+            return _timing.CurTick;
 
-        SetLastRealTick(args.SenderSession.UserId, tick - 1);
-    }
-
-    public void SetLastRealTick(NetUserId session, GameTick tick)
-    {
-        _lastRealTicks[session] = tick;
-    }
-
-    public override GameTick GetLastRealTick(ICommonSession? session)
-    {
-        if (session == null)
-            return base.GetLastRealTick(session);
-
-        return _lastRealTicks.GetValueOrDefault(session.UserId, base.GetLastRealTick(session));
+        return GetLastRealTick(actor.PlayerSession);
     }
 
     /// <summary>
@@ -109,43 +104,20 @@ public sealed class ServerMisfitsLagCompensationSystem : SharedMisfitsLagCompens
     /// </summary>
     public bool IsWithinRange(EntityUid origin, EntityUid target, ICommonSession session, float range)
     {
-        return IsWithinMargin((origin, Transform(origin)), (target, Transform(target)), session, range);
-    }
+        var originCoords = Transform(origin).Coordinates;
+        var targetCoords = Transform(target).Coordinates;
 
-    public override (EntityCoordinates Coordinates, Angle Angle) GetCoordinatesAngle(EntityUid uid,
-        ICommonSession? session,
-        TransformComponent? xform = null)
-    {
-        if (session == null)
-            return _lagCompensation.GetCoordinatesAngle(uid, session, xform);
+        var effectiveRange = range;
 
-        return _lagCompensation.GetCoordinatesAngle(uid, GetLastRealTick(session), xform);
-    }
+        var storedTick = GetLastRealTick(session);
+        var tickDelta = (int)(_timing.CurTick.Value - storedTick.Value);
+        var msLag = tickDelta * (1000f / _timing.TickRate);
 
-    public override Angle GetAngle(EntityUid uid, ICommonSession? session, TransformComponent? xform = null)
-    {
-        return GetCoordinatesAngle(uid, session, xform).Angle;
-    }
+        // If the client was behind the server (within the compensation window), add margin
+        // to forgive minor positional drift that occurred between ticks.
+        if (msLag > 0 && msLag <= MaxCompensationMs)
+            effectiveRange += MarginTiles;
 
-    public override EntityCoordinates GetCoordinates(EntityUid uid, ICommonSession? session, TransformComponent? xform = null)
-    {
-        return GetCoordinatesAngle(uid, session, xform).Coordinates;
-    }
-
-    public override (EntityCoordinates Coordinates, Angle Angle) GetCoordinatesAngle(EntityUid uid,
-        GameTick tick,
-        TransformComponent? xform = null)
-    {
-        return _lagCompensation.GetCoordinatesAngle(uid, tick, xform);
-    }
-
-    public override Angle GetAngle(EntityUid uid, GameTick tick, TransformComponent? xform = null)
-    {
-        return _lagCompensation.GetCoordinatesAngle(uid, tick, xform).Angle;
-    }
-
-    public override EntityCoordinates GetCoordinates(EntityUid uid, GameTick tick, TransformComponent? xform = null)
-    {
-        return _lagCompensation.GetCoordinatesAngle(uid, tick, xform).Coordinates;
+        return _transform.InRange(originCoords, targetCoords, effectiveRange);
     }
 }

@@ -16,7 +16,7 @@ public sealed class LagCompensationSystem : EntitySystem
 
     // I figured 500 ping is max, so 1.5 is 750.
     // Max ping I've had is 350ms from aus to spain.
-    public TimeSpan BufferTime { get; set; } = TimeSpan.FromMilliseconds(750);
+    public static readonly TimeSpan BufferTime = TimeSpan.FromMilliseconds(750);
 
     public override void Initialize()
     {
@@ -29,8 +29,8 @@ public sealed class LagCompensationSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var bufferTicks = Math.Max(1, (int) Math.Ceiling(BufferTime.TotalSeconds * _timing.TickRate));
-        var earliestTick = _timing.CurTick - (uint) bufferTicks;
+        var curTime = _timing.CurTime;
+        var earliestTime = curTime - BufferTime;
 
         // Cull any old ones from active updates
         // Probably fine to include ignored.
@@ -40,7 +40,7 @@ public sealed class LagCompensationSystem : EntitySystem
         {
             while (comp.Positions.TryPeek(out var pos))
             {
-                if (pos.Tick < earliestTick)
+                if (pos.Item1 < earliestTime)
                 {
                     comp.Positions.Dequeue();
                     continue;
@@ -56,7 +56,7 @@ public sealed class LagCompensationSystem : EntitySystem
         if (!args.NewPosition.EntityId.IsValid())
             return; // probably being sent to nullspace for deletion.
 
-        component.Positions.Enqueue((_timing.CurTick, args.NewPosition, args.NewRotation));
+        component.Positions.Enqueue((_timing.CurTime, args.NewPosition, args.NewRotation));
     }
 
     public (EntityCoordinates Coordinates, Angle Angle) GetCoordinatesAngle(EntityUid uid, ICommonSession? pSession,
@@ -65,39 +65,25 @@ public sealed class LagCompensationSystem : EntitySystem
         if (!Resolve(uid, ref xform))
             return (EntityCoordinates.Invalid, Angle.Zero);
 
-        if (pSession == null)
+        if (pSession == null || !TryComp<LagCompensationComponent>(uid, out var lag) || lag.Positions.Count == 0)
             return (xform.Coordinates, xform.LocalRotation);
 
+        var angle = Angle.Zero;
+        var coordinates = EntityCoordinates.Invalid;
         var ping = pSession.Ping;
-        var deltaTicks = Math.Max(1, (int) Math.Ceiling(ping * 1.5 / 1000f * _timing.TickRate));
-        var targetTick = _timing.CurTick - (uint) deltaTicks;
-        return GetCoordinatesAngle(uid, targetTick, xform);
-    }
-
-    public (EntityCoordinates Coordinates, Angle Angle) GetCoordinatesAngle(EntityUid uid, GameTick targetTick,
-        TransformComponent? xform = null)
-    {
-        if (!Resolve(uid, ref xform))
-            return (EntityCoordinates.Invalid, Angle.Zero);
-
-        if (!TryComp<LagCompensationComponent>(uid, out var lag) || lag.Positions.Count == 0)
-            return (xform.Coordinates, xform.LocalRotation);
-
-        var angle = xform.LocalRotation;
-        var coordinates = xform.Coordinates;
-        var found = false;
+        // Use 1.5 due to the trip buffer.
+        var sentTime = _timing.CurTime - TimeSpan.FromMilliseconds(ping * 1.5);
 
         foreach (var pos in lag.Positions)
         {
-            coordinates = pos.Coordinates;
-            angle = pos.Angle;
-            found = true;
+            coordinates = pos.Item2;
+            angle = pos.Item3;
 
-            if (pos.Tick >= targetTick)
+            if (pos.Item1 >= sentTime)
                 break;
         }
 
-        if (!found)
+        if (coordinates == default)
         {
             Log.Debug($"No long comp coords found, using {xform.Coordinates}");
             coordinates = xform.Coordinates;
