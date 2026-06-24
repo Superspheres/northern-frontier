@@ -7751,3 +7751,12 @@ Entries:
   id: 6133
   time: '2026-06-23T23:47:30.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/886
+- author: Squagg
+  changes:
+    - type: Fix
+      message: Fixed chems mixing in chem buffer.
+    - type: Tweak
+      message: Set the chemistry set buffer limit to 10,000u.
+  id: 6134
+  time: '2026-06-24T01:45:01.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/887
