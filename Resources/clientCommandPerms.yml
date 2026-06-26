@@ -42,6 +42,7 @@
     - saveconfig
     - war
     - warjoin 
+    - surrender
     - group
     - raid
 

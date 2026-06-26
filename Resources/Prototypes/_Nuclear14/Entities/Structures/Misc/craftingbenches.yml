@@ -544,7 +544,7 @@
   - type: SolutionContainerManager
     solutions:
       buffer:
-        maxVol: 1000 # #Misfits Tweak - cap buffer at 150u to prevent super-chem stacking
+        maxVol: 10000 # #Misfits Tweak - cap buffer to prevent unlimited super-chem stacking
       pillBuffer:
         maxVol: 1000
   - type: DumpableSolution

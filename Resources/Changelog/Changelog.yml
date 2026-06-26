@@ -7707,3 +7707,166 @@ Entries:
   id: 6127
   time: '2026-06-22T20:52:16.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/878
+- author: Operator
+  changes:
+    - type: Fix
+      message: Welding a motorbike at full HP wont blow it up anymore.
+  id: 6128
+  time: '2026-06-23T21:44:18.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/881
+- author: Squagg
+  changes:
+    - type: Tweak
+      message: Chemical sets no longer have a 1000u buffer limit.
+  id: 6129
+  time: '2026-06-23T21:44:41.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/879
+- author: Vixting
+  changes:
+    - type: Remove
+      message: Removed vault sec medical & engi access
+  id: 6130
+  time: '2026-06-23T21:47:23.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/873
+- author: RedBookcase
+  changes:
+    - type: Add
+      message: >-
+        New Legion Blueprints have been sent in from the Augustus, and old
+        designs have been changed.
+  id: 6131
+  time: '2026-06-23T21:51:46.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/862
+- author: cythisiax
+  changes:
+    - type: Fix
+      message: /surrender added to whitelist
+  id: 6132
+  time: '2026-06-23T22:50:48.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/885
+- author: Squagg
+  changes:
+    - type: Fix
+      message: Emergency chem buffer bugfix
+  id: 6133
+  time: '2026-06-23T23:47:30.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/886
+- author: Squagg
+  changes:
+    - type: Fix
+      message: Fixed chems mixing in chem buffer.
+    - type: Tweak
+      message: Set the chemistry set buffer limit to 10,000u.
+  id: 6134
+  time: '2026-06-24T01:45:01.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/887
+- author: cythisiax
+  changes:
+    - type: Tweak
+      message: >-
+        Major Factions cannot 2v1. Or 3v1. Etc. This applies to Brotherhood,
+        Enclave, Legion, NCR. Majors can only 1v1, but minor factions can join
+        as they please. For now, likely.
+  id: 6135
+  time: '2026-06-24T03:25:16.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/889
+- author: luckyshotpictures
+  changes:
+    - type: Add
+      message: '[Legion] The colloseum is now roofed.'
+    - type: Tweak
+      message: '[Legion] The grave area has been moved.'
+    - type: Add
+      message: >-
+        [Legion] A houndmaster area has been added near the graveyard with three
+        legion mutts.
+    - type: Tweak
+      message: >-
+        [Legion] Surgery has been moved into a seperate room, and a surgery
+        crate has been added.
+    - type: Tweak
+      message: >-
+        [Legion] Medical storage area has been expanded a bit, as well as access
+        locked.
+    - type: Add
+      message: '[Legion] Slaves have gained access to a botany equipment crate.'
+    - type: Add
+      message: '[Legion] A rundown house has been added infront of Legio. Fixer Upper.'
+    - type: Tweak
+      message: '[Legion] The mine has been slightly expanded and changed.'
+    - type: Tweak
+      message: '[80s] Mapped the 80s Blueprint crate and removed the mapped blueprint.'
+    - type: Tweak
+      message: '[80s] Ants in the mines have been replaced with cazadors and bloatflys.'
+    - type: Add
+      message: '[NCR] A rundown bar has been added to the front. Fixer Upper.'
+    - type: Add
+      message: FotA, NCR and BOS have received a reduced chem dispenser.
+    - type: Add
+      message: A new mine has been added.
+    - type: Tweak
+      message: Several dungeon areas have been expanded and/or changed.
+    - type: Add
+      message: Prototype for a wastelander wolf dog.
+    - type: Add
+      message: Legion Dog Spawners
+    - type: Fix
+      message: Timmy, Jimmy and Dr. Thumper spawners.
+  id: 6136
+  time: '2026-06-25T01:03:20.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/892
+- author: HungryCuban
+  changes:
+    - type: Add
+      message: Added several brass knuckles, sprites ported from ms13
+  id: 6137
+  time: '2026-06-25T01:04:54.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/891
+- author: paige404
+  changes:
+    - type: Add
+      message: >-
+        Added Feral Rage, a ghoul-exclusive negative perk that gradually turns
+        you feral. This progresses naturally over time, and the signs will
+        become increasingly severe and noticeable to others.
+    - type: Add
+      message: >-
+        Added an effect to reduce feralization to Promethine, RadAway, Rad-X,
+        and Bitterdrink. The latter two are only effective in later stages.
+        Nothing can turn a fully feral ghoul back to normal, though.
+    - type: Remove
+      message: Removed radiation immunity from ghouls. (Glowing ghouls remain immune.)
+    - type: Add
+      message: >-
+        Added radiation immunity to the Gamma Shield perk. Also reduced its
+        price.
+    - type: Tweak
+      message: Raised ghoul radiation resistance from 50% to 80%.
+    - type: Fix
+      message: >-
+        Ghoulified humans now properly receive ghoul resistances and radiation
+        healing. They have a 20% chance to receive Gamma Shield, and a 10%
+        chance to receive Feral Rage.
+    - type: Tweak
+      message: >-
+        Radiation healing (ghouls, glowing ghouls, super mutants) now heals Cold
+        and Caustic damage as well.
+    - type: Tweak
+      message: Unnatural Regeneration heals Cold damage again.
+  id: 6138
+  time: '2026-06-26T00:15:21.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/893
+- author: cythisiax
+  changes:
+    - type: Fix
+      message: RobustToolBox update to 277.2.1 with included Lidgren Security Fix.
+  id: 6139
+  time: '2026-06-26T00:49:40.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/895
+- author: RedBookcase
+  changes:
+    - type: Add
+      message: Huge Legion kit reworks. New Legion kits. Various bugfixes and changes.
+  id: 6140
+  time: '2026-06-26T01:31:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/884

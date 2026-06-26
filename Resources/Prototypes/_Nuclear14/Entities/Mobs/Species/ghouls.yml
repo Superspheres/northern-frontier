@@ -188,7 +188,9 @@
         Dehydration: -0.35
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: GhoulGlowing
+    damageModifierSets: 
+    - GhoulGlowing
+    - N14GammaShield
   - type: RadiationReceiver
   - type: RadiationHealing
   - type: MobThresholds

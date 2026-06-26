@@ -285,6 +285,8 @@
         damage:
           types:
             Radiation: -5
+      - !type:ModifyFeralization    # Misfits Add
+        delta: -1
 
 - type: reagent
   id: RadAwayDiluted
@@ -307,6 +309,8 @@
         damage:
           types:
             Radiation: -2.5
+      - !type:ModifyFeralization    # Misfits Add
+        delta: -0.5
 
 - type: reagent
   id: RadX
@@ -329,6 +333,9 @@
         damage:
           types:
             Radiation: -1
+      - !type:ModifyFeralization    # Misfits Add
+        delta: -0.2
+        minimumThreshold: 50
 
 # Other
 - type: reagent
@@ -505,6 +512,9 @@
         conditions:
         - !type:ReagentThreshold
           min: 25
+      - !type:ModifyFeralization  # Misfits Add
+        delta: -0.5
+        minimumThreshold: 80
 
 - type: reagent
   id: UltraRobustHealingMixture

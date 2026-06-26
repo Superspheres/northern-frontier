@@ -22,3 +22,17 @@
     - !type:TraitAddComponent
       components:
         - type: ChronicPain
+
+- type: trait
+  id: MisfitsFeralRage
+  category: Physical
+  points: 4
+  requirements:
+    - !type:CharacterSpeciesRequirement
+      species:
+        - Ghoul
+        - GhoulGlowing
+  functions:
+    - !type:TraitAddComponent
+      components:
+        - type: FeralGhoulifyOverTime

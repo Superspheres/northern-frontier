@@ -171,7 +171,6 @@ namespace Content.Server.Chemistry.EntitySystems
             else // Container to buffer
             {
                 var solution = isOutput ? pillBufferSolution : bufferSolution;
-                // #Misfits Tweak - respect buffer maxVol to prevent unlimited super-chem stacking
                 amount = FixedPoint2.Min(amount, containerSolution.GetReagentQuantity(id));
                 amount = FixedPoint2.Min(amount, solution.AvailableVolume);
                 if (amount <= FixedPoint2.Zero)

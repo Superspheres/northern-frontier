@@ -279,6 +279,7 @@
               Slash: -0.20
               Piercing: -0.20
               Heat: -0.20
+              Cold: -0.20
               Shock: -0.20
               Caustic: -0.20
               Asphyxiation: -0.35 # Last longer in crit, takes a WHIIILE to get back up.
@@ -406,12 +407,12 @@
 - type: trait
   id: N14GammaShield
   category: Physical
-  points: -8
+  points: -4              # Misfits Change: Gamma Shield is kinda ass, reduced cost from 8 to 4
   requirements:
     - !type:CharacterSpeciesRequirement
       species:
         - Ghoul
-        - GhoulGlowing
+#        - GhoulGlowing   # Misfits Change: Glowing Ghouls get it for free now
   functions:
     - !type:TraitAddArmor
       damageModifierSets:
