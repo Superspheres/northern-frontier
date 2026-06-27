@@ -1810,8 +1810,8 @@
     size: Huge
   - type: SpawnItemsOnUse
     items:
-      - id: N14WeaponRifleSKS # Legion SKS as new standard for the upper ranks (Vex/Explorer)
-      - id: SKSEnbloc308
+      - id: N14WeaponSniperHunting # #Misfits Change: hunting rifle as Legion baseline primary (replaces SMG)
+      - id: N14AmmoBox308
         amount: 3
       - id: N14WeaponPistol45Colt # #Misfits Change: standardised to .45 pistol Legion sidearm
       - id: N14MagazinePistol45
@@ -1819,7 +1819,6 @@
       - id: ClothingBeltRope
       - id: Bola
         amount: 2
-      - id: ClothingEyesNightVisionGoggles
       - id: N14HealingPowder
       - id: N14HealingPoultice
       - id: N14FoodTinK
@@ -1841,14 +1840,13 @@
     size: Huge
   - type: SpawnItemsOnUse
     items:
-      - id: N14WeaponRifle762Fal
-      - id: Magazine762AmmoShort
-        amount: 3
+      - id: N14WeaponSMGGreaseGun # #Misfits Change: legion smg for hunting armor.
+      - id: Magazine45SubMachineGun
+        amount: 2
       - id: N14WeaponPistol45Colt # #Misfits Change: .45 pistol Legion sidearm
       - id: N14MagazinePistol45
         amount: 2
       - id: ClothingBeltRope
-      - id: ClothingEyesNightVisionGoggles
       - id: Bola
         amount: 2
       - id: N14HealingPowder
