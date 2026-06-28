@@ -7982,3 +7982,18 @@ Entries:
   id: 6150
   time: '2026-06-28T01:00:32.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/910
+- author: cythisiax
+  changes:
+    - type: Add
+      message: Ore Processor Reagents
+    - type: Add
+      message: >-
+        135% global speed cap coef. So, only 35% increased speed above base
+        MobHuman @100% value. 135% effective total movespeed.
+    - type: Fix
+      message: >-
+        [Ghost] not working for non aghost. [Ghost] (while in ghost) should work
+        for player ghosts via widget.
+  id: 6151
+  time: '2026-06-28T04:13:26.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/912
