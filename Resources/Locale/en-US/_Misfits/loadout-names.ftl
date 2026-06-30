@@ -380,6 +380,8 @@ loadout-name-LoadoutClothingNeckNCRMPBeret = NCR MP beret
 loadout-name-LoadoutMaskGas = gas mask
 loadout-name-LoadoutMaskMuzzle = muzzle mask
 loadout-name-LoadoutMaskBandSkull = skull bandana
+loadout-name-LoadoutN14ClothingMaskWeatheredGasMask = weathered ranger gas mask
+loadout-name-LoadoutN14ClothingMaskGasRangerBroken = old riot gas mask
 
 # Brotherhood of Steel loadouts (Midwest)
 loadout-name-LoadoutBoSMidwestSquire = Brotherhood squire armor (Midwest)
