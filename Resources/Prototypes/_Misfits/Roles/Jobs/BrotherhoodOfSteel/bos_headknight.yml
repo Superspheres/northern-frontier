@@ -61,6 +61,7 @@
   overrideConsoleVisibility: false
   canBeAntag: false
   name: job-name-bos-headknight
+  overwatchCategory: OverwatchBosKnight
   description: job-description-bos-headknight
   playTimeTracker: BoSHeadKnight
   requirements:

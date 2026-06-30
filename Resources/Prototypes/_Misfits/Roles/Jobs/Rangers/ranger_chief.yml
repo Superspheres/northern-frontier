@@ -3,6 +3,7 @@
   setPreference: false
   alwaysUseSpawner: true
   name: job-name-ranger-chief
+  overwatchCategory: OverwatchNcrRangers
   description: job-description-ranger-chief
   playTimeTracker: RangerChief
   # #Misfits Tweak - Weight set to 0; rank not actively used, prevents blocking war declarations

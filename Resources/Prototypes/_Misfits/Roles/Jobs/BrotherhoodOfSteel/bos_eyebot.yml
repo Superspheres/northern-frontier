@@ -7,6 +7,7 @@
   setPreference: false
   canBeAntag: false
   name: job-name-bos-eyebot
+  overwatchCategory: OverwatchBosSupport
   description: job-description-bos-eyebot
   playTimeTracker: BoSEyebot
 

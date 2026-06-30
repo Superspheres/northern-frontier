@@ -8,6 +8,7 @@
   overrideConsoleVisibility: true
   canBeAntag: false
   name: job-name-ncr-prisoner #Misfits Change
+  overwatchCategory: OverwatchNcrCivilian
   description: job-description-ncr-prisoner
   playTimeTracker: NCRPrisoner
   requirements: # TEMP REMOVED - all requirements removed

@@ -8,6 +8,7 @@
   overrideConsoleVisibility: true
   canBeAntag: false
   name: job-name-ncr-recruit
+  overwatchCategory: OverwatchNcrEnlisted
   description: job-description-ncr-recruit
   playTimeTracker: NCRTrooper
   requirements:

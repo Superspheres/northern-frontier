@@ -4,6 +4,7 @@
   alwaysUseSpawner: true
   jobWhitelistBypassesRoleTimers: true
   name: job-name-ranger-veteran-n14
+  overwatchCategory: OverwatchNcrRangers
   description: job-description-ranger-veteran-n14
   playTimeTracker: NCRVeteranRanger
   weight: 10

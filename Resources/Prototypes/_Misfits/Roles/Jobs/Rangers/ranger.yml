@@ -5,6 +5,7 @@
   jobWhitelistBypassesRoleTimers: true
   weight: 8 # #Misfits Add - position below Veteran Ranger, above Patrol
   name: job-name-ranger-field
+  overwatchCategory: OverwatchNcrRangers
   description: job-description-ranger-field
   playTimeTracker: NCRFieldRanger
   startingGear: NCRFieldRangerGear

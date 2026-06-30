@@ -7,6 +7,7 @@
   alwaysUseSpawner: true
   jobWhitelistBypassesRoleTimers: true
   name: job-name-ncr-ranger-recruit
+  overwatchCategory: OverwatchNcrRangers
   description: job-description-ncr-ranger-recruit
   playTimeTracker: NCRRangerRecruit
   weight: 4 # #Misfits Tweak - bottom of Rangers ladder

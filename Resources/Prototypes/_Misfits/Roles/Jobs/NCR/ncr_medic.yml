@@ -7,6 +7,7 @@
   canBeAntag: false
   weight: 42
   name: job-name-ncr-medic
+  overwatchCategory: OverwatchNcrMedical
   description: job-description-ncr-medic
   playTimeTracker: NCRMedic
   requirements:

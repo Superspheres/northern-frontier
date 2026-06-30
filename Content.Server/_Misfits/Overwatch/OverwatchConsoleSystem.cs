@@ -2,10 +2,12 @@ using System;
 using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Server._Misfits.Holotape;
+using Content.Server._Misfits.WastelandMap;
 using Content.Shared.Access.Components;
 using Content.Shared.DeltaV.NanoChat;
 using Content.Shared.Damage;
 using Content.Shared._Misfits.Holotape;
+using Content.Shared._Misfits.WastelandMap;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -45,12 +47,9 @@ public sealed class OverwatchConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
         SubscribeLocalEvent<OverwatchConsoleComponent, ComponentShutdown>(OnShutdown);
-        Subs.BuiEvents<OverwatchConsoleComponent>(HolotapeUiKey.Key, subs =>
-        {
-            subs.Event<BoundUIOpenedEvent>(OnOpened);
-            subs.Event<BoundUIClosedEvent>(OnClosed);
-            subs.Event<OverwatchConsoleMessage>(OnMessage);
-        });
+        SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnOpened);
+        SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIClosedEvent>(OnClosed);
+        SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchConsoleMessage>(OnMessage);
     }
 
     public override void Update(float frameTime)
@@ -78,6 +77,9 @@ public sealed class OverwatchConsoleSystem : EntitySystem
 
     private void OnOpened(Entity<OverwatchConsoleComponent> ent, ref BoundUIOpenedEvent args)
     {
+        if (!IsOverwatchUi(args.UiKey))
+            return;
+
         ent.Comp.UiOpen = true;
         ent.Comp.UiActor = args.Actor;
         RefreshUi(ent);
@@ -85,6 +87,9 @@ public sealed class OverwatchConsoleSystem : EntitySystem
 
     private void OnClosed(Entity<OverwatchConsoleComponent> ent, ref BoundUIClosedEvent args)
     {
+        if (!IsOverwatchUi(args.UiKey))
+            return;
+
         ent.Comp.UiOpen = false;
         ent.Comp.UiActor = null;
         StopWatching(ent);
@@ -97,6 +102,9 @@ public sealed class OverwatchConsoleSystem : EntitySystem
 
     private void OnMessage(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleMessage args)
     {
+        if (!IsOverwatchUi(args.UiKey))
+            return;
+
         switch (args.Type)
         {
             case OverwatchConsoleMessageType.Watch:
@@ -110,6 +118,12 @@ public sealed class OverwatchConsoleSystem : EntitySystem
 
         ValidateWatch(ent);
         RefreshUi(ent);
+    }
+
+    private static bool IsOverwatchUi(Enum uiKey)
+    {
+        return HolotapeUiKey.Key.Equals(uiKey) ||
+               WastelandMapUiKey.Key.Equals(uiKey);
     }
 
     private void OnExpandRecipients(ExpandICChatRecipientsEvent ev)
@@ -189,6 +203,14 @@ public sealed class OverwatchConsoleSystem : EntitySystem
             return;
         }
 
+        // #Misfits Add - If the resolved player changed while we had a valid watch,
+        // the pipboy was picked up by someone else. Stop watching.
+        if (ent.Comp.WatchedEntity != null && ent.Comp.WatchedEntity != watchedEntity)
+        {
+            StopWatching(ent);
+            return;
+        }
+
         if (ent.Comp.WatchedEntity != watchedEntity)
         {
             RemoveWatchViewSubscription(ent.Comp.WatchingActor, ent.Comp.WatchedEntity);
@@ -208,7 +230,10 @@ public sealed class OverwatchConsoleSystem : EntitySystem
         if (ent.Comp.UiActor == null || Deleted(ent.Comp.UiActor.Value))
             return;
 
-        _holotape.RefreshTerminalState(ent.Owner, ent.Comp.UiActor.Value);
+        if (HasComp<WastelandMapComponent>(ent.Owner))
+            EntityManager.System<WastelandMapSystem>().RefreshUi(ent.Owner, ent.Comp.UiActor.Value);
+        else
+            _holotape.RefreshTerminalState(ent.Owner, ent.Comp.UiActor.Value);
     }
 
     public OverwatchConsoleState? BuildUiState(EntityUid uid, OverwatchConsoleComponent? comp = null)
@@ -244,13 +269,12 @@ public sealed class OverwatchConsoleSystem : EntitySystem
         while (query.MoveNext(out var uid, out var nanoChat, out var idCard))
         {
             if (nanoChat.Number == null ||
-                nanoChat.PdaUid == null ||
                 !MatchesTrackedPersonnel(comp, uid))
             {
                 continue;
             }
 
-            if (!TryResolvePersonnelTarget(nanoChat.PdaUid.Value, out var personnelEntity))
+            if (!TryResolvePersonnelTarget(nanoChat.PdaUid ?? uid, out var personnelEntity))
                 continue;
 
             var position = Transform(personnelEntity).WorldPosition;
@@ -281,13 +305,12 @@ public sealed class OverwatchConsoleSystem : EntitySystem
         while (query.MoveNext(out var uid, out var nanoChat))
         {
             if (nanoChat.Number != targetNumber ||
-                nanoChat.PdaUid == null ||
                 !MatchesTrackedPersonnel(comp, uid))
             {
                 continue;
             }
 
-            return TryResolvePersonnelTarget(nanoChat.PdaUid.Value, out target);
+            return TryResolvePersonnelTarget(nanoChat.PdaUid ?? uid, out target);
         }
 
         return false;
@@ -350,10 +373,10 @@ public sealed class OverwatchConsoleSystem : EntitySystem
         return (health, state);
     }
 
-    private bool TryResolvePersonnelTarget(EntityUid pdaUid, out EntityUid target)
+    private bool TryResolvePersonnelTarget(EntityUid sourceUid, out EntityUid target)
     {
-        target = pdaUid;
-        var current = pdaUid;
+        target = sourceUid;
+        var current = sourceUid;
 
         while (_container.TryGetContainingContainer((current, null, null), out var container))
         {
@@ -361,7 +384,7 @@ public sealed class OverwatchConsoleSystem : EntitySystem
             target = current;
         }
 
-        if (target == pdaUid || Deleted(target))
+        if (target == sourceUid || Deleted(target))
             return false;
 
         return HasComp<MobStateComponent>(target) || HasComp<ActorComponent>(target);

@@ -3,8 +3,12 @@ namespace Content.IntegrationTests.Tests.Destructible
     public static class DestructibleTestPrototypes
     {
         public const string SpawnedEntityId = "DestructibleTestsSpawnedEntity";
+        public const string SpawnedStackEntityId = "DestructibleTestsSpawnedStackEntity";
+        public const string SpawnedStackId = "DestructibleTestsSpawnedStack";
         public const string DestructibleEntityId = "DestructibleTestsDestructibleEntity";
         public const string DestructibleDestructionEntityId = "DestructibleTestsDestructibleDestructionEntity";
+        public const string DestructibleStackEntityId = "DestructibleTestsDestructibleStackEntity";
+        public const string DestructibleStackId = "DestructibleTestsDestructibleStack";
         public const string DestructibleDamageTypeEntityId = "DestructibleTestsDestructibleDamageTypeEntity";
         public const string DestructibleDamageGroupEntityId = "DestructibleTestsDestructibleDamageGroupEntity";
         public const string RcdConstructedTag = "RCDConstructed";
@@ -55,6 +59,26 @@ namespace Content.IntegrationTests.Tests.Destructible
   id: {SpawnedEntityId}
   name: {SpawnedEntityId}
 
+- type: stack
+  id: {SpawnedStackId}
+  name: {SpawnedStackId}
+  spawn: {SpawnedStackEntityId}
+  maxCount: 3
+
+- type: stack
+  id: {DestructibleStackId}
+  name: {DestructibleStackId}
+  spawn: {DestructibleStackEntityId}
+  maxCount: 10
+
+- type: entity
+  id: {SpawnedStackEntityId}
+  name: {SpawnedStackEntityId}
+  components:
+  - type: Stack
+    stackType: {SpawnedStackId}
+    count: 1
+
 - type: entity
   id: {DestructibleEntityId}
   name: {DestructibleEntityId}
@@ -102,6 +126,28 @@ namespace Content.IntegrationTests.Tests.Destructible
             min: 1
             max: 1
       - !type:DoActsBehavior # This must come last as it destroys the entity.
+        acts: [""Destruction""]
+
+- type: entity
+  id: {DestructibleStackEntityId}
+  name: {DestructibleStackEntityId}
+  components:
+  - type: Damageable
+  - type: Stack
+    stackType: {DestructibleStackId}
+    count: 5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          {SpawnedStackEntityId}:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
         acts: [""Destruction""]
 
 - type: entity

@@ -10,6 +10,7 @@
   showBorder: true
   canBeAntag: false
   name: job-name-chief-ranger
+  overwatchCategory: OverwatchNcrRangers
   description: job-description-chief-ranger
   playTimeTracker: NCRChiefRanger
   startingGear: NCRChiefRangerGear

@@ -6,6 +6,7 @@
   jobWhitelistBypassesRoleTimers: true # #Misfits Change
   weight: 120
   name: job-name-bos-west-elder-comm
+  overwatchCategory: OverwatchBosElder
   description: job-description-bos-west-elder-comm
   playTimeTracker: BoSWestElderCommander
   requirements:

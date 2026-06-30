@@ -9,6 +9,7 @@
   overrideConsoleVisibility: false
   canBeAntag: true
   name: job-name-bos-mid-paladin-comm
+  overwatchCategory: OverwatchBosPaladin
   description: job-description-bos-mid-paladin-comm
   playTimeTracker: BoSMidPaladinCommander
   requirements:

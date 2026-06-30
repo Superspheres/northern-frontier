@@ -7,6 +7,7 @@
   overrideConsoleVisibility: false
   canBeAntag: true
   name: job-name-ncr-requisition-officer
+  overwatchCategory: OverwatchNcrOfficers
   description: job-description-ncr-requisition-officer
   playTimeTracker: NCRRO
   requirements:
