@@ -520,6 +520,12 @@ public abstract partial class SharedGunSystem : EntitySystem
         Physics.SetLinearVelocity(uid, gunVelocity + direction.Normalized() * speed, body: physics);
 
         var projectile = EnsureComp<ProjectileComponent>(uid);
+
+        if (TryComp<GunDamageModifierComponent>(gunUid, out var damageModifier))
+        {
+            projectile.Damage += damageModifier.Damage;
+        }
+        
         Projectiles.SetShooter(uid, projectile, user ?? gunUid);
         projectile.Weapon = gunUid;
         projectile.ExtraIgnoredEntity = GetShotExtraIgnoredEntity(user);
