@@ -154,7 +154,7 @@ public partial class SharedBodySystem
             if (targetPart == null)
                 return;
 
-            if (!TryChangePartDamage(ent, args.Damage, args.IgnoreResistances, args.CanSever, args.CanEvade, args.PartMultiplier, targetPart.Value, out var evaded)
+            if (!TryChangePartDamage(ent, args.Damage, args.IgnoreResistances, args.ArmorPenetration, args.CanSever, args.CanEvade, args.PartMultiplier, targetPart.Value, out var evaded)
                 && args.CanEvade && evaded)
             {
                 if (_net.IsServer)
@@ -189,6 +189,7 @@ public partial class SharedBodySystem
     private bool TryChangePartDamage(EntityUid entity,
         DamageSpecifier damage,
         bool ignoreResistances,
+        float armorPenetration,
         bool canSever,
         bool canEvade,
         float partMultiplier,
@@ -216,7 +217,7 @@ public partial class SharedBodySystem
                     continue;
                 }
 
-                var damageResult = _damageable.TryChangeDamage(part.FirstOrDefault().Id, damage * partMultiplier, ignoreResistances, canSever: canSever);
+                var damageResult = _damageable.TryChangeDamage(part.FirstOrDefault().Id, damage * partMultiplier, ignoreResistances, armorPenetration: armorPenetration, canSever: canSever);
                 if (damageResult != null && damageResult.GetTotal() != 0)
                     landed = true;
             }

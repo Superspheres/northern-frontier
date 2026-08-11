@@ -111,7 +111,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             ? _damageableSystem.TryChangeDamage(target,
                 ev.Damage,
                 component.IgnoreResistances,
-                origin: component.Shooter)
+                origin: component.Shooter,
+                armorPenetration: component.ArmorPenetration)
             : new DamageSpecifier(ev.Damage);
         var deleted = Deleted(target);
 

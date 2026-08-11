@@ -45,7 +45,30 @@ public abstract class SharedArmorSystem : EntitySystem
         if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
             return;
 
-        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, component.Modifiers);
+        var penetration = args.Args.ArmorPenetration;
+
+        if(penetration == 0f)
+        {
+            args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, component.Modifiers);
+            return;
+        }
+
+        var effectiveModifiers = new DamageModifierSet();
+
+        foreach (var (type, coefficient) in component.Modifiers.Coefficients)
+        {
+            effectiveModifiers.Coefficients[type] =
+                coefficient + ((1f - coefficient) * penetration);
+        }
+
+        foreach (var (type, flatReduction) in component.Modifiers.FlatReduction)
+        {
+            effectiveModifiers.FlatReduction[type] =
+                flatReduction * (1f - penetration);
+        }
+
+        args.Args.Damage =
+            DamageSpecifier.ApplyModifierSet(args.Args.Damage, effectiveModifiers);
     }
 
     private void OnBorgDamageModify(EntityUid uid, ArmorComponent component,

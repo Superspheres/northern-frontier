@@ -52,6 +52,14 @@ public sealed partial class ProjectileComponent : Component
     public DamageSpecifier Damage = new();
 
     /// <summary>
+    /// Signed armor penetration modifier.
+    /// Positive values reduce armor effectiveness.
+    /// Negative values increase armor effectiveness.
+    /// </summary>
+    [DataField]
+    public float ArmorPenetration = 0f;
+
+    /// <summary>
     ///     If the projectile should be deleted on collision.
     /// </summary>
     [DataField]
