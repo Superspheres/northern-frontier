@@ -54,3 +54,12 @@
     count: 10
   - type: TimedDespawn
     lifetime: 0.25
+
+- type: entity
+  id: PelletClusterDefensive
+  name: defensive grenade fragment
+  categories: [ HideSpawnMenu ]
+  parent: PelletClusterLethal
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4

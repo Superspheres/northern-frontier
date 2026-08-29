@@ -331,9 +331,10 @@
     price: 25
 
 - type: entity
-  name: EMP grenade
-  description: A grenade designed to wreak havoc on electronic systems.
+  name: pulse grenade
+  description: A grenade that releases a damaging blue energy pulse, devastating robots and electronic systems.
   parent: GrenadeBase
+  # Retain the old ID so existing maps, recipes, and loadouts receive the pulse grenade.
   id: EmpGrenade
   components:
   - type: Sprite
@@ -341,8 +342,54 @@
   - type: EmpOnTrigger
     range: 4
     energyConsumption: 2700000
+  - type: SpawnOnTrigger
+    proto: PulseGrenadeExplosion
   - type: DeleteOnTrigger
   - type: Appearance
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/countdown.ogg
+
+- type: entity
+  id: PulseGrenadeExplosion
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: N14Pulse
+    maxIntensity: 5
+    intensitySlope: 5
+    totalIntensity: 20
+    canCreateVacuum: false
+    maxTileBreak: 0
+    tileBreakScale: 0
+
+- type: entity
+  name: plasma grenade
+  description: A high-energy grenade that erupts in a devastating burst of caustic green plasma.
+  parent: GrenadeBase
+  id: GrenadePlasma
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/empgrenade.rsi
+    color: "#53FF38"
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: N14Plasma
+    maxIntensity: 8
+    intensitySlope: 4
+    totalIntensity: 55
+    canCreateVacuum: false
+    maxTileBreak: 0
+    tileBreakScale: 0
+  - type: OnUseTimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 2
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
@@ -379,7 +426,7 @@
   description: A tactical grenade that releases a large, long-lasting cloud of smoke when used.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/smoke.rsi
+    sprite: _Misfits/Objects/Weapons/Throwable/smoke_grenade.rsi
   - type: SmokeOnTrigger
     duration: 30
     spreadAmount: 50
@@ -406,6 +453,23 @@
       reagents:
       - ReagentId: SpaceCleaner
         Quantity: 30
+
+- type: entity
+  parent: SmokeGrenade
+  id: GrenadeWhitePhosphorus
+  name: white phosphorus grenade
+  description: A screening grenade that releases pale, corrosive smoke. Prolonged exposure causes severe chemical burns.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/smoke.rsi
+    color: "#E8E8E8"
+  - type: SmokeOnTrigger
+    duration: 25
+    spreadAmount: 50
+    solution:
+      reagents:
+      - ReagentId: WhitePhosphorusSmoke
+        Quantity: 50
 
 - type: entity
   parent: SmokeGrenade

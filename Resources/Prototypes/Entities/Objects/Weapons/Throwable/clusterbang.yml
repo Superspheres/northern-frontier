@@ -148,17 +148,48 @@
   parent: GrenadeBase
   id: GrenadeIncendiary
   name: incendiary grenade
-  description: Guaranteed to light up the mood.
+  description: Releases a cloud of burning orange smoke that immolates anyone caught inside.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/pyrogrenade.rsi
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]
+  - type: SmokeOnTrigger
+    duration: 10
+    spreadAmount: 25
+    solution:
+      reagents:
+      - ReagentId: Phlogiston
+        Quantity: 30
+  - type: OnUseTimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 2
+  - type: SoundOnTrigger
+    sound: /Audio/Items/smoke_grenade_smoke.ogg
+  - type: DeleteOnTrigger
+
+- type: entity
+  parent: GrenadeBase
+  id: GrenadeShrapnel
+  name: offensive frag grenade
+  description: A blast-focused hand grenade with a limited spray of lethal fragmentation.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/shrapnelgrenade.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: ClusterGrenade
-    fillPrototype: PelletClusterIncendiary
-    maxGrenadesCount: 30
+    fillPrototype: PelletClusterLethal
+    maxGrenadesCount: 20
     grenadeType: enum.GrenadeType.Shoot
+  - type: SpawnOnTrigger #trigger explosion after the fragmmentation is dispersed
+    proto: GrenadeFragExplosion
   - type: OnUseTimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
@@ -175,20 +206,23 @@
 
 - type: entity
   parent: GrenadeBase
-  id: GrenadeShrapnel
-  name: shrapnel grenade
-  description: Releases a deadly spray of shrapnel that causes severe bleeding.
+  id: GrenadeFragDefensive
+  name: defensive frag grenade
+  description: A fragmentation-heavy grenade intended to be thrown from cover. Its small blast scatters lethal fragments across a wide area.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/shrapnelgrenade.rsi
+    sprite: _Misfits/Objects/Weapons/Throwable/defensive_frag_grenade.rsi
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]
   - type: ClusterGrenade
-    fillPrototype: PelletClusterLethal
-    maxGrenadesCount: 30
+    fillPrototype: PelletClusterDefensive
+    maxGrenadesCount: 45
     grenadeType: enum.GrenadeType.Shoot
+  - type: SpawnOnTrigger
+    proto: GrenadeFragDefensiveExplosion
   - type: OnUseTimerTrigger
+    delay: 4
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
@@ -201,6 +235,36 @@
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
+
+- type: entity
+  id: GrenadeFragExplosion
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: N14DefaultStructural
+    maxIntensity: 8
+    intensitySlope: 4
+    totalIntensity: 50
+    canCreateVacuum: false
+    maxTileBreak: 0
+    tileBreakScale: 0
+
+- type: entity
+  id: GrenadeFragDefensiveExplosion
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: N14DefaultStructural
+    maxIntensity: 4
+    intensitySlope: 4
+    totalIntensity: 20
+    canCreateVacuum: false
+    maxTileBreak: 0
+    tileBreakScale: 0
 
 - type: entity
   parent: SoapSyndie
@@ -245,7 +309,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeShrapnel
+  parent: GrenadeBase
   id: GrenadeFoamDart
   name: foam dart grenade
   description: Releases a bothersome spray of foam darts that cause severe welching.
@@ -262,3 +326,16 @@
     maxGrenadesCount: 30
     grenadeType: enum.GrenadeType.Throw
     velocity: 70
+  - type: OnUseTimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 2
+  - type: EmitSoundOnTrigger
+    sound:
+      path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container

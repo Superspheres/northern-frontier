@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Frag grenade sprites by iinowa72 and superspheres for Misfits.",
+  "copyright": "Made by superspheres for Misfits.",
   "size": {
     "x": 32,
     "y": 32
@@ -12,10 +12,6 @@
     },
     {
       "name": "primed"
-    },
-    {
-      "name": "equipped-BELT",
-      "directions": 4
     }
   ]
 }
