@@ -11,6 +11,7 @@
   - type: ClusterGrenadeVisuals
     state: base
   - type: ClusterGrenade
+  - type: PacifismBlocked
   - type: OnUseTimerTrigger
     delay: 3.5
   - type: ContainerContainer
@@ -33,6 +34,7 @@
     fillPrototype: GrenadeFlashBang
     distance: 7
     velocity: 7
+  - type: PacifismBlocked
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
@@ -64,6 +66,7 @@
     fillPrototype: ExGrenade
     velocity: 3.5
     distance: 5
+  - type: PacifismBlocked
   - type: OnUseTimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
@@ -92,6 +95,7 @@
     fillPrototype: TrashBananaPeelExplosive
     maxGrenadesCount: 6
     baseTriggerDelay: 20
+  - type: PacifismBlocked
   - type: DamageOnLand
     damage:
       types:
@@ -130,6 +134,7 @@
     fillPrototype: PelletClusterRubber
     maxGrenadesCount: 30
     grenadeType: enum.GrenadeType.Shoot
+  - type: PacifismBlocked
   - type: FlashOnTrigger
     range: 7
   - type: EmitSoundOnTrigger
@@ -190,6 +195,7 @@
     grenadeType: enum.GrenadeType.Shoot
   - type: SpawnOnTrigger #trigger explosion after the fragmmentation is dispersed
     proto: GrenadeFragExplosion
+  - type: PacifismBlocked
   - type: OnUseTimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
@@ -221,6 +227,7 @@
     grenadeType: enum.GrenadeType.Shoot
   - type: SpawnOnTrigger
     proto: GrenadeFragDefensiveExplosion
+  - type: PacifismBlocked
   - type: OnUseTimerTrigger
     delay: 4
     beepSound:
@@ -285,6 +292,7 @@
     baseTriggerDelay: 60
     randomSpread: true
     velocity: 3
+  - type: PacifismBlocked
   - type: DamageOnLand
     damage:
       types:

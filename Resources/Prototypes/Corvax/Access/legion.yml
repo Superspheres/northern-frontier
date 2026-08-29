@@ -11,6 +11,10 @@
   name: id-card-access-level-legion-recruit
 
 - type: accessLevel
+  id: CaesarLegionTrader
+  name: id-card-access-level-legion-trader
+
+- type: accessLevel
   id: CaesarLegionHoundmaster
   name: id-card-access-level-legion-houndmaster
 
@@ -47,6 +51,14 @@
   name: id-card-access-level-legion-veteran-decanus
 
 - type: accessLevel
+  id: CaesarLegionPriestessOfMars
+  name: id-card-access-level-legion-priestess-of-mars
+
+- type: accessLevel
+  id: CaesarLegionAcolyteOfMars
+  name: id-card-access-level-legion-acolyte-of-mars
+
+- type: accessLevel
   id: CaesarLegionOptio
   name: id-card-access-level-legion-optio
 
@@ -73,6 +85,11 @@
   tags:
   - CaesarLegion
   - CaesarLegionRecruit
+
+- type: accessGroup
+  id: CaesarLegionTrader
+  tags:
+  - CaesarLegionTrader
 
 - type: accessGroup
   id: CaesarLegionHoundmaster
@@ -156,10 +173,26 @@
   - CaesarLegionVeteranDecanus
 
 - type: accessGroup
+  id: CaesarLegionPriestessOfMars
+  tags:
+  - CaesarLegion
+  - CaesarLegionRecruit
+  - CaesarLegionAcolyteOfMars
+  - CaesarLegionPriestessOfMars
+
+- type: accessGroup
+  id: CaesarLegionAcolyteOfMars
+  tags:
+  - CaesarLegion
+  - CaesarLegionRecruit
+  - CaesarLegionAcolyteOfMars
+
+- type: accessGroup
   id: CaesarLegionOptio
   tags:
   - CaesarLegion
   - CaesarLegionRecruit
+  - CaesarLegionTrader
   - CaesarLegionHoundmaster
   - CaesarLegionFrumentarii
   - CaesarLegionVexillarius
@@ -170,6 +203,8 @@
   - CaesarLegionLegionnaireVeteran
   - CaesarLegionDean
   - CaesarLegionVeteranDecanus
+  - CaesarLegionAcolyteOfMars
+  - CaesarLegionPriestessOfMars
 
 
 - type: accessGroup
@@ -177,6 +212,7 @@
   tags:
   - CaesarLegion
   - CaesarLegionRecruit
+  - CaesarLegionTrader
   - CaesarLegionHoundmaster
   - CaesarLegionFrumentarii
   - CaesarLegionVexillarius
@@ -188,12 +224,15 @@
   - CaesarLegionDean
   - CaesarLegionVeteranDecanus
   - CaesarLegionCenturion
+  - CaesarLegionAcolyteOfMars
+  - CaesarLegionPriestessOfMars
 
 - type: accessGroup
   id: CaesarLegionLegate
   tags:
   - CaesarLegion
   - CaesarLegionRecruit
+  - CaesarLegionTrader
   - CaesarLegionHoundmaster
   - CaesarLegionFrumentarii
   - CaesarLegionVexillarius
@@ -203,18 +242,10 @@
   - CaesarLegionLegionnaireWarrior
   - CaesarLegionLegionnaireVeteran
   - CaesarLegionDean
+  - CaesarLegionAcolyteOfMars
   - CaesarLegionVeteranDecanus
+  - CaesarLegionPriestessOfMars
   - CaesarLegionCenturion
   - CaesarLegionLegate
 
-- type: accessGroup
-  id: CaesarLegionPriestessOfMars
-  tags:
-  - CaesarLegion
-  - CaesarLegionRecruit
 
-- type: accessGroup
-  id: CaesarLegionAcolyteOfMars
-  tags:
-  - CaesarLegion
-  - CaesarLegionRecruit

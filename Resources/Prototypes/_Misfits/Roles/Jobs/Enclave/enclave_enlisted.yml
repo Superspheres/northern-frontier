@@ -3,7 +3,6 @@
 - type: job
   id: EnclaveEnlisted
   setPreference: true
-  hideWithoutJobWhitelist: true
   jobWhitelistBypassesRoleTimers: true # #Misfits Change
   weight: 100
   displayWeight: 122
@@ -32,6 +31,9 @@
       - type: NpcFactionMember
         factions:
           - Enclave
+          - Wastelander
+      - type: ReplacementAccent
+        accent: n14Enclave
       - type: PowerArmorProficiency
 
 - type: startingGear

@@ -4,7 +4,6 @@
 - type: job
   id: EnclaveVertibirdPilot
   setPreference: true
-  hideWithoutJobWhitelist: true
   jobWhitelistBypassesRoleTimers: true
   weight: 112
   displayWeight: 127
@@ -33,6 +32,8 @@
       - type: NpcFactionMember
         factions:
           - Enclave
+      - type: ReplacementAccent
+        accent: n14Enclave
       - type: PowerArmorProficiency
       - type: VertibirdPilotPerk # #Misfits Add - pilot perk granted free with the role
       - type: VertibirdCrew # #Misfits Add - trained crew repair the airframe faster
