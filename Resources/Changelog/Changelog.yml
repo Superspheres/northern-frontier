@@ -10760,3 +10760,94 @@ Entries:
   id: 6370
   time: '2026-08-29T12:31:50.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1821
+- author: cythisiax
+  changes:
+    - type: Fix
+      message: >-
+        tribal roles being unable to use or receive tribal smoke-signal,
+        spirit-board, hunt, and warcry etc
+    - type: Fix
+      message: >-
+        brotherhood recruitment prompts opening without the recruiter's and
+        target's names.
+    - type: Fix
+      message: >-
+        surgically reattached limbs and organs being deleted by dropped-giblet
+        cleanup.
+    - type: Fix
+      message: >-
+        pet traits being removed when saving characters with species that allow
+        the parent Pets category.
+    - type: Fix
+      message: >-
+        gunfire passing through or targeting riders/buckled players instead of
+        damaging the mount/bike
+    - type: Fix
+      message: the Enclave recruit greeting displaying an untranslated supervisor key.
+    - type: Add
+      message: >-
+        radiation-suit suppression for glowing ghouls, preventing them from
+        irradiating nearby people while suited.
+    - type: Add
+      message: >-
+        Enclave Eyebot companion for Enclave scientists, Enclave Cyberdog
+        companion too for them.
+    - type: Add
+      message: >-
+        Added account- and character-specific sprite framework for custom
+        sprites to overlay jobslots 1:1
+    - type: Add
+      message: A roaming sentient Deathclaw by the name 'Bwonsamdi', it's nice
+    - type: Tweak
+      message: Scrambler bike acceleration should work now
+    - type: Tweak
+      message: Brotherhood Head Knights to select Dermal Armor and Phoenix Armor perks.
+  id: 6371
+  time: '2026-08-30T01:04:54.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1825
+- author: Tytos
+  changes:
+    - type: Fix
+      message: sent the irs to get harry's ass
+  id: 6372
+  time: '2026-08-30T03:14:43.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1827
+- author: JohnKieser
+  changes:
+    - type: Tweak
+      message: >-
+        Junk crutch now has in-hand sprites and it has been reworked into a
+        weapon. Item shape also enlarged
+    - type: Fix
+      message: Fixed wrench/crowbar sprites for real this time
+    - type: Fix
+      message: Willow elder renamed to have correct name
+    - type: Fix
+      message: Fixed SM ranger not having ranger comms
+    - type: Fix
+      message: 'Legion principes PA now has explosive resist '
+    - type: Fix
+      message: Breacher loadout kit has accurate description now
+  id: 6373
+  time: '2026-08-30T03:45:29.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1828
+- author: enkidienne
+  changes:
+    - type: Add
+      message: expansion to the vault mine ruin.
+  id: 6374
+  time: '2026-08-30T13:10:22.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1807
+- author: cythisiax
+  changes:
+    - type: Fix
+      message: >-
+        Patreon custom sprites now register sprite-overlay replacement of
+        default loadoutkit gear, i.e BoSPaladin t45 stats > but custom sprite.
+    - type: Fix
+      message: t51bc sprite rotations
+    - type: Tweak
+      message: 'bwonsamdi tribal tree protector '
+  id: 6375
+  time: '2026-08-31T00:25:46.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1829
