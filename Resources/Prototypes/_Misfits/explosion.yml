@@ -15,6 +15,52 @@
   texturePath: /Textures/Effects/fire.rsi
   fireStates: 3
 
+# Misfits Add - 40mm HE trades limb-severing piercing damage for a predictable
+# 100-damage epicenter and crowd-control knockdown on the surrounding tiles.
+- type: explosion
+  id: N1440mmHE
+  damagePerIntensity:
+    types:
+      Heat: 6.25
+      Blunt: 6.25
+      Structural: 60
+  tileBreakChance: [0]
+  tileBreakIntensity: [0]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireStates: 3
+
+# Misfits Add - Incendiary 40mm relies on ignition rather than blast damage.
+# Its intensity is kept below the explosion system's knockdown threshold.
+- type: explosion
+  id: N1440mmIncendiary
+  damagePerIntensity:
+    types:
+      Heat: 0
+  fireStacks: 4
+  tileBreakChance: [0]
+  tileBreakIntensity: [0]
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireStates: 3
+
+# Misfits Add - Missiles retain a lethal 220-damage epicenter while their
+# broader intensity curve supplies knockdown through roughly three tiles.
+- type: explosion
+  id: N14Missile
+  damagePerIntensity:
+    types:
+      Heat: 5
+      Blunt: 5
+      Structural: 60
+  tileBreakChance: [0]
+  tileBreakIntensity: [0]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireStates: 3
+
 # Misfits Add - Blue energy burst used by Fallout-style pulse weaponry.
 - type: explosion
   id: N14Pulse

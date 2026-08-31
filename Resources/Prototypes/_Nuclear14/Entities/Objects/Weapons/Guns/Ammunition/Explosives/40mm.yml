@@ -1,6 +1,6 @@
 - type: entity
   id: 40mmGrenadeFrag
-  name: 40mm grenade
+  name: 40mm HE grenade
   parent: BaseGrenade
   components:
   - type: Tag
@@ -11,11 +11,11 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
-    - state: frag
+    - state: he
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
-    state: frag
+    state: he
     suffix: false
 
 - type: entity

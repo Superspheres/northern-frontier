@@ -1481,12 +1481,26 @@
   completetime: 8
   requiresBlueprint: true
   availableFaction:
-  - CaesarLegion
+  - NCR
   materials:
     Steel: 1000
 
     N14Gunpowder: 1200
 
+    N14Iron: 500
+
+# #Misfits Add - Issue #968 faction ordnance: NCR offensive fragmentation grenade.
+- type: latheRecipe
+  id: N14BPNCRGrenadeShrapnel
+  result: GrenadeShrapnel
+  category: N14BlueprintNCRAmmoT3
+  completetime: 10
+  requiresBlueprint: true
+  availableFaction:
+  - NCR
+  materials:
+    Steel: 1500
+    N14Gunpowder: 1200
     N14Iron: 500
 
 
@@ -2800,6 +2814,20 @@
     N14Gunpowder: 1200
 
     N14Iron: 500
+
+# #Misfits Add - Issue #968 faction ordnance: Legion improvised tin grenade.
+- type: latheRecipe
+  id: N14BPLegionGrenadeTin
+  result: N14TinNade
+  category: N14BlueprintLegionAmmoT3
+  completetime: 8
+  requiresBlueprint: true
+  availableFaction:
+  - CaesarLegion
+  materials:
+    Steel: 500
+    N14Gunpowder: 700
+    Scrap: 500
 
 
 # #Misfits Add - T3 ammo parity: 7.62mm for SKS, and craftable dynamite (Legion explosive doctrine)

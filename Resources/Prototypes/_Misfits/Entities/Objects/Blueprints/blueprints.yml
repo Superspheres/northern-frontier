@@ -250,6 +250,7 @@
     - N14BPNCRAmmoMag10mmSMG
     - N14BPNCRAmmoMag12mmSMG
     - N14BPNCRAmmo40mmGrenade
+    - N14BPNCRGrenadeShrapnel # #Misfits Add - Issue #968 NCR fragmentation ordnance
 
 - type: entity
   parent: N14BlueprintBase
@@ -467,6 +468,7 @@
     - N14BPLegionAmmoBox762       # #Misfits Add - 7.62mm box (for SKS)
     - N14BPLegionWeaponDynamite   # #Misfits Add - craftable dynamite
     - N14BPLegionAmmoSKSEnbloc308
+    - N14BPLegionGrenadeTin # #Misfits Add - Issue #968 Legion improvised ordnance
 
 - type: entity
   parent: N14BlueprintBase
@@ -671,6 +673,7 @@
     # #Misfits Change - MFC/ECP recipes removed; consolidated to single generic cells at T1
     - N14BPBoSAmmoPlasmaShell
     - N14BPBoSAmmoPlasmaCartridgeMultiplas
+    - N14BPBoSGrenadePlasma # #Misfits Add - Issue #968 Brotherhood plasma ordnance
 
 - type: entity
   parent: N14BlueprintBase
@@ -907,6 +910,7 @@
     - N14BPTownAmmoBox44Magnum
     - N14BPTownAmmoMag762Rifle
     - N14BPTownAmmoMag10mmSMG
+    - N14BPTownGrenadeTin # #Misfits Add - Issue #968 Yuma/town improvised ordnance
 
 - type: entity
   parent: N14BlueprintBase

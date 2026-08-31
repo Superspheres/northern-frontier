@@ -23,13 +23,18 @@
   parent: BaseGrenadeProjectile
   categories: [ HideSpawnMenu ]
   components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
   - type: ExplodeOnTrigger
   - type: Explosive
-    #Misfits Change - use the structural-capable N14 explosion profile.
-    explosionType: N14DefaultStructural
-    maxIntensity: 8 # max 30 per tile
-    intensitySlope: 6
-    totalIntensity: 15 # 60 total damage to distribute over tiles
+    # Misfits Change - 100 maximum damage, scaling outward. A 5-point slope
+    # leaves adjacent tiles forceful enough for the explosion knockdown system.
+    explosionType: N1440mmHE
+    maxIntensity: 8
+    intensitySlope: 5
+    totalIntensity: 42
     maxTileBreak: 0
 
 
@@ -39,15 +44,18 @@
   parent: BaseGrenadeProjectile
   categories: [ HideSpawnMenu ]
   components:
-  - type: IgniteOnCollide
-    fireStacks: 10
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
   - type: ExplodeOnTrigger
   - type: Explosive
-    #Misfits Change - use the structural-capable N14 explosion profile.
-    explosionType: N14DefaultStructural
-    maxIntensity: 8 # max 30 per tile
-    intensitySlope: 6
-    totalIntensity: 15 # 60 total damage to distribute over tiles
+    # Misfits Change - applies four fire stacks over a wider radius without
+    # reaching the explosion system's knockdown threshold.
+    explosionType: N1440mmIncendiary
+    maxIntensity: 2
+    intensitySlope: 1
+    totalIntensity: 28
     maxTileBreak: 0
 
 - type: entity
@@ -106,12 +114,15 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 8
+        Blunt: 0
   - type: ExplodeOnTrigger
   - type: Explosive
-    #Misfits Change - use the structural-capable N14 explosion profile.
-    explosionType: N14DefaultStructural
-    maxIntensity: 24 # max 30 per tile
+    # Misfits Change - lethal 220-damage center with a broad three-tile
+    # knockdown radius supplied by the existing explosion crowd control.
+    explosionType: N14Missile
+    maxIntensity: 22
     intensitySlope: 6
-    totalIntensity: 60 # 60 total damage to distribute over tiles
+    # 310 total intensity is enough for the curve to reach its 22-point cap;
+    # damage is 10 per intensity, so the epicenter actually reaches 220.
+    totalIntensity: 310
     maxTileBreak: 0
