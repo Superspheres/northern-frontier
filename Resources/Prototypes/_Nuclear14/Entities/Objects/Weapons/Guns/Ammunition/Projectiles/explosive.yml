@@ -29,12 +29,12 @@
         Blunt: 0
   - type: ExplodeOnTrigger
   - type: Explosive
-    # Misfits Change - 100 maximum damage, scaling outward. A 5-point slope
-    # leaves adjacent tiles forceful enough for the explosion knockdown system.
+    # Misfits Change - retain the 100-damage cap but broaden the blast to
+    # approximately 2.5 tiles, compensating for HE having no fragmentation.
     explosionType: N1440mmHE
     maxIntensity: 8
-    intensitySlope: 5
-    totalIntensity: 42
+    intensitySlope: 4
+    totalIntensity: 65
     maxTileBreak: 0
 
 

@@ -93,7 +93,7 @@
     
 - type: entity
   name: Baseball grenade
-  description: Hollowed out baseball filled with explosives that explodes on impact.
+  description: A hollowed-out baseball filled with explosives. Prime it in hand before throwing to detonate on impact.
   parent: BaseItem
   id: N14BaseballNade
   components:
@@ -118,21 +118,29 @@
     canCreateVacuum: false
     maxTileBreak: 0
     tileBreakScale: 0
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 3
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 1
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:ExplodeBehavior
-  - type: Damageable
-    damageContainer: Inorganic
+  # Misfits Fix - do not turn the early landing event into self-damage and an
+  # explosion. Explicit priming enables thrown collision/settling triggers.
+  - type: ImpactGrenade
+  # A persistent soft sensor detects mobs and vehicle bodies even after the
+  # engine removes its temporary throwing fixture. It does not block walking.
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      impact:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        hard: false
+        mask:
+        - ThrownItem
   - type: Construction
     graph: N14BaseballNade
     node: baseballnade
@@ -171,7 +179,7 @@
 
 - type: entity
   name: Nuka-nade
-  description: Highly radioactive grenade made with Nuka-Cola and love.
+  description: An improvised Nuka-Cola grenade that erupts in a compact burst of Quantum-blue caustic plasma.
   parent: GrenadeBase
   id: N14NukaNade
   components:
@@ -179,11 +187,12 @@
     sprite: _Nuclear14/Objects/Weapons/Grenades/NukaNade.rsi
   - type: ExplodeOnTrigger
   - type: Explosive
-    #Misfits Change - use the structural-capable N14 explosion profile.
-    explosionType: N14DefaultStructural
+    # Misfits Change - lighter plasma: 5 x 15 = 75 maximum caustic damage,
+    # with a smaller footprint than the standard plasma grenade. No ignition.
+    explosionType: N14NukaPlasma
     maxIntensity: 5
-    intensitySlope: 1
-    totalIntensity: 1
+    intensitySlope: 4
+    totalIntensity: 25
     canCreateVacuum: false
     maxTileBreak: 0
     tileBreakScale: 0
@@ -197,15 +206,6 @@
   - type: RandomTimerTrigger
     min: 3
     max: 4
-  - type: SmokeOnTrigger
-    duration: 3
-    spreadAmount: 25
-    solution:
-      reagents:
-      - ReagentId: TearGas
-        Quantity: 5
-      - ReagentId: Radium
-        Quantity: 15
   - type: Construction
     graph: N14NukaNade
     node: NukaNade

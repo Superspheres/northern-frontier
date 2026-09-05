@@ -1,6 +1,7 @@
 - type: entity
   id: 40mmGrenadeFrag
   name: 40mm HE grenade
+  description: A high-explosive 40mm round with a broad concussive blast and no fragmentation.
   parent: BaseGrenade
   components:
   - type: Tag
@@ -11,12 +12,110 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
-    - state: he
+    - state: frag
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
-    state: he
+    state: frag
     suffix: false
+
+# Misfits Add - All variants inherit the launcher's N14Grenade tag and casing
+# behavior. Only the impact payload and ammunition appearance change.
+- type: entity
+  id: 40mmGrenadeHEDP
+  parent: 40mmGrenadeFrag
+  name: 40mm HEDP grenade
+  description: A 40mm round combining a compact explosive blast with lethal fragmentation. Use from cover.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmHEDPProjectile
+  - type: Sprite
+    layers:
+    - state: he
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: SpentAmmoVisuals
+    state: he
+
+- type: entity
+  id: 40mmGrenadePulse
+  parent: 40mmGrenadeFrag
+  name: 40mm pulse grenade
+  description: A 40mm round that releases an electromagnetic pulse and a blue energy burst. Effective against robots and powered armor.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmPulseProjectile
+  - type: Sprite
+    layers:
+    - state: emp
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: SpentAmmoVisuals
+    state: emp
+
+- type: entity
+  id: 40mmGrenadePlasma
+  parent: 40mmGrenadeFrag
+  name: 40mm plasma grenade
+  description: A 40mm round that releases a compact burst of caustic green plasma.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmPlasmaProjectile
+
+- type: entity
+  id: 40mmGrenadeBuckshot
+  parent: 40mmGrenadeFrag
+  name: 40mm buckshot round
+  description: A 40mm shell containing twenty small buckshot pellets. Fires directly from the launcher without an explosion.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmBuckshotSpread
+  - type: Sprite
+    layers:
+    - state: buckshot
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: SpentAmmoVisuals
+    state: buckshot
+
+- type: entity
+  id: 40mmGrenadeSmoke
+  parent: 40mmGrenadeFrag
+  name: 40mm smoke round
+  description: A 40mm round that releases screening smoke on impact.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmSmokeProjectile
+
+- type: entity
+  id: 40mmGrenadeWhitePhosphorus
+  parent: 40mmGrenadeFrag
+  name: 40mm white phosphorus round
+  description: A 40mm round that releases pale, caustic screening smoke without igniting its targets.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmWhitePhosphorusProjectile
+
+- type: entity
+  id: 40mmGrenadeFlashbang
+  parent: 40mmGrenadeFrag
+  name: 40mm flashbang round
+  description: A 40mm round that produces a blinding flash and loud bang on impact.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmFlashbangProjectile
+  - type: Sprite
+    layers:
+    - state: flashbang
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: SpentAmmoVisuals
+    state: flashbang
+
+- type: entity
+  id: 40mmGrenadeTearGas
+  parent: 40mmGrenadeFrag
+  name: 40mm tear gas round
+  description: A 40mm riot-control round that releases irritating tear gas on impact.
+  components:
+  - type: CartridgeAmmo
+    proto: N1440mmTearGasProjectile
 
 - type: entity
   id: 40mmGrenadeFire

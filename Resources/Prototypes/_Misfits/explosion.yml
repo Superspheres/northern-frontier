@@ -74,6 +74,20 @@
   texturePath: /Textures/Effects/fire_greyscale.rsi
   fireStates: 3
 
+# Misfits Add - Quantum-blue variant for the lighter improvised Nuka grenade.
+# Separate visuals keep standard plasma green; the grenade sets its lower cap.
+- type: explosion
+  id: N14NukaPlasma
+  damagePerIntensity:
+    types:
+      Caustic: 15
+  tileBreakChance: [0]
+  tileBreakIntensity: [0]
+  lightColor: "#80E8FF"
+  fireColor: "#80E8FF"
+  texturePath: /Textures/Effects/fire_greyscale.rsi
+  fireStates: 3
+
 # Misfits Add - Green caustic burst used by Fallout-style plasma explosives.
 - type: explosion
   id: N14Plasma

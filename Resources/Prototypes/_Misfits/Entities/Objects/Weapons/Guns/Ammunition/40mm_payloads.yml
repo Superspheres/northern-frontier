@@ -1,0 +1,107 @@
+# Misfits Add - Impact rounds use separate payload entities because projectile
+# collision removes the bullet. ClusterGrenade emits its fragments on the next
+# update, so it must survive independently of the colliding projectile.
+- type: entity
+  id: N1440mmHEDPProjectile
+  parent: BaseBulletTrigger
+  name: HEDP grenade
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
+  - type: SpawnOnTrigger
+    proto: N1440mmHEDPPayload
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: N1440mmHEDPPayload
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: ClusterGrenade
+    fillPrototype: N1440mmHEDPFragment
+    maxGrenadesCount: 20
+    grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
+  - type: SpawnOnTrigger
+    proto: N1440mmHEDPExplosion
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+
+- type: entity
+  id: N1440mmHEDPFragment
+  parent: PelletClusterLethal
+  name: HEDP fragment
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    # Stop at the first collision rather than piercing through multiple targets.
+    deleteOnCollide: true
+    damage:
+      types:
+        Piercing: 10
+  - type: TimedDespawn
+    lifetime: 0.25
+
+- type: entity
+  id: N1440mmHEDPExplosion
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    # 4.8 x (6.25 Heat + 6.25 Blunt) = 60 maximum blast damage.
+    # Fragment hits are additional and depend on direction, cover, and distance.
+    explosionType: N1440mmHE
+    maxIntensity: 4.8
+    intensitySlope: 4
+    totalIntensity: 20
+    canCreateVacuum: false
+    maxTileBreak: 0
+    tileBreakScale: 0
+
+- type: entity
+  id: N1440mmPulseProjectile
+  parent: N1440mmHEDPProjectile
+  name: pulse grenade
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnTrigger
+    proto: N1440mmPulsePayload
+
+- type: entity
+  id: N1440mmPulsePayload
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: EmpOnTrigger
+    # Reuse hand-pulse behavior, including the existing synthetic damage caps.
+    range: 4
+    energyConsumption: 2700000
+  - type: SpawnOnTrigger
+    proto: PulseGrenadeExplosion
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: N1440mmPlasmaProjectile
+  parent: BaseBulletTrigger
+  name: plasma grenade
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    # 6 x 15 = 90 maximum caustic damage; smaller than the hand grenade.
+    explosionType: N14Plasma
+    maxIntensity: 6
+    intensitySlope: 4
+    totalIntensity: 30
+    canCreateVacuum: false
+    maxTileBreak: 0
+    tileBreakScale: 0

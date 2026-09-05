@@ -1,0 +1,116 @@
+# Misfits Add - Buckshot is fired at the muzzle, not emitted radially on impact.
+# ProjectileSpread counts the initial projectile: count 20 means exactly 20 pellets.
+- type: entity
+  id: N1440mmBuckshotPellet
+  parent: PelletShotgun12
+  name: 40mm buckshot pellet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    # Inherit 12-gauge pellet damage (currently 10 Piercing) and its falloff.
+    # Twenty hits can total 200 raw damage before armor and distance reductions.
+    deleteOnCollide: true
+
+- type: entity
+  id: N1440mmBuckshotSpread
+  parent: N1440mmBuckshotPellet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: N1440mmBuckshotPellet
+    count: 20
+    spread: 20
+
+# Utility rounds inherit only the zero-impact-damage projectile and its
+# spawn/delete trigger behavior. No explosive blast is attached to these rounds.
+- type: entity
+  id: N1440mmSmokeProjectile
+  parent: N1440mmHEDPProjectile
+  name: smoke round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnTrigger
+    proto: N1440mmSmokePayload
+
+- type: entity
+  id: N1440mmWhitePhosphorusProjectile
+  parent: N1440mmHEDPProjectile
+  name: white phosphorus round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnTrigger
+    proto: N1440mmWhitePhosphorusPayload
+
+- type: entity
+  id: N1440mmTearGasProjectile
+  parent: N1440mmHEDPProjectile
+  name: tear gas round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnTrigger
+    proto: N1440mmTearGasPayload
+
+- type: entity
+  id: N1440mmFlashbangProjectile
+  parent: N1440mmHEDPProjectile
+  name: flashbang round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnTrigger
+    proto: N1440mmFlashbangPayload
+
+# Match the handheld smoke's lifetime and spread. Spread is a tile budget,
+# not a circular radius; walls and available space affect the final cloud.
+- type: entity
+  id: N1440mmSmokePayload
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: SmokeOnTrigger
+    duration: 30
+    spreadAmount: 50
+  - type: SoundOnTrigger
+    sound: /Audio/Items/smoke_grenade_smoke.ogg
+  - type: DeleteOnTrigger
+
+# Reuse the existing caustic WP reagent; deliberately no fire stacks or ignition.
+- type: entity
+  id: N1440mmWhitePhosphorusPayload
+  parent: N1440mmSmokePayload
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SmokeOnTrigger
+    duration: 25
+    spreadAmount: 50
+    solution:
+      reagents:
+      - ReagentId: WhitePhosphorusSmoke
+        Quantity: 50
+
+- type: entity
+  id: N1440mmTearGasPayload
+  parent: N1440mmSmokePayload
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SmokeOnTrigger
+    duration: 10
+    spreadAmount: 30
+    solution:
+      reagents:
+      - ReagentId: TearGas
+        Quantity: 50
+
+# Reuse standard flash handling, including visibility and flash protection.
+- type: entity
+  id: N1440mmFlashbangPayload
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: FlashOnTrigger
+    range: 7
+  - type: SoundOnTrigger
+    sound:
+      path: /Audio/Effects/flash_bang.ogg
+  - type: SpawnOnTrigger
+    proto: GrenadeFlashEffect
+  - type: DeleteOnTrigger
