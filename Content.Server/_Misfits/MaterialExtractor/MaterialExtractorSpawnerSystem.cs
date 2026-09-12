@@ -3,6 +3,8 @@ using Content.Server.Maps;
 using Content.Server._Misfits.Expeditions;
 using Content.Shared.GameTicking;
 using Content.Shared.Maps;
+using Content.Shared._Misfits.CCVar;
+using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -11,7 +13,7 @@ using Robust.Shared.Random;
 namespace Content.Server._Misfits.MaterialExtractor;
 
 /// <summary>
-/// Creates the single round-scoped Seismic Material Extractor on Wendover.
+/// Creates the configured round-scoped Seismic Material Extractors on Wendover.
 /// Placement is deliberately data-independent: it examines the loaded grid rather
 /// than relying on a serialized map marker.
 /// </summary>
@@ -25,6 +27,7 @@ public sealed partial class MaterialExtractorSpawnerSystem : EntitySystem
         new(1, 0), new(-1, 1), new(0, 1), new(1, 1),
     ];
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private N14ExpeditionEntranceSpawnerSystem _expeditionEntrances = default!;
@@ -82,13 +85,36 @@ public sealed partial class MaterialExtractorSpawnerSystem : EntitySystem
             return;
         }
 
-        var rockTile = rockCandidates[_random.Next(rockCandidates.Count)];
-        var tile = rockTile + AdjacentOffsets[_random.Next(AdjacentOffsets.Length)];
-        var extractor = Spawn(ExtractorPrototype, _map.GridTileToLocal(gridUid, grid, tile));
-        // Round-start landmarks are spawned directly rather than placed by a player,
-        // so anchor them here to satisfy the portable-generator start path.
-        _transform.AnchorEntity(extractor, Transform(extractor));
-        _log.Info($"Spawned the round's material extractor at {tile} beside boulder {rockTile} on Wendover map {mapId}.");
+        var targetCount = (long) Math.Max(0, _config.GetCVar(MaterialExtractorCVars.GuaranteedCount));
+        var extraChance = Math.Clamp(_config.GetCVar(MaterialExtractorCVars.ExtraChance), 0f, 1f);
+        if (_random.Prob(extraChance))
+            targetCount++;
+
+        // Visit different boulders first and never stack extractors on the same tile.
+        _random.Shuffle(rockCandidates);
+        var usedTiles = new HashSet<Vector2i>();
+        foreach (var rockTile in rockCandidates)
+        {
+            if (usedTiles.Count >= targetCount)
+                break;
+
+            var startOffset = _random.Next(AdjacentOffsets.Length);
+            for (var i = 0; i < AdjacentOffsets.Length; i++)
+            {
+                var tile = rockTile + AdjacentOffsets[(startOffset + i) % AdjacentOffsets.Length];
+                if (!usedTiles.Add(tile))
+                    continue;
+
+                var extractor = Spawn(ExtractorPrototype, _map.GridTileToLocal(gridUid, grid, tile));
+                // Anchor round-start landmarks to satisfy the portable-generator start path.
+                _transform.AnchorEntity(extractor, Transform(extractor));
+                _log.Info($"Spawned material extractor at {tile} beside boulder {rockTile} on Wendover map {mapId}.");
+                break;
+            }
+        }
+
+        if (usedTiles.Count < targetCount)
+            _log.Warning($"Only spawned {usedTiles.Count} of {targetCount} material extractors on Wendover map {mapId}; ran out of boulder locations.");
 
         // The extractor is visible proof that this established round-start path
         // ran for Wendover. Enforce expedition entrances from the same path so
