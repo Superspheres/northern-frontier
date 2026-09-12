@@ -23,6 +23,7 @@ using Content.Shared.Language;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Language.Systems;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
@@ -85,6 +86,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedSpecialSystem _special = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!; // #Misfits Add - remote pilots speak and hear through the body they left behind
 
     // Forge-Change Moved to shared
     // public const int VoiceRange = 10; // how far voice goes in world units
@@ -220,6 +222,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             return;
         }
+
+        // #Misfits Fix - someone running a camera remotely, like a vertibird gunner, is attached to
+        // the camera rather than to themselves. Speak as the body instead: that is where their voice
+        // carries from and where the headset they are talking into is actually sitting.
+        if (_mind.TryGetPilotedBody(source, out var pilot))
+            source = pilot;
 
         if (!CanSendInGame(message, shell, player))
             return;
@@ -642,7 +650,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool hideLog = false,
         bool checkEmote = true,
         bool ignoreActionBlocker = false,
-        NetUserId? author = null
+        NetUserId? author = null,
+        int? fontSizeOverride = null
         )
     {
         if (!_actionBlocker.CanEmote(source) && !ignoreActionBlocker)
@@ -666,7 +675,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
 
         // #Misfits Change
-        var wrappedMessage = BuildEmoteWrappedMessage(source, name, action);
+        var wrappedMessage = BuildEmoteWrappedMessage(source, name, action, fontSizeOverride);
 
         if (checkEmote)
             TryEmoteChatInput(source, action);
@@ -857,14 +866,6 @@ public sealed partial class ChatSystem : SharedChatSystem
             // Genetics: deaf entities cannot receive spoken local chat. Emotes and LOOC remain visible.
             if (HasComp<DeafComponent>(listener) && channel != ChatChannel.Emotes && channel != ChatChannel.LOOC)
                 continue;
-
-            // #Misfits Add - Room occlusion: if the listener is beyond the clear range and has no line
-            // of sight to the speaker (separated by walls), they cannot hear/read the message.
-            // Within VoiceOccludedRange you can always hear (through thin walls nearby).
-            if (data.Range > VoiceOccludedRange
-                && !_interactionSystem.InRangeUnobstructed(source, listener, VoiceRange, Shared.Physics.CollisionGroup.Opaque))
-                continue;
-
 
             // If the channel does not support languages, or the entity can understand the message, send the original message, otherwise send the obfuscated version
             if (channel == ChatChannel.LOOC || channel == ChatChannel.Emotes || _language.CanUnderstand(listener, language.ID))
@@ -1078,7 +1079,11 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (player.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
 
-            var transformEntity = xforms.GetComponent(playerEntity);
+            // #Misfits Fix - a player off running a camera still hears whatever is said around the
+            // body they left behind, rather than around the camera.
+            var listener = _mind.TryGetPilotedBody(playerEntity, out var pilotBody) ? pilotBody : playerEntity;
+
+            var transformEntity = xforms.GetComponent(listener);
 
             if (transformEntity.MapID != sourceMapId)
                 continue;

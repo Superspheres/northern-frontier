@@ -15,7 +15,7 @@
   startingGear: CaesarLegionAuxiliaGear
   alwaysUseSpawner: true
   icon: "JobIconlegionerRecruit"
-  supervisors: job-name-caesar-legion-other
+  supervisors: job-name-caesar-legion-female # changed aux and aom to have their own command chain under priestess.
   canBeAntag: false
   accessGroups:
   - CaesarLegionRecruit
@@ -34,6 +34,7 @@
 - type: startingGear
   id: CaesarLegionAuxiliaGear
   equipment:
+    wallet: N14Wallet
     jumpsuit: N14ClothingUniformJumpsuitLegionnaire
     ears: N14ClothingHeadsetLegion
     mask: N14ClothingMaskBrownMask
@@ -53,6 +54,7 @@
     - N14HealingPoultice
     - N14HealingPoultice
     - N14Hydra
+    - BookLegionLaw #new players get the guidebook
 
 - type: playTimeTracker
   id: CaesarLegionAuxilia

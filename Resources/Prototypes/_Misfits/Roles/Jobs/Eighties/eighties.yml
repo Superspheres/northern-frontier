@@ -46,6 +46,7 @@
 - type: startingGear
   id: EightiesTheBlockGear
   equipment:
+    wallet: N14Wallet
     bandage: NCClothingBandageRaiders
     id: MisfitsEightiesIDCardHead
     gloves: N14ClothingHandsGlovesBlackBiker
@@ -62,7 +63,7 @@
     belt: ClothingBeltMilitary
   storage:
     back:
-    - N14BoxPlasticFilledWastelander
+    - N14BoxPlasticFilledRaider
 
 - type: playTimeTracker
   id: EightiesTheBlock
@@ -110,8 +111,9 @@
 - type: startingGear
   id: EightiesCylindersGear
   equipment:
+    wallet: N14Wallet
     bandage: NCClothingBandageRaiders
-    id: MisfitsEightiesIDCard
+    id: MisfitsEightiesIDCardCylinders
     gloves: N14ClothingHandsGlovesBlackBiker
     jumpsuit: N14ClothingUniformJumpsuitBrahminFarmer
     outerClothing: MisfitsClothingOuterEightiesArmorHeavyElite
@@ -125,7 +127,7 @@
     belt: ClothingBeltMilitary
   storage:
     back:
-    - N14BoxPlasticFilledWastelander
+    - N14BoxPlasticFilledRaider
 
 - type: playTimeTracker
   id: EightiesCylinders
@@ -172,8 +174,9 @@
 - type: startingGear
   id: EightiesPistonsGear
   equipment:
+    wallet: N14Wallet
     bandage: NCClothingBandageRaiders
-    id: MisfitsEightiesIDCard
+    id: MisfitsEightiesIDCardPistons
     jumpsuit: N14ClothingUniformJumpsuitBrahminFarmer
     gloves: N14ClothingHandsGlovesBlackBiker
     outerClothing: MisfitsClothingOuterEightiesArmorHeavy
@@ -187,7 +190,7 @@
     belt: ClothingBeltMilitary
   storage:
     back:
-    - N14BoxPlasticFilledWastelander
+    - N14BoxPlasticFilledRaider
 
 - type: playTimeTracker
   id: EightiesPistons
@@ -234,8 +237,9 @@
 - type: startingGear
   id: EightiesOilersGear
   equipment:
+    wallet: N14Wallet
     bandage: NCClothingBandageRaiders
-    id: MisfitsEightiesIDCard
+    id: MisfitsEightiesIDCardOilers
     jumpsuit: N14ClothingUniformJumpsuitBrahminFarmer
     gloves: N14ClothingHandsGlovesBlackBiker
     outerClothing: MisfitsClothingOuterEightiesArmorHeavyBoss
@@ -249,7 +253,7 @@
     belt: ClothingBeltMilitary
   storage:
     back:
-    - N14BoxPlasticFilledWastelander
+    - N14BoxPlasticFilledRaider
 
 - type: playTimeTracker
   id: EightiesOilers
@@ -276,7 +280,7 @@
     - GhoulGlowing
   - !type:CharacterPlaytimeRequirement
     tracker: Wastelander
-    min: 46800 # 13 hours
+    min: 28800 # 8 hours
   startingGear: EightiesRoadRashGear
   alwaysUseSpawner: true
   icon: "JobIconEighties"
@@ -293,6 +297,7 @@
 - type: startingGear
   id: EightiesRoadRashGear
   equipment:
+    wallet: N14Wallet
     bandage: NCClothingBandageRaiders
     id: MisfitsEightiesIDCard
     jumpsuit: N14ClothingUniformJumpsuitBrahminFarmer
@@ -307,7 +312,7 @@
     belt: ClothingBeltMilitary
   storage:
     back:
-    - N14BoxPlasticFilledWastelander
+    - N14BoxPlasticFilledRaider
 
 - type: playTimeTracker
   id: EightiesRoadRash

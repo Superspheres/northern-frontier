@@ -37,10 +37,11 @@
   id: NCRRangerRecruitGear
   # Entry-level gear: standard ranger hat, NCR uniform, basic boots, revolver belt, recruit badge
   equipment:
+    wallet: N14Wallet
     head: N14ClothingHeadHatRanger
     back: N14ClothingBackpackMilitary
     jumpsuit: N14ClothingUniformRangerV1
-    ears: N14ClothingHeadsetNCR
+    ears: MisfitsClothingHeadsetNCRRanger
     shoes: N14ClothingBootsLeather
     belt: ClothingBeltRevolverdesertfilled
     pocket1: MagazineBox45-70

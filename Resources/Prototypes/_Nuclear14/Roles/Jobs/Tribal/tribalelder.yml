@@ -15,7 +15,7 @@
       - Ghoul
     - !type:CharacterDepartmentTimeRequirement
       department: Tribe
-      min: 252000 # 70 hours
+      min: 144000 # 40 hours
   startingGear: TribalElderGear
   alwaysUseSpawner: true
   icon: "JobIconTribalLeader" # Corvax-Change
@@ -60,6 +60,7 @@
 - type: startingGear
   id: TribalElderGear
   equipment:
+    wallet: N14Wallet
     jumpsuit: N14ClothingUniformJumpsuitTribal
     suitstorage: N14TribalBigClubDecorated
     outerClothing: N14ClothingOuterTribalCoat

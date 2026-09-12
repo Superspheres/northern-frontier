@@ -10,9 +10,14 @@
   description: job-description-caesar-legion-Acolyte-of-mars
   playTimeTracker: CaesarLegionAcolyteOfMars
   requirements:
-    - !type:CharacterDepartmentTimeRequirement
+    - !type:CharacterDepartmentTimeRequirement # Legion total timelock
       department: CaesarLegion
-      min: 28800 # 8 hours
+      min: 57600 # 16 hours
+    - !type:CharacterLogicOrRequirement
+      requirements:
+        - !type:CharacterPlaytimeRequirement
+          tracker: CaesarLegionAuxilia
+          min: 21600 # 6 hours # make this higher later but for rn no one is playing this role.
     - !type:CharacterSpeciesRequirement
       species:
         - Human
@@ -23,13 +28,14 @@
   startingGear: CaesarLegionAcolyteOfMarsGear
   alwaysUseSpawner: true
   icon: "JobIconlegionerRecruit"
-  supervisors: job-name-caesar-legion-other
+  supervisors: job-name-caesar-legion-female # changed aux and aom to have their own command chain under priestess.
   canBeAntag: false
   accessGroups:
     - CaesarLegionAcolyteOfMars
   special:
     - !type:AddComponentSpecial
       components:
+        - type: BibleUser #Lets them heal with bibles
         - type: NpcFactionMember
           factions:
             - CaesarLegion
@@ -42,14 +48,17 @@
 - type: startingGear
   id: CaesarLegionAcolyteOfMarsGear
   equipment:
+    wallet: N14Wallet
     jumpsuit: N14ClothingUniformJumpsuitLegionnaire
     ears: N14ClothingHeadsetLegion
+    neck: N14ClothingNeckAcolyteCloak
     mask: N14ClothingMaskBrownMask
     back: N14ClothingBackpackMilitary
     shoes: N14ClothingBootsLeather
     head: N14ClothingHeadHatTribalOutcastHood
     gloves: N14ClothingHandsGlovesTribal
     outerClothing: N14ClothingOuterLegionnaireRecruitArmor
+    pocket1: LegionAcolyteLoadoutKits
     id: N14IDLegionaryBadge
   innerClothingSkirt: N14ClothingUniformJumpsuitLegionnaireOther
   storage:
@@ -59,6 +68,7 @@
     - N14HealingPowder
     - N14HealingPoultice
     - N14HealingPoultice
+    - BibleMars
 
 - type: playTimeTracker
   id: CaesarLegionAcolyteOfMars

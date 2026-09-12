@@ -2,7 +2,7 @@
 
 - type: job
   id: WhiteLegsBoneBreaker
-  setPreference: true
+  setPreference: false # #Misfits Change - White Legs is retained for compatibility, not character setup.
   weight: 40
   showBorder: true
   name: job-name-whitelegs-bone-breaker
@@ -17,7 +17,7 @@
     - Human
     - Ghoul
   - !type:CharacterDepartmentTimeRequirement
-    department: WhiteLegs
+    department: GreatKhans
     min: 43200 # 12 hours
   startingGear: WhiteLegsBoneBreakerGear
   alwaysUseSpawner: true
@@ -34,8 +34,9 @@
 - type: startingGear
   id: WhiteLegsBoneBreakerGear
   equipment:
+    wallet: N14Wallet
     bandage: NCClothingBandageRaiders
-    jumpsuit: N14ClothingUniformJumpsuitWarriorTribal
+    jumpsuit: M14ClothingUniformWhiteLegsUniform
     outerClothing: MisfitsClothingOuterWhiteLegsArmor
     shoes: N14ClothingShoesRaider
     neck: ClothingNeckBlackScarf

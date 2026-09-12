@@ -417,6 +417,8 @@
           prob: 0.02
         - id: N14FloraWildCoyoteTobaccoClippingSeed
           prob: 0.02
+        - id: N14FloraWildCannabisClippingSeed
+          prob: 0.02
         - id: N14FloraDaturaClippingSeed
           prob: 0.01
         - id: N14FloraWildGlowpepperClippingSeed
@@ -589,7 +591,7 @@
         - id: N14WeaponSniper556VarmintRifle
           prob: 0.09
           orGroup: Weapon
-        - id: N14WeaponRevolver44Magnun
+        - id: N14WeaponRevolver44Magnum
           prob: 0.07
           orGroup: Weapon
         #- id: N14WeaponDesertEagle44 # Forge-Change
@@ -1456,6 +1458,48 @@
         - id: Magazine45SubMachineGun
           prob: 0.09
           orGroup: Ammunition
+        # #Misfits Add - rare loose 40mm finds. Other than existing upstream
+        # availability, these variants enter circulation through junk or crafting.
+        - id: 40mmGrenadeFrag
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: 40mmGrenadeFire
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadeHEDP
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadePulse
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadePlasma
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadeBuckshot
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadeSmoke
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadeWhitePhosphorus
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadeFlashbang
+          prob: 0.0025
+          orGroup: Ammunition
+        - id: Misfits40mmGrenadeTearGas
+          prob: 0.0025
+          orGroup: Ammunition
+        # #Misfits Add - exceptionally rare, intact grenade finds in junk piles.
+        - id: GrenadeShrapnel
+          prob: 0.005
+          orGroup: Ammunition
+        - id: MisfitsGrenadeFragDefensive
+          prob: 0.005
+          orGroup: Ammunition
+        - id: MisfitsGrenadeImpact
+          prob: 0.005
+          orGroup: Ammunition
         - id: N14JunkAbraxoCleaner
           prob: 0.05
           orGroup: Junk
@@ -1657,6 +1701,9 @@
         # #Misfits Change - Extremely rare pipboy (0.5%) and low-chance wasteland scrap headset (2%) for junk pile finds
         - id: N14Pipboy
           prob: 0.005
+        # #Misfits Add - Shoddy power armor manual, same rare drop chance as the pipboy (0.5%)
+        - id: WastelandPowerArmor
+          prob: 0.005
         - id: MisfitsClothingHeadsetWastelandScrap
           prob: 0.02
         - id: N14CurrencyCap
@@ -1812,7 +1859,7 @@
         - id: N14WeaponRevolver10mm
           prob: 0.01
           orGroup: Weapons
-        - id: N14WeaponRevolver44Magnun
+        - id: N14WeaponRevolver44Magnum
           prob: 0.01
           orGroup: Weapons
         - id: N14WeaponPistol9mm
@@ -2253,7 +2300,7 @@
         - id: N14WeaponPistol9mmSpy
           prob: 0.05
           orGroup: Weapon
-        - id: N14WeaponRevolver44Magnun
+        - id: N14WeaponRevolver44Magnum
           prob: 0.07
           orGroup: Weapon
         - id: N14WeaponRevolver45-70Hunter
@@ -2769,6 +2816,8 @@
         - id: N14FloraWildCarrotClippingSeed
           prob: 0.05
         - id: N14FloraWildCoyoteTobaccoClippingSeed
+          prob: 0.05
+        - id: N14FloraWildCannabisClippingSeed
           prob: 0.05
         - id: N14FloraDaturaClippingSeed
           prob: 0.05

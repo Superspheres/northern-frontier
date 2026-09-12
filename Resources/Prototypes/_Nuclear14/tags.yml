@@ -9,6 +9,9 @@
   id: Bedroll
 
 - type: Tag
+  id: BottleCap
+
+- type: Tag
   id: Bomb
 
 - type: Tag
@@ -55,6 +58,10 @@
 
 - type: Tag
   id: MisfitsPipBoy
+
+# #Cythisiax Added - lets utility belts store the N14 welding goggles
+- type: Tag
+  id: WeldingGoggles
 
 # Medical Items
 - type: Tag
@@ -195,6 +202,9 @@
 
 - type: Tag
   id: N14Igniter
+
+- type: Tag
+  id: N14PoliceBaton
 
 - type: Tag
   id: Capacitor2
@@ -457,6 +467,12 @@
 
 - type: Tag
   id: N14ElectronChargePack
+
+- type: Tag
+  id: N14PulseEnergyCell
+
+- type: Tag
+  id: N14PulseMicrofusionCell
 
 #MARK: Ammo tags(explosives)
 

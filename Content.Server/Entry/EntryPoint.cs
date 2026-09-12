@@ -27,6 +27,7 @@ using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
+using Content.Server._Misfits.Administration;
 using Content.Server.Voting.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.Kitchen;
@@ -88,6 +89,9 @@ namespace Content.Server.Entry
                 .ToArray();
             if (rmcIgnored.Length > 0)
                 factory.RegisterIgnore(rmcIgnored);
+
+            // Misifts
+            factory.RegisterIgnore(MisfitsIgnoredComponents.List);
             prototypes.RegisterIgnore("guideEntry");
             prototypes.RegisterIgnore("parallax");
             prototypes.RegisterIgnore("latheRecipePack"); // #Misfits Add: RMC prototype type not in this fork

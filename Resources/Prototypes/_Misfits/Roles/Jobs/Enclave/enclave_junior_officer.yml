@@ -3,7 +3,6 @@
 - type: job
   id: EnclaveJuniorOfficer
   setPreference: true
-  hideWithoutJobWhitelist: true
   jobWhitelistBypassesRoleTimers: true # #Misfits Change
   weight: 110
   displayWeight: 127
@@ -19,10 +18,7 @@
       - Ghoul
     - !type:CharacterDepartmentTimeRequirement
       department: Enclave
-      min: 57600 # 16 hours
-    - !type:CharacterPlaytimeRequirement
-      tracker: EnclaveNCO
-      min: 36000 # 10 hours
+      min: 43200 # 12 hours
   startingGear: EnclaveJuniorOfficerGear
   icon: "JobIconEnclaveJuniorOfficer"
   supervisors: job-supervisors-enclave-junior-officer
@@ -35,18 +31,20 @@
       - type: NpcFactionMember
         factions:
           - Enclave
+          - Wastelander
+      - type: ReplacementAccent
+        accent: n14Enclave
       - type: PowerArmorProficiency
 
 - type: startingGear
   id: EnclaveJuniorOfficerGear
   equipment:
+    wallet: N14Wallet
     head: N14ClothingHeadHatEnclaveOfficer
     back: N14ClothingBackpackMilitary
     jumpsuit: N14ClothingUniformJumpsuitEnclave
-    outerClothing: N14ClothingOuterPowerArmorAdvanced2
     shoes: N14ClothingBootsCombatFilled
     gloves: N14ClothingHandsGlovesCombat
-    neck: ClothingNeckPinEnclaveSecondLieutenant
     belt: ClothingBeltMilitary
     ears: N14ClothingHeadsetEnclave
     pocket1: EnclaveOfficerloadoutkits

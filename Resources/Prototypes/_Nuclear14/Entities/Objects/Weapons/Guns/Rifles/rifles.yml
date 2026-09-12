@@ -462,6 +462,7 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: ChamberMagazineAmmoProvider
     autoEject: true
+    retainEmptyWhenChambered: true # #Misfits Fixed - same en-bloc clip retention as the M1 Garand
   - type: GunWieldBonus
     minAngle: -23
     maxAngle: -56
@@ -1121,6 +1122,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: ChamberMagazineAmmoProvider
     autoEject: true
+    retainEmptyWhenChambered: true # #Misfits Fixed - keep the empty clip while a round is chambered (no early ping / double bolt with +1)
     # The iconic Garand ping when the en-bloc clip ejects on empty
     soundAutoEject:
       path: /Audio/_Nuclear14/Weapons/Guns/Rifles/N14WeaponM1Garand/garand_ping.ogg
@@ -1210,9 +1212,9 @@
 # Republic's Pride — UNIQUE, scoped M1C variant issued to NCR Scout Captains.
 - type: entity
   name: Republic's Pride
-  parent: N14WeaponRifleM1Garand
+  parent: N14WeaponRifle762MarksmanChinese
   id: N14WeaponRifleM1GarandRepublicsPride
-  description: A well-tuned scoped M1C rifle crafted by a master gunsmith from the Gunrunners. Proudly issued to NCR Scout Captains. Chambered in 7.62x51 and fitted with a long-range optic.
+  description: A well-tuned scoped M1C rifle crafted by a master gunsmith from the Gunrunners. Modified to accept standard 21-round magazines. Proudly issued to NCR Scout Captains. Chambered in .308 and fitted with a long-range optic.
   components:
   - type: Clothing
     sprite: _Nuclear14/Objects/Weapons/Guns/Snipers/hunting.rsi # #Misfits Tweak: hunting rifle RSI back-slot placeholder, same as base Garand
@@ -1291,6 +1293,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: ChamberMagazineAmmoProvider
     autoEject: true
+    retainEmptyWhenChambered: true # #Misfits Fixed - same en-bloc clip retention as the M1 Garand
   - type: GunWieldBonus
     minAngle: -23
     maxAngle: -56

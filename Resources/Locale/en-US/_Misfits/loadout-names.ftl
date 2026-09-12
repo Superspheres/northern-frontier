@@ -128,7 +128,14 @@ loadout-name-MisfitsLoadoutOuterVegabondsVest = vagabond's vest
 loadout-name-MisfitsLoadoutOuterArmorKit = armor kit
 loadout-name-MisfitsLoadoutOuterArmorKitPunk = punk armor kit
 loadout-name-MisfitsLoadoutOuterArmorKitShoulder = shoulder armor kit
-loadout-name-MisfitsLoadoutOuterKhanLeather = great khan leather vest
+loadout-name-MisfitsLoadoutOuterKhansJacket = great khan jacket
+loadout-name-MisfitsLoadoutOuterKhansVest = great khan vest
+loadout-name-MisfitsLoadoutOuterKhansBattlecoatRed = great khan red battlecoat
+loadout-name-MisfitsLoadoutOuterKhansBattlecoatBlack = great khan black battlecoat
+loadout-name-MisfitsLoadoutOuterMarkedMenCombatTribalArmor = marked men tribal armor
+loadout-name-MisfitsLoadoutOuterMarkedMenCombatPatrolArmor = marked men patrol armor
+loadout-name-MisfitsLoadoutOuterWhiteLegsArmor = white legs tribal armor
+
 
 # Shoes
 loadout-name-ClothingShoesBootsLaceupVault = laceup shoes
@@ -287,6 +294,8 @@ loadout-name-N14TribalSword = tribal sword
 loadout-name-N14KitchenKnife = kitchen knife
 loadout-name-N14BrassKnife = brass knife
 loadout-name-N14WastelandTribalSpear = wasteland tribal spear
+loadout-name-Cane = cane
+loadout-name-CaneBlade = cane blade
 
 # NCR loadouts
 loadout-name-LoadoutNCRPinRecruit = NCR recruit pin
@@ -413,7 +422,7 @@ loadout-name-LoadoutClothingOuterMBoSSquireArmor = Brotherhood squire armor (Mid
 # loadout-name-LoadoutClothingHeadHatBoSInquisitorHat = Brotherhood inquisitor hat
 
 # Misfits Add - N14 weapon loadout names
-loadout-name-N14WeaponBlowback = blowback
+loadout-name-N14WeaponShotgunBlowback = blowback
 loadout-name-N14WeaponLaserPistol = laser pistol
 loadout-name-N14WeaponLaserRevolver = laser revolver
 loadout-name-N14WeaponLaserRifleMakeshift = makeshift laser rifle
@@ -466,7 +475,8 @@ loadout-name-Magazine762AmmoShort = 7.62 short magazine
 loadout-name-Magazine762Rifle = 7.62 rifle magazine
 loadout-name-ClipMagazine308Rifle = .308 rifle clip
 loadout-name-MagazineBox10mm = 10mm ammo box
-loadout-name-MagazineBox12 = 12-gauge ammo box
+# Cythisiax Fixed - MagazineBox12 is the 12.7mm box (was mislabeled as 12-gauge)
+loadout-name-MagazineBox12 = 12.7mm ammo box
 loadout-name-MagazineBox12gauge = 12-gauge ammo box
 loadout-name-MagazineBox20gauge = 20-gauge ammo box
 loadout-name-MagazineBox22 = .22 ammo box
@@ -493,6 +503,16 @@ loadout-name-N14LoadoutOuterSoldierCoat = soldier coat
 loadout-name-N14LoadoutOuterZealotDuster = zealot duster
 loadout-name-N14LoadoutOuterRaiderCombat1 = raider combat armor
 loadout-name-N14LoadoutOuterCombatArmorRaider = raider combat armor
+loadout-name-MisfitsLoadoutOuterCombatTalon = talon combat armor
+loadout-name-MisfitsLoadoutOuterCombatTalonDuster = talon combat duster
+loadout-name-MisfitsLoadoutOuterDeadHorsesArmor = dead horses armor
+loadout-name-MisfitsLoadoutOuterDeadHorsesLightArmor = dead horses light armor
+loadout-name-MisfitsLoadoutOuterSorrowsArmor = sorrows armor
+loadout-name-MisfitsLoadoutOuterRustwalkersArmor = rustwalkers armor
+loadout-name-MisfitsLoadoutOuterRustwalkersLightArmor = rustwalkers light armor
+loadout-name-MisfitsLoadoutOuterWesternWayfarerArmor = western wayfarer armor
+loadout-name-MisfitsLoadoutOuterWesternWayfarerHeavyArmor = western wayfarer heavy armor
+loadout-name-MisfitsLoadoutOuterWardenPlate = warden plate
 loadout-name-LoadoutN14ClothingOuterCaliforniaGirlVetRangerRiotArmor = california girl riot armor
 loadout-name-LoadoutN14ClothingOuterTheDevoutVetRangerRiotArmor = the devout riot armor
 loadout-name-LoadoutN14ClothingOuterDemoExpertVetRangerRiotArmor = demo expert riot armor
@@ -606,6 +626,10 @@ loadout-name-LoadoutBoSMidwestHellCat = Brotherhood Hellcat armor (Midwest)
 loadout-name-LoadoutN14ClothingOuterLegionPaladinKiller = Legion paladin killer armor
 loadout-name-LoadoutLegionPrincipes = Principes pattern armor
 
+# Misfits Add - 509th BoS T-51bc power armor loadout names
+loadout-name-LoadoutBoS509ElderT51BC = 509th BoS Elder T-51bc Power Armor
+# #Cythisiax Removed - Head Paladin T-51bc loadout no longer exists; the suit moved to the Honor Guard rank.
+
 # Enclave rank pin loadouts
 loadout-name-LoadoutEnclavePinPrivate = Enclave private pin
 loadout-name-LoadoutEnclavePinPFC = Enclave private first class pin
@@ -614,6 +638,7 @@ loadout-name-LoadoutEnclavePinSergeant = Enclave sergeant pin
 loadout-name-LoadoutEnclavePinStaffSergeant = Enclave staff sergeant pin
 loadout-name-LoadoutEnclavePinSFC = Enclave sergeant first class pin
 loadout-name-LoadoutEnclavePinMasterSergeant = Enclave master sergeant pin
+loadout-name-LoadoutEnclavePinSergeantMajor = Enclave sergeant major pin
 loadout-name-LoadoutEnclavePinSecondLieutenant = Enclave second lieutenant pin
 loadout-name-LoadoutEnclavePinFirstLieutenant = Enclave first lieutenant pin
 loadout-name-LoadoutEnclavePinCaptain = Enclave captain pin
@@ -624,6 +649,16 @@ loadout-name-LoadoutEnclavePinGeneral = Enclave general pin
 loadout-name-LoadoutEnclavePinJuniorScientist = Enclave junior scientist pin
 loadout-name-LoadoutEnclavePinScientist = Enclave scientist pin
 loadout-name-LoadoutEnclavePinHeadScientist = Enclave head scientist pin
+
+# Misfits Add - Enclave supermutant rank pin loadouts
+loadout-name-LoadoutEnclaveSMPinPrivate = Enclave private pin (Supermutant)
+loadout-name-LoadoutEnclaveSMPinPFC = Enclave private first class pin (Supermutant)
+loadout-name-LoadoutEnclaveSMPinSpecialist = Enclave specialist pin (Supermutant)
+loadout-name-LoadoutEnclaveSMPinSergeant = Enclave sergeant pin (Supermutant)
+loadout-name-LoadoutEnclaveSMPinStaffSergeant = Enclave staff sergeant pin (Supermutant)
+loadout-name-LoadoutEnclaveSMPinSFC = Enclave sergeant first class pin (Supermutant)
+loadout-name-LoadoutEnclaveSMPinMasterSergeant = Enclave master sergeant pin (Supermutant)
+loadout-name-LoadoutEnclaveSMPinSergeantMajor = Enclave sergeant major pin (Supermutant)
 
 # NCR rank pin additions
 loadout-name-LoadoutNCRPinChiefPhysicianMedic = NCR chief physician pin (Medic)
@@ -654,6 +689,8 @@ loadout-name-MisfitsLoadoutHeadHeadMarlowHat = marlow hat
 loadout-name-MisfitsLoadoutHeadHeadSchlimmHat = schlimm hat
 loadout-name-MisfitsLoadoutHeadHeadAHPhelmet = highway patrol helmet
 loadout-name-MisfitsLoadoutHeadKhanHelmet = khan helmet
+loadout-name-MisfitsLoadoutHeadKhanFurHelmet = khan fur helmet
+loadout-name-MisfitsLoadoutHeadKhanFullHelmet = khan full helmet
 # Head — NCR soldiers
 loadout-name-MisfitsLoadoutHeadNCRSidecap = NCR sidecap
 loadout-name-MisfitsLoadoutHeadNCRBeretOfficer = NCR officer beret
@@ -693,6 +730,7 @@ loadout-name-MisfitsLoadoutShoesTribal = tribal shoes
 loadout-name-MisfitsLoadoutShoesRaider = raider treads
 loadout-name-MisfitsLoadoutMilitaryCowboyBoots = military cowboy boots
 loadout-name-MisfitsLoadoutMilitarySteelTippedBoots = steel-tipped boots
+loadout-name-MisfitsLoadoutMilitaryPeltBoots = long pelt boots
 # Neck — faction cloaks
 loadout-name-MisfitsLoadoutNeckCloakNCR = NCR cloak
 loadout-name-MisfitsLoadoutNeckCloakNCRSnow = NCR winter cloak
@@ -764,7 +802,7 @@ loadout-name-N14LoadoutUniversalUniformNCRSnow = NCR trooper uniform
 loadout-name-N14LoadoutUniversalUniformJumpskirtBOSBlack = Black Brotherhood of Steel uniform
 loadout-name-N14LoadoutUniversalUniformJumpskirtBOSGold = Brotherhood of Steel uniform
 loadout-name-N14LoadoutUniversalUniformJumpskirtBOSSilver = Brotherhood of Steel uniform
-loadout-name-N14LoadoutUniversalUniformJumpskirtRDFormal = research director's formal dress
+loadout-name-N14LoadoutUniversalUniformJumpskirtRDFormal = formal brown dress
 loadout-name-N14LoadoutUniversalUniformJumpsuitBOSBlack = Black Washington BoS uniform
 loadout-name-N14LoadoutUniversalUniformJumpsuitBOSGreen = Brotherhood of Steel uniform
 loadout-name-N14LoadoutUniversalUniformJumpsuitBOSRed = Washington BoS undersuit
@@ -778,7 +816,7 @@ loadout-name-N14LoadoutUniversalUniformJumpsuitEnclave = enclave uniform
 loadout-name-N14LoadoutUniversalUniformJumpsuitFudd = fudd clothes
 loadout-name-N14LoadoutUniversalUniformJumpsuitMilUniform = prewar military uniform
 loadout-name-N14LoadoutUniversalUniformJumpsuitRCMP = RCMP uniform
-loadout-name-N14LoadoutUniversalUniformJumpsuitRDFormal = research director's formal suit
+loadout-name-N14LoadoutUniversalUniformJumpsuitRDFormal = formal brown outfit
 loadout-name-N14LoadoutUniversalUniformJumpsuitTownGuard = the Guard's uniform
 loadout-name-N14LoadoutUniversalUniformJumpsuitTownGuardLight = the Guard's uniform
 loadout-name-N14LoadoutUniversalUniformJumpsuitVancouver = vancouver preventor uniform
@@ -803,6 +841,10 @@ loadout-name-MisfitsLoadoutUniformKhansUniform = great khans uniform
 loadout-name-MisfitsLoadoutUniformKhansUniformShorts = great khan jorts
 loadout-name-MisfitsLoadoutUniformEnclaveUniformGrey = grey enclave jumpsuit
 loadout-name-MisfitsLoadoutUniformEnclaveUniformBlue = blue enclave jumpsuit
+loadout-name-MisfitsLoadoutUniformDeadHorsesUniform = dead horses garb
+loadout-name-MisfitsLoadoutUniformSorrowsUniform = sorrows garb
+loadout-name-MisfitsLoadoutUniformRustwalkersUniform = rustwalkers uniform
+loadout-name-MisfitsLoadoutUniformWhiteLegsUniform = white legs garb
 
 # Ammo and magazines
 loadout-name-N14MagazinePistol45 = pistol magazine (.45 auto)
@@ -826,7 +868,7 @@ loadout-name-N14PoliceBaton = police baton
 loadout-name-N14WeaponPistol9mmChinese = chinese pistol
 loadout-name-N14WeaponPistol45Colt = .45 colt handgun
 loadout-name-N14WeaponPistolWebley = webley pistol
-loadout-name-N14WeaponRevolver44Magnun = magnum revolver
+loadout-name-N14WeaponRevolver44Magnum = magnum revolver
 
 # Other loadouts
 loadout-name-LoadoutLegionExplorerVeteranArmor = veteran legion explorer armor
@@ -836,3 +878,14 @@ loadout-name-LoadoutNCRRangerFoxArmor = fox ranger combat armor
 loadout-name-MisfitsLoadoutHeadAntlerSkull = antler skullcap
 loadout-name-MisfitsLoadoutBoSMidwestCommanderPowerArmor = BoS Commander Power Armor
 loadout-name-MisfitsLoadoutFollowerResponderDuster = Follower Responder Duster
+
+# #Cythisiax Add - Patreon supporter loadout names/category
+loadout-category-Patreon = Patreon
+loadout-name-LoadoutPatreonSilverUniformVaultJumpsuit = vault jumpsuit (Patreon)
+loadout-name-LoadoutPatreonGoldCombatBoots = combat boots (Patreon)
+loadout-name-LoadoutPatreonNuclearPistol10mm = 10mm pistol (Patreon)
+loadout-name-LoadoutPatreonBondholderHat = bondholder hat (Patreon)
+loadout-name-LoadoutPatreonEquityPartnerHat = equity partner hat (Patreon)
+loadout-name-LoadoutPatreonVentureCapitalistHat = venture capitalist hat (Patreon)
+loadout-name-LoadoutPatreonShareholderHat = shareholder hat (Patreon)
+loadout-name-LoadoutPatreonPrincipalShareholderHat = principal shareholder hat (Patreon)

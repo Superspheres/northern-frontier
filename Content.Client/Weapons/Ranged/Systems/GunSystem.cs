@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using Content.Client._Misfits.Movement; // #Misfits Add
 using Content.Shared._Misfits.Weapons.Ranged.Prediction;
@@ -7,12 +5,10 @@ using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
 using Content.Client.Weapons.Ranged.Components;
-using Content.Shared.Buckle.Components;
 using Content.Shared.Camera;
 using Content.Shared.CombatMode;
 using Content.Shared._Misfits.CCVar;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Effects;
 using Content.Shared.Mech.Components; // Goobstation
 using Content.Shared.Projectiles;
@@ -61,11 +57,12 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private PhysicsSystem _physics = default!;
     [Dependency] private MisfitsLagCompensationSystem _lagComp = default!; // #Misfits Add — lag compensation tick stamp
-
+    [Dependency] private ILogManager _logMan = default!;
     private readonly HashSet<EntityUid> _lagCompCandidates = [];
     private float _lagCompAabbEnlargement;
     private float _lagCompHitscanSearchPadding;
     private EntityQuery<SpriteComponent> _spriteQuery;
+
 
     [ValidatePrototypeId<EntityPrototype>]
     public const string HitscanProto = "HitscanEffect";
@@ -119,6 +116,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
         // Misfit add: refactoring obsolete sprite methods
         _spriteQuery = GetEntityQuery<SpriteComponent>();
+
     }
 
     private void OnUpdateClientAmmo(EntityUid uid, AmmoCounterComponent ammoComp, ref UpdateClientAmmoEvent args)
@@ -156,11 +154,6 @@ public sealed partial class GunSystem : SharedGunSystem
 
         var entity = entityNull.Value;
 
-        if (TryComp<MechPilotComponent>(entity, out var mechPilot) &&
-            TryComp<MechComponent>(mechPilot.Mech, out var mech) &&
-            mech.CurrentSelectedEquipment.HasValue) // Goobstation
-            entity = mechPilot.Mech;
-
         if (!TryGetGun(entity, out var gunUid, out var gun))
         {
             return;
@@ -187,7 +180,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
             return;
         }
-
+        //if(Inputting really fast ignore)
         // Define target coordinates relative to gun entity, so that network latency on moving grids doesn't fuck up the target location.
         var coordinates = _xform.ToCoordinates(entity, mousePos);
 
@@ -224,11 +217,13 @@ public sealed partial class GunSystem : SharedGunSystem
         ICommonSession? userSession = null)
     {
         userImpulse = true;
-
+        //
         if (!GunPrediction)
         {
             // Rather than splitting client / server for every ammo provider it's easier
             // to just delete the spawned entities. This is for programmer sanity despite the wasted perf.
+
+            //Misfit: bad^^^^^^^^^^^ really bad^^^^
             var direction = _xform.ToMapCoordinates(fromCoordinates).Position - _xform.ToMapCoordinates(toCoordinates).Position;
             var worldAngle = direction.ToAngle().Opposite();
 
@@ -243,7 +238,7 @@ public sealed partial class GunSystem : SharedGunSystem
                         RemoveShootable(ent.Value);
                     continue;
                 }
-
+                // TODO: use ishootable like an actual interface
                 switch (shootable)
                 {
                     case CartridgeAmmoComponent cartridge:
@@ -346,7 +341,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     RemoveShootable(ent.Value);
                 continue;
             }
-
+            // TODO: use ishootable like an actual interface
             switch (shootable)
             {
                 case CartridgeAmmoComponent cartridge:
@@ -365,10 +360,11 @@ public sealed partial class GunSystem : SharedGunSystem
                     Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
 
                     if (!cartridge.DeleteOnSpawn && !Containers.IsEntityInContainer(ent!.Value))
-                        EjectCartridge(ent.Value, angle);
-
-                    if (IsClientSide(ent!.Value))
-                        Del(ent.Value);
+                        EjectCartridge(ent.Value, baseCoords: Transform(gunUid).Coordinates, angle);
+                    // misfit: removed ejected carts deleted by EjectCartridge
+                    //         plus redundant check this is only called by client
+                    //if (IsClientSide(ent!.Value))
+                    //    Del(ent.Value);
 
                     break;
                 case AmmoComponent newAmmo:
@@ -632,12 +628,12 @@ public sealed partial class GunSystem : SharedGunSystem
             false).ToList();
         var firedFromContainer = Containers.IsEntityOrParentInContainer(source);
 
+        // #Cythisiax Fixed - Revert PR #1103 rider hitscan deferral: shots at a ridden bike hit the
+        // bike fixture again (bike takes full damage) instead of being deferred to the rider/passing through.
         EntityUid? staticHit = null;
         EntityUid? currentDynamicHit = null;
-        EntityUid? strapHit = null;
         var staticDistance = hitscan.MaxLength;
         var currentDynamicDistance = hitscan.MaxLength;
-        var strapDistance = hitscan.MaxLength;
 
         foreach (var result in rayCastResults)
         {
@@ -645,16 +641,6 @@ public sealed partial class GunSystem : SharedGunSystem
                 result.HitEntity == ignoredEntity ||
                 !IsValidHitscanTarget(result.HitEntity, target, firedFromContainer))
                 continue;
-
-            // thing buckled to genrally has larger fixture, defer to rider, if not fallback to strap
-            if (strapHit == null &&
-                TryComp<StrapComponent>(result.HitEntity, out var strap) &&
-                strap.BuckledEntities.Count > 0)
-            {
-                strapHit = result.HitEntity;
-                strapDistance = result.Distance;
-                continue;
-            }
 
             if (TryComp<PhysicsComponent>(result.HitEntity, out var resultPhysics) &&
                 resultPhysics.BodyType != BodyType.Static)
@@ -702,13 +688,6 @@ public sealed partial class GunSystem : SharedGunSystem
             return true;
         }
 
-        if (strapHit != null)
-        {
-            hit = strapHit.Value;
-            distance = strapDistance;
-            return true;
-        }
-
         return false;
     }
 
@@ -744,9 +723,8 @@ public sealed partial class GunSystem : SharedGunSystem
                 continue;
             }
 
-            if (TryComp<StrapComponent>(candidate, out var strap) && strap.BuckledEntities.Count > 0)
-                continue;
-
+            // #Cythisiax Fixed - Revert PR #1103: don't skip strap/bike entities in lag-comp hitscan;
+            // bikes are valid hitscan targets and take full damage again.
             if (!IsValidHitscanTarget(candidate, target, firedFromContainer) ||
                 !TryGetHistoricalHitscanBounds(candidate, historicalTick, collisionMask, fixtures, xform, out var bounds) ||
                 !TryIntersectSegmentBox(from.Position, end, bounds, out var fraction))

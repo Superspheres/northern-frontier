@@ -29,6 +29,8 @@
   - SuperMutantNCRRanger   # #Misfits Add - NCR-aligned supermutant ranger
   - SuperMutantNCRTrooper  # #Misfits Add - NCR-aligned supermutant trooper
   - SuperMutantTribal  # #Misfits Add - Tribe aligned supermutant trooper
+  - SentientDeathclawRegular # ordinary sentient Deathclaw whitelist
+  - SentientDeathclaw  # Bwonsamdi; original ID retained for whitelist compatibility
   # #Misfits Removed - generic variants hidden from department; NCR-specific ones take their place
   # - SuperMutantRanger
   # - SuperMutantTrooper
@@ -48,6 +50,7 @@
   - EnclaveCommander
   - EnclaveSeniorOfficer
   - EnclaveJuniorOfficer
+  - EnclaveVertibirdPilot # #Misfits Add - commissioned aviator, ranks 2LT → 1LT → Captain
   - EnclaveHeadScientist
   - EnclaveScientist
   - EnclaveJuniorScientist
@@ -55,6 +58,18 @@
   - EnclaveEnlisted
   - EnclaveRecruit       # #Misfits Add - hidden job for per-round recruitment playtime tracking
   - SuperMutantEnclave
+
+# #Cythisiax Added - Brotherhood of Steel personal whitelist department.
+# Single-player whitelist postings styled after the Brotherhood faction so they
+# appear attached to the BoS in the Whitelist tab.
+- type: department
+  id: BoSPersonalWhitelist
+  description: department-BoSPersonalWhitelist-description
+  color: "#3B72BF" # Brotherhood of Steel blue
+  weight: -103
+  uiCategory: Whitelist
+  roles:
+  - BoSHonorGuard # #Cythisiax Added - HONOR GUARD | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_honor_guard.yml
 
 # #Misfits Add — Caesar's Legion department. Groups all Legion roles for the
 # character-creation screen and for department-based requirements/lookups.
@@ -102,16 +117,14 @@
   - EightiesOilers      # specialist tier, 4 slots
   - EightiesRoadRash    # recruit tier, 4 slots
 
-# #Misfits Add - White Legs are now a full department while keeping the base WhiteLegs job ID for compatibility.
+# #Misfits Change - White Legs remains defined for compatibility, but Great Khans
+# are now the visible single-role Minor Faction replacement.
 - type: department
-  id: WhiteLegs
-  description: department-WhiteLegs-description
-  color: "#d8d0c4"
-  weight: -98
+  id: GreatKhans
+  description: department-GreatKhans-description
+  color: "#9b1c1c"
+  weight: -99
   uiCategory: MinorFaction
   roles:
-  - WhiteLegsWarChief
-  - WhiteLegsBoneBreaker
-  - WhiteLegsStormDrummer
-  - WhiteLegs
+  - GreatKhan
 

@@ -479,6 +479,27 @@ public sealed class NcContractCard : PanelContainer
             NcUiIconFit.Fit(view, _sprites, protoId, targetPx: TargetIconPx, paddingPx: 4);
             targetRow.AddChild(view);
         }
+        else if (targetProto is { Abstract: true })
+        {
+            // Abstract contract targets (for example the shared raider base)
+            // accept any concrete descendant, but EntityPrototypeView cannot
+            // spawn an abstract entity. Use the prototype icon directly so
+            // these broad targets still have a visual identifier.
+            var iconProto = FindConcreteDescendant(targetProto);
+            var icon = iconProto == null ? null : _sprites.GetPrototypeIcon(iconProto.ID).Default;
+            if (icon != null)
+            {
+                targetRow.AddChild(new TextureRect
+                {
+                    Texture = icon,
+                    MinSize = new(TargetIconPx, TargetIconPx),
+                    MaxSize = new(TargetIconPx, TargetIconPx),
+                    Stretch = TextureRect.StretchMode.KeepAspectCentered,
+                    Margin = new(0, 0, 4, 0),
+                    MouseFilter = MouseFilterMode.Ignore
+                });
+            }
+        }
 
         var targetName = targetProto?.Name ?? protoId ?? Loc.GetString("nc-store-unknown-item");
 
@@ -503,6 +524,35 @@ public sealed class NcContractCard : PanelContainer
             return proto.Name;
 
         return protoId;
+    }
+
+    private EntityPrototype? FindConcreteDescendant(EntityPrototype abstractProto)
+    {
+        foreach (var candidate in _proto.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (candidate.Abstract || candidate.ID == abstractProto.ID)
+                continue;
+
+            var pending = new Stack<string>(candidate.Parents ?? []);
+            var visited = new HashSet<string>(StringComparer.Ordinal);
+            while (pending.Count > 0)
+            {
+                var parentId = pending.Pop();
+                if (!visited.Add(parentId))
+                    continue;
+
+                if (parentId == abstractProto.ID)
+                    return candidate;
+
+                if (_proto.TryIndex<EntityPrototype>(parentId, out var parent))
+                {
+                    foreach (var grandparentId in parent.Parents ?? [])
+                        pending.Push(grandparentId);
+                }
+            }
+        }
+
+        return null;
     }
 
     private static string BuildProtoTooltip(EntityPrototype? proto)
@@ -670,6 +720,19 @@ public sealed class NcContractCard : PanelContainer
             "Hub Mercenary"    => Color.FromHex("#FFD700"),
             "Bunker Buster" => Color.FromHex("#4FC3E8"),
             "Wasteland Legend" => Color.FromHex("#B9F2FF"),
+            // new ones for ncr and legion traders
+            "Servus"  => Color.FromHex("#CD7F32"),
+            "Plebeian"    => Color.FromHex("#8C8C8C"),
+            "Auxiliary"  => Color.FromHex("#C0C0C0"),
+            "Legionary"    => Color.FromHex("#FFD700"),
+            "Decanus" => Color.FromHex("#4FC3E8"),
+            "Centurion" => Color.FromHex("#B9F2FF"),
+            "Tribal"  => Color.FromHex("#CD7F32"),
+            "Settler"    => Color.FromHex("#8C8C8C"),
+            "Citizen"  => Color.FromHex("#C0C0C0"),
+            "Caravaneer"    => Color.FromHex("#FFD700"),
+            "Caravan Master" => Color.FromHex("#4FC3E8"),
+            "Brahmin Baron" => Color.FromHex("#B9F2FF"),
             // Legacy fallbacks so old data doesn't break
             "Easy"   => Color.FromHex("#4CAF50"),
             "Medium" => Color.FromHex("#FFC107"),
@@ -690,6 +753,19 @@ public sealed class NcContractCard : PanelContainer
             "Hub Mercenary"    => Loc.GetString("nc-store-difficulty-hub-mercenary"),
             "Bunker Buster" => Loc.GetString("nc-store-difficulty-bunker-buster"),
             "Wasteland Legend" => Loc.GetString("nc-store-difficulty-wasteland-legend"),
+            // new ones for econ update
+            "Servus"  => Loc.GetString("nc-store-difficulty-servus"),
+            "Plebeian"    => Loc.GetString("nc-store-difficulty-lazy-plebeian"),
+            "Auxiliary"  => Loc.GetString("nc-store-difficulty-auxiliary"),
+            "Legionary"    => Loc.GetString("nc-store-difficulty-legionary"),
+            "Decanus" => Loc.GetString("nc-store-difficulty-decanus"),
+            "Centurion" => Loc.GetString("nc-store-difficulty-centurion"),
+            "Tribal"  => Loc.GetString("nc-store-difficulty-tribal"),
+            "Settler"    => Loc.GetString("nc-store-difficulty-settler"),
+            "Citizen"  => Loc.GetString("nc-store-difficulty-citizen"),
+            "Caravaneer"    => Loc.GetString("nc-store-difficulty-caravaneer"),
+            "Caravan Master" => Loc.GetString("nc-store-difficulty-caravan-master"),
+            "Brahmin Baron" => Loc.GetString("nc-store-difficulty-brahmin-baron"),
             // Legacy fallbacks
             "Easy"   => Loc.GetString("nc-store-difficulty-easy"),
             "Medium" => Loc.GetString("nc-store-difficulty-medium"),

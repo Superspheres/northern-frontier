@@ -2,7 +2,7 @@
 
 - type: job
   id: WhiteLegsWarChief
-  setPreference: true
+  setPreference: false # #Misfits Change - White Legs is retained for compatibility, not character setup.
   weight: 60
   name: job-name-whitelegs-war-chief
   description: job-description-whitelegs-war-chief
@@ -16,7 +16,7 @@
     - Human
     - Ghoul
   - !type:CharacterDepartmentTimeRequirement
-    department: WhiteLegs
+    department: GreatKhans
     min: 144000 # 40 hours
   startingGear: WhiteLegsWarChiefGear
   alwaysUseSpawner: true
@@ -33,8 +33,9 @@
 - type: startingGear
   id: WhiteLegsWarChiefGear
   equipment:
+    wallet: N14Wallet
     bandage: NCClothingBandageRaiders
-    jumpsuit: N14ClothingUniformJumpsuitWarriorTribal
+    jumpsuit: M14ClothingUniformWhiteLegsUniform
     outerClothing: MisfitsClothingOuterWhiteLegsArmor
     shoes: N14ClothingShoesRaider
     neck: ClothingNeckBlackScarf

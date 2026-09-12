@@ -9,6 +9,9 @@ job-description-ncr-commander = You command the NCR detachment. Set operational 
 job-name-ncr-executive-officer = NCR Executive Officer
 job-description-ncr-executive-officer = You are the Commander's second, managing the detachment's day-to-day operations and keeping the NCOs in line. Lead by example and bridge command and the ranks below.
 
+job-name-lieutenant-colonel = NCR Lieutenant Colonel
+job-description-ltcol = You command the NCR detachment at the highest field level, coordinating officers, squads, and strategy while answering only to senior command. Legends tell you jumped all the way from staff sergeant.
+
 job-name-ncr-platoon-leader = NCR Platoon Leader
 job-description-ncr-platoon-leader = You lead a platoon in the field, directing NCOs and executing the Commander's orders. Your commision begins at 2LT — earn your 1LT through service.
 
@@ -20,6 +23,9 @@ job-description-ncr-weapon-specialist = You are a weapons-qualified specialist o
 
 job-name-ncr-requisition-officer = NCR Requisition Officer
 job-description-ncr-requisition-officer = You are a Quartermaster and Requisition Officer of NCR, maintain the armies' equipment and supervise the allocation of its resources.
+
+job-name-ncr-vertibird-pilot = NCR Vertibird Pilot
+job-description-ncr-vertibird-pilot = You fly the Republic's vertibirds. Insertion, extraction, and casualty evacuation are yours to run, and the bird you are given is worth more than the platoon riding in it. You hold a warrant, not a commission — you start as a Warrant Officer and climb to CW3 on flight hours alone.
 
 job-name-ncr-citizen = NCR Citizen
 job-description-ncr-citizen = You are a citizen of the NCR coming east for work, to help the military as a Civilian contractor.
@@ -36,6 +42,8 @@ job-name-enclave-senior-officer = Enclave Senior Officer
 job-description-enclave-senior-officer = Serve as the Commander's right hand, directing field operations and managing subordinate officers. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
 job-name-enclave-junior-officer = Enclave Junior Officer
 job-description-enclave-junior-officer = Lead squads in the field, execute mission objectives, and bridge the gap between NCOs and senior command. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
+job-name-enclave-vertibird-pilot = Enclave Vertibird Pilot
+job-description-enclave-vertibird-pilot = You fly for the Enclave. The vertibird is the last symbol of what America was, and you are trusted to keep it in the air. Your commission begins at Second Lieutenant and reaches Captain with hours logged. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
 job-name-enclave-nco = Enclave NCO
 job-description-enclave-nco = Maintain discipline, train enlisted personnel, and ensure tactical readiness on the ground. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
 job-name-enclave-enlisted = Enclave Enlisted
@@ -91,6 +99,10 @@ job-description-supermutant-ranger = You are a supermutant who has learned patie
 job-name-supermutant-trooper = Supermutant Trooper
 job-description-supermutant-trooper = You are the hammer — a supermutant front-liner built for direct assault. Your trooper armor can soak punishment that would shred a human, and you intend to make the most of it.
 
+# #Misfits Add - Enclave Supermutant (whitelist supermutant serving the Enclave)
+job-name-supermutant-enclave = Enclave Supermutant
+job-description-supermutant-enclave = A Supermutant working for the United States. Service Guarantees Citizenship!
+
 # #Misfits Add - NCR-aligned supermutant variants for the FEVMutants whitelist department.
 job-name-supermutant-ncr-ranger = Supermutant NCR Ranger
 job-description-supermutant-ncr-ranger = You are a supermutant who earned a place among the NCR Rangers — an unlikely alliance forged in blood and mutual necessity. Your ranger armor and NCR badge open doors that your fists would otherwise destroy.
@@ -123,10 +135,19 @@ job-name-follower-guard = Followers Guard
 job-description-follower-guard = You protect the Followers' clinic, escort doctors into dangerous ground, and keep desperate people from turning the humanitarian mission into another battlefield.
 job-name-follower-volunteer = Followers Volunteer
 job-description-follower-volunteer = You are new to the Followers. You believe knowledge and compassion can outlast bullets and bombs. Prove it — learn from those above you and help anyone who needs it.
+job-name-follower-director = Followers Director
+job-description-follower-director = You head the follower's training program, teaching new volunteers the ways of the Followers and how to survive in the wastes.
 
 # #Misfits Add - Supermutant Follower Doctor job locale.
 job-name-supermutant-follower-doctor = Supermutant Follower Doctor
 job-description-supermutant-follower-doctor = A SuperMutant trained in the ways of medicine.
+
+# Bwonsamdi keeps the original internal SentientDeathclaw job ID for whitelist compatibility.
+job-name-bwonsamdi = Bwonsamdi [CYTHISIA]
+job-description-bwonsamdi = You are Bwonsamdi, a deathclaw of unnatural strength bound to the loa of death. Sense the fallen, ferry willing souls, and make the wastes remember that every life eventually reaches the grave.
+
+job-name-sentient-deathclaw = Sentient Deathclaw [RESTRICTED]
+job-description-sentient-deathclaw = You are an unusually intelligent deathclaw capable of speech, reason, and choosing your own place in the wastes. You possess a deathclaw's natural strength, but none of Bwonsamdi's authority over death or the loa.
 
 # #Misfits Add — Western BoS chapter command-tier jobs (Elder + Head Scribe).
 # These keys were commented out in the Corvax locale when the Corvax west-BoS chapter
@@ -143,12 +164,20 @@ job-name-bos-paladin = Brotherhood Paladin
 job-description-bos-paladin = Fight as the Brotherhood's frontline heavy infantry and defend the chapter's interests.
 job-name-bos-knight = Brotherhood Knight
 job-description-bos-knight = Protect the chapter, escort missions, and recover technology in the field.
+# #Misfits Add - Brotherhood Lancers, the chapter's aviation branch.
+# Knight-Lancer is the branch's sole role and receives the vertibird pilot perk.
+job-name-bos-lancer-knight = Brotherhood Knight-Lancer
+job-description-bos-lancer-knight = You are the Brotherhood's vertibird pilot, crew chief, door gunner, and deck crew. Keep the bird in the air, work the turret, and put it right with your torch when it is down.
 job-name-bos-scribe = Brotherhood Scribe
 job-description-bos-scribe = Support the chapter with research, medicine, and technical expertise.
 job-name-bos-initiate = Brotherhood Initiate
 job-description-bos-initiate = Learn the Brotherhood's code, follow orders, and earn your place in the chapter.
 job-name-bos-eyebot = Brotherhood Eyebot
 job-description-bos-eyebot = Serve the Brotherhood of Steel as a loyal robotic companion.
+
+# #Misfits Add - Enclave Eyebot pet ghost-role job (playtime attribution only)
+job-name-enclave-eyebot = Enclave Eyebot
+job-description-enclave-eyebot = Serve the Enclave as a loyal robotic reconnaissance companion.
 
 # #Misfits Add — Squire loadout kit locale for new Misfits_SqrBasic_Set.
 # #Misfits Tweak: Removed rank prefix so the kit name is role-neutral.
@@ -176,7 +205,7 @@ job-name-caesar-legion-Acolyte-of-mars = Acolyte of Mars
 job-description-caesar-legion-Acolyte-of-mars = You are a devoted Acolyte of Mars, you answer to the Priestess directly.
 
 job-name-bos-off-duty = Off Duty BOS
-job-description-bos-off-duty = You are an off-duty member of the Brotherhood of Steel. You are not to participate in combat operations as this week you are not on duty.
+job-description-bos-off-duty = You are an off-duty member of the Brotherhood of Steel. You are not to participate in operations as this week you are not on duty. To do so is to violate the codex.
 
 job-name-ncr-provost = NCR Provost
 job-description-ncr-provost = You are An investigator sent on behalf of the Provost office.

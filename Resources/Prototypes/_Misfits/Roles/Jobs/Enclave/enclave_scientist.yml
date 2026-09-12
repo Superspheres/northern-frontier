@@ -4,7 +4,6 @@
 - type: job
   id: EnclaveScientist
   setPreference: true
-  hideWithoutJobWhitelist: true
   jobWhitelistBypassesRoleTimers: true # #Misfits Change
   weight: 106
   displayWeight: 125
@@ -18,9 +17,9 @@
       species:
       - Human
       - Ghoul
-    - !type:CharacterDepartmentTimeRequirement # #Misfits Tweak - T4 faction timelock (12h Enclave)
+    - !type:CharacterDepartmentTimeRequirement # #Misfits Tweak - BoS-equivalent specialist faction timelock
       department: Enclave
-      min: 43200 # 12 hours
+      min: 28800 # 8 hours
   startingGear: EnclaveScientistGear
   icon: "JobIconEnclaveScientist"
   supervisors: job-supervisors-enclave-scientist
@@ -33,11 +32,17 @@
       - type: NpcFactionMember
         factions:
           - Enclave
+          - Wastelander
+      - type: ReplacementAccent
+        accent: n14Enclave
       - type: CPRTraining
+  - !type:AddTraitSpecial # #Misfits Add - Enclave scientists are issued an Enclave Eyebot companion
+    traits: [ MisfitsPetEyebotEnclave ]
 
 - type: startingGear
   id: EnclaveScientistGear
   equipment:
+    wallet: N14Wallet
     head: N14ClothingHeadHatEnclaveScientist
     back: N14ClothingBackpackSatchelMilitary
     jumpsuit: N14ClothingUniformJumpsuitEnclave

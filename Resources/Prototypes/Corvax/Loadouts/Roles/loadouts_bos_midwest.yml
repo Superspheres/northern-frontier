@@ -157,6 +157,8 @@
         - BoSMidPaladinCommander
         - BoSMidPaladin
         - BoSMidKnight
+        - BoSLancerKnight
+        # #Cythisiax Removed - Lancer rank folded into Lancer-Knight
         - BoSWestElderCommander # Misfits Change /Add/: expand access to all BoS roles
         - BoSHeadKnight
         - BoSWestScribe

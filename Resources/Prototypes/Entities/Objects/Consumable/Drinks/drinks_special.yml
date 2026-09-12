@@ -11,7 +11,11 @@
   - type: MixableSolution
     solution: drink
   - type: Drink
-  - type: Shakeable # Doesn't do anything, but I mean...
+  - type: Shakeable
+  - type: ReactionMixer
+    mixMessage: shake-mixing-success # this message is a blank string, so nothing pops up when you pour from one shaker to another
+    reactionTypes:
+    - FakeShake # add this if you want something to mix when shaken
   - type: FitsInDispenser
     solution: drink
   - type: DrawableSolution
@@ -126,6 +130,12 @@
     canChangeTransferAmount: true
   - type: Spillable
     solution: drink
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
   - type: UserInterface
     interfaces:
       enum.TransferAmountUiKey.Key:
@@ -170,3 +180,4 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 75
+

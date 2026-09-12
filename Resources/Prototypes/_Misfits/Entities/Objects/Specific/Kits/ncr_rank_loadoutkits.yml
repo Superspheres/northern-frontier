@@ -272,8 +272,8 @@
     items:
       - id: ClothingBeltRevolverCaptainfilled
       - id: N14WeaponRifleM1GarandRepublicsPride # #Misfits Change: Republic's Pride scoped M1C replaces .50 rifle
-      - id: ClipMagazine308Rifle # #Misfits Change - replaced GarandEnbloc308
-        amount: 4
+      - id: Magazine308Rifle # #Misfits Change - replaced GarandEnbloc308
+        amount: 2
       - id: RadioHandheld
       - id: SmokeGrenade
       - id: N14BoxCardboardMREBoxCFilled
@@ -300,7 +300,7 @@
   name: captain field officer kit
   parent: KitBase
   id: KitNCR_CaptainServiceRifle
-  description: A crate containing field officer gear for an NCR captain who favors the service rifle on the front line.
+  description: A crate containing field officer gear for an NCR captain who favors the marksman carbine on the front line.
   components:
   - type: Sprite
     state: rifleman
@@ -309,9 +309,9 @@
   - type: SpawnItemsOnUse
     items:
       - id: ClothingBeltNCR
-      - id: N14WeaponRifle556ServiceScoped
-      - id: Magazine556Rifle
-        amount: 6
+      - id: N14WeaponRifle762Marksman
+      - id: Magazine762Rifle
+        amount: 4
       - id: N14WeaponPistol9mm
       - id: N14MagazinePistol9mm
         amount: 3
@@ -386,6 +386,34 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
+  name: Heavy Trooper Minigun Kit
+  parent: KitBase
+  id: KitNCR_HeavyTrooperMinigun
+  description: A crate containing a standard minigun and supplies for sustained fire.
+  components:
+  - type: Sprite
+    state: pointman
+  - type: Item
+    size: Huge
+  - type: SpawnItemsOnUse
+    items:
+      - id: N14WeaponMinigun
+      - id: N14MagazineMinigun5mm
+        amount: 2
+      - id: SmokeGrenade
+        amount: 2
+      - id: N14Dynamite
+        amount: 2
+      - id: N14BoxCardboardMREBoxCFilled
+      - id: N14Stimpak
+      - id: N14SuperStimpak
+      - id: N14RadAwayBloodbag
+      - id: N14CleanGauze10
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
   name: Heavy Trooper Defender Kit
   parent: KitBase
   id: KitNCR_HeavyTrooperDefender
@@ -431,6 +459,16 @@
   - KitNCR_HeavyTrooperLinebreaker
 
 - type: UndecidedLoadoutBackpackSet
+  id: NCR_HeavyTrooperMinigunSet
+  name: undecided-loadout-category-misfits-ncr-ht-minigun-name
+  description: undecided-loadout-category-misfits-ncr-ht-minigun-description
+  sprite:
+    sprite: _Nuclear14/Objects/Misc/kits.rsi
+    state: pointman
+  content:
+  - KitNCR_HeavyTrooperMinigun
+
+- type: UndecidedLoadoutBackpackSet
   id: NCR_HeavyTrooperDefenderSet
   name: undecided-loadout-category-misfits-ncr-ht-defender-name
   description: undecided-loadout-category-misfits-ncr-ht-defender-description
@@ -452,4 +490,18 @@
     possibleSets:
     - NCR_HeavyTrooperVeteranSet
     - NCR_HeavyTrooperLinebreakerSet
+    - NCR_HeavyTrooperDefenderSet
+
+- type: entity
+  id: NCRHeavyTrooperLeadLoadoutKits
+  name: Undecided NCR Heavy Trooper Lead Kit
+  parent: BaseLoadoutKit
+  components:
+  - type: Sprite
+    sprite: _Nuclear14/Objects/Misc/kits.rsi
+    state: rifleman
+  - type: UndecidedLoadoutBackpack
+    possibleSets:
+    - NCR_HeavyTrooperVeteranSet
+    - NCR_HeavyTrooperMinigunSet
     - NCR_HeavyTrooperDefenderSet

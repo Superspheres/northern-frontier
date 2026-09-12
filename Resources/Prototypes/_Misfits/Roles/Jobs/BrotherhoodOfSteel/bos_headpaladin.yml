@@ -48,6 +48,7 @@
 - type: startingGear
   id: BoSMidPaladinCommanderGear
   equipment:
+    wallet: N14Wallet
     jumpsuit: N14ClothingUniformBosRecon  #Misfits Change /Tweak/: New consolidated BoS gear
     back: N14ClothingBackpackMilitary
     shoes: N14ClothingBootsLeatherFilled
@@ -57,10 +58,12 @@
     pocket1: BoSBrotherhoodHeadPaladinKits
     id: N14HeadPaladin_PipBoy
     ears: N14ClothingHeadsetBrotherhoodOfSteel
-    belt: N14ClothingBeltBoSWebbing
+    belt: MisfitsClothingBeltPaladinWebbing
   storage:
     back:
     - N14BoxPlasticFilledMilitary
+    - MisfitsGrenadePlasma # #Misfits Add - faction council Head Paladin ordnance
+    - GrenadeIncendiary
 
 - type: playTimeTracker
   id: BoSMidPaladinCommander

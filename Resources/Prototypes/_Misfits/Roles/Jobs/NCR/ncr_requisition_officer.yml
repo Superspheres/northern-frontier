@@ -18,7 +18,10 @@
     - !type:CharacterDepartmentTimeRequirement # T6 faction timelock (20h NCR)
       department: NCR
       min: 72000 # 20 hours
-  weight: 105
+    - !type:CharacterPlaytimeRequirement
+      tracker: NCRSquadLeader
+      min: 28800 # 8 hours as NCO
+  weight: 106 # #Misfits Tweak - requisition officer stays above aviation
   startingGear: NCRRequisitionOfficerGear
   icon: "JobIconNcrLeader"
   supervisors: job-supervisors-ncr-commander
@@ -40,6 +43,7 @@
 - type: startingGear
   id: NCRRequisitionOfficerGear
   equipment:
+    wallet: N14Wallet
     head: N14ClothingHeadHatNCRBeretOfficer
     back: N14ClothingBackpackNCR
     jumpsuit: N14ClothingOfficerUniformNCRDesert

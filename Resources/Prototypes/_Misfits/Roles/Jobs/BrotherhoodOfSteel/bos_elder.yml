@@ -31,7 +31,7 @@
         factions:
           - BrotherhoodOfSteel
       - type: PowerArmorProficiency # #Misfits Add: Elder can equip power armor.
-      - type: LanguageKnowledge # #Misfits Add: Elders speak and understand Brotherhood binary code by default.
+      - type: LanguageKnowledge # #Misfits Add / #Cythisiax Kept - Elders speak and understand Brotherhood Code; only Elders and Scribes may speak it.
         speaks:
         - English
         - N14BrotherBeep
@@ -54,6 +54,7 @@
         - BoSWestElderCommander
         - BoSHeadKnight
         - BoSMidPaladinCommander
+        - BoSHonorGuard # #Cythisiax Added - personal-whitelist HONOR GUARD warcry
         - BoSWestScribe
         - BoSInitiate
         - BoSKnight
@@ -67,6 +68,7 @@
 - type: startingGear
   id: BoSWestElderCommanderGear
   equipment:
+    wallet: N14Wallet
     jumpsuit: N14ClothingUniformJumpskirtBOSBlack  #Misfits Change /Tweak/: New consolidated BoS gear
     back: N14ClothingBackpackMilitary
     shoes: N14ClothingBootsLeatherFilled

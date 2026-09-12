@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._NC.Mountable.Components;
+using Content.Shared._Misfits.Special;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -49,6 +50,9 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.IO.Compression;
+using MathNet.Numerics.Distributions;
+using System.Diagnostics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -78,11 +82,15 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected SharedPhysicsSystem Physics = default!;
     [Dependency] protected SharedProjectileSystem Projectiles = default!;
     [Dependency] protected SharedTransformSystem _xform = default!;
-    [Dependency] protected TagSystem TagSystem = default!;
     [Dependency] protected ThrowingSystem ThrowingSystem = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPhysicsSystem _sharedPhysics = default!;
+    [Dependency] private ISharedPlayerManager _sharedPlayer = default!;
+    [Dependency] private SharedSpecialSystem _special = default!;
+
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -158,11 +166,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (user == null)
             return;
 
-        if (TryComp<MechPilotComponent>(user.Value, out var mechPilot) &&
-            TryComp<MechComponent>(mechPilot.Mech, out var mech) &&
-            mech.CurrentSelectedEquipment.HasValue)
-            user = mechPilot.Mech;
-
         if (!TryGetGun(user.Value, out var ent, out var gun))
             return;
 
@@ -196,6 +199,15 @@ public abstract partial class SharedGunSystem : EntitySystem
     {
         gunEntity = default;
         gunComp = null;
+
+        // A mech pilot may fire either a selected mech weapon or a gun held in
+        // the pilot's modified hands. Keep the pilot as the lookup entity so
+        // the latter is not lost when the shot is relayed through the mech.
+        if (TryComp<MechPilotComponent>(entity, out var pilot) &&
+            TryGetGun(pilot.Mech, out gunEntity, out gunComp))
+        {
+            return true;
+        }
 
         if (TryComp<MechComponent>(entity, out var mech) &&
             mech.CurrentSelectedEquipment.HasValue &&
@@ -272,10 +284,11 @@ public abstract partial class SharedGunSystem : EntitySystem
             return null;
         }
 
-        if (TryComp<MechPilotComponent>(user.Value, out var mechPilot))
+        var pilot = user;
+        if (TryComp<MechPilotComponent>(pilot.Value, out var mechPilot))
             user = mechPilot.Mech;
 
-        if (!TryGetGun(user.Value, out var ent, out var gun) ||
+        if (!TryGetGun(pilot.Value, out var ent, out var gun) ||
             HasComp<ItemComponent>(user) ||
             ent != GetEntity(netGun))
         {
@@ -605,21 +618,32 @@ public abstract partial class SharedGunSystem : EntitySystem
         random /= Contests.MassContest(user);
         var spread = component.CurrentAngle.Theta * random;
 
-        // #Cythisiax Added - Accuracy penalty when shooting from a moving vehicle/buckle
+        // #Cythisiax Added - Accuracy penalty when shooting from a moving motorbike.
         var buckleMovementSpread = 0d;
         if (user != null &&
             TryComp<BuckleComponent>(user.Value, out var buckle) &&
             buckle.BuckledTo is { } buckledTo &&
-            HasComp<VehicleComponent>(buckledTo) &&
+            HasComp<MotorbikeComponent>(buckledTo) &&
             TryComp<PhysicsComponent>(buckledTo, out var vehiclePhysics))
         {
             var vehicleSpeed = vehiclePhysics.LinearVelocity.Length();
             if (vehicleSpeed > 1.0f) // Only penalize above walking speed
-                buckleMovementSpread = (vehicleSpeed - 1.0f) * 0.04; // ~0.12 rad (~7°) at full bike speed (~4 m/s)
+            {
+                var tuning = _special.GetTuning();
+                var perception = _special.GetEffective(user.Value, SpecialStat.Perception);
+                var perceptionFraction = (perception - SpecialProfile.Minimum) /
+                                         (float) (SpecialProfile.Maximum - SpecialProfile.Minimum);
+                var penaltyMultiplier = MathHelper.Lerp(
+                    tuning.PerceptionVehicleSpreadMultiplierLow,
+                    tuning.PerceptionVehicleSpreadMultiplierHigh,
+                    perceptionFraction);
+
+                buckleMovementSpread = (vehicleSpeed - 1.0f) * 0.04 * penaltyMultiplier;
+            }
         }
 
         var angle = new Angle(direction.Theta + spread + buckleMovementSpread);
-        DebugTools.Assert(spread <= component.MaxAngleModified.Theta);
+        //DebugTools.Assert(spread <= component.MaxAngleModified.Theta);
         return angle;
     }
 
@@ -813,52 +837,39 @@ public abstract partial class SharedGunSystem : EntitySystem
         cartridge.Spent = spent;
         Appearance.SetData(uid, AmmoVisuals.Spent, spent);
     }
-
+    /// TODO Misfit: Get rid of useless params like angle, playsound, ect... and replace with something else
+    /// Misfit: revamped EjectCartridge
     /// <summary>
     /// Drops a single cartridge / shell
+    /// Also raises <see cref="EjectSpentCartEvent"> to handle spent cartridges
+    /// to strip its comps(including physics) and ensure no desync issues
     /// </summary>
     protected void EjectCartridge(
-        EntityUid entity,
+        EntityUid cart, EntityCoordinates baseCoords,
         Angle? angle = null,
-        bool playSound = true)
+        bool playSound = true,
+        ICommonSession? userSession = null)
     {
-        // TODO: Sound limit version.
-        var offsetPos = Random.NextVector2(EjectOffset);
-        var xform = Transform(entity);
+        // Misfit: pending refactor. maybe redundant check
+        if (!TryGetNetEntity(cart, out var netEnt)) return;
 
-        var coordinates = xform.Coordinates;
-        coordinates = coordinates.Offset(offsetPos);
-
-        _xform.SetLocalRotation(xform, Random.NextAngle());
-        _xform.SetCoordinates(entity, xform, coordinates);
-
-        // decides direction the casing ejects and only when not cycling
-        if (angle != null)
+        var xform = Transform(cart);
+        if (!TryComp<CartridgeAmmoComponent>(cart, out var cartComp) || !cartComp.Spent)
         {
-            Angle ejectAngle = angle.Value;
-            ejectAngle += 3.7f; // 212 degrees; casings should eject slightly to the right and behind of a gun
-            ThrowingSystem.TryThrow(entity, ejectAngle.ToVec().Normalized() / 100, 5f);
-        }
-        if (playSound && TryComp<CartridgeAmmoComponent>(entity, out var cartridge))
-        {
-            Audio.PlayPvs(cartridge.EjectSound, entity, AudioParams.Default.WithVariation(SharedContentAudioSystem.DefaultVariation).WithVolume(-1f));
+            var (posEjectRNG, angleEjectRNG) = GetRandVectAngle(netEnt.Value.Id, netEnt.Value.Id);
+            _xform.SetLocalPositionRotation(cart, xform.Coordinates.Offset(posEjectRNG).Position, angleEjectRNG, xform);
+            return;
         }
 
-        // Make spent cartridges unpickable and automatically despawn when ejected.
-        if (TryComp<CartridgeAmmoComponent>(entity, out var cartridge2) && cartridge2.Spent)
-        {
-            var despawn = EnsureComp<TimedDespawnComponent>(entity);
-            despawn.Lifetime = 30f; // #Misfits Tweak - Reduce casing despawn from 5min to 30s to prevent entity buildup during war
+        var angleW = _xform.GetWorldRotation(baseCoords.EntityId);
+        var mapCoord = _xform.ToMapCoordinates(baseCoords);
+        var cartProto = MetaData(cart).EntityPrototype?.ID;
+        var senderNetID = userSession?.UserId;
 
-            _entManager.RemoveComponent<ItemComponent>(entity);
-
-            // #Misfits Fix - Casings ejected without a throw angle (revolver/manual cycling)
-            // never get ThrownItemComponent, so LandEvent never fires and
-            // CasingPhysicsOptSystem can't strip their physics. Remove it here.
-            if (angle == null)
-                RemCompDeferred<PhysicsComponent>(entity);
-        }
+        EjectSpentCart(new SpentCartEvent(mapCoord, angleW, cartProto, senderNetID));
+        PredictedDel(cart);
     }
+
 
     protected IShootable EnsureShootable(EntityUid uid)
     {

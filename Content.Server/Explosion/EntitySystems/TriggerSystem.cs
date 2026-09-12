@@ -8,6 +8,7 @@ using Content.Shared.Flash.Components;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Database;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion.Components.OnTrigger;
@@ -22,6 +23,7 @@ using Content.Shared.Slippery;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Ranged.Events;
+using System.Linq;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -90,6 +92,9 @@ namespace Content.Server.Explosion.EntitySystems
             SubscribeLocalEvent<TriggerOnSpawnComponent, MapInitEvent>(OnSpawnTriggered);
             SubscribeLocalEvent<TriggerOnCollideComponent, StartCollideEvent>(OnTriggerCollide);
             SubscribeLocalEvent<TriggerOnActivateComponent, ActivateInWorldEvent>(OnActivate);
+            SubscribeLocalEvent<ExplosiveComponent, AttemptPacifiedThrowEvent>(OnExplosiveAttemptPacifiedThrow);
+            SubscribeLocalEvent<PacifismBlockedComponent, AttemptPacifiedThrowEvent>(OnPacifismBlockedAttemptThrow);
+            SubscribeLocalEvent<PayloadCaseComponent, AttemptPacifiedThrowEvent>(OnPayloadCaseAttemptPacifiedThrow);
             SubscribeLocalEvent<TriggerImplantActionComponent, ActivateImplantEvent>(OnImplantTrigger);
             SubscribeLocalEvent<TriggerOnStepTriggerComponent, StepTriggeredOffEvent>(OnStepTriggered);
             SubscribeLocalEvent<TriggerOnSlipComponent, SlipEvent>(OnSlipTriggered);
@@ -207,8 +212,15 @@ namespace Content.Server.Explosion.EntitySystems
 
         private void OnTriggerCollide(EntityUid uid, TriggerOnCollideComponent component, ref StartCollideEvent args)
         {
-            if (args.OurFixtureId == component.FixtureID && (!component.IgnoreOtherNonHard || args.OtherFixture.Hard))
-                Trigger(uid);
+            if (component.Triggered || args.OurFixtureId != component.FixtureID ||
+                component.IgnoreOtherNonHard && !args.OtherFixture.Hard)
+                return;
+
+            // A projectile can report several fixture contacts during the same physics step.
+            // Mark it first so payload-spawning impact rounds cannot trigger repeatedly while
+            // their queued deletion is still pending.
+            component.Triggered = true;
+            Trigger(uid);
         }
 
         private void OnSpawnTriggered(EntityUid uid, TriggerOnSpawnComponent component, MapInitEvent args)
@@ -221,8 +233,62 @@ namespace Content.Server.Explosion.EntitySystems
             if (args.Handled || !args.Complex)
                 return;
 
+            if (TryPacifiedBlockArm(uid, args.User))
+            {
+                args.Handled = true;
+                return;
+            }
+
             Trigger(uid, args.User);
             args.Handled = true;
+        }
+
+        public bool TryPacifiedBlockArm(EntityUid uid, EntityUid user)
+        {
+            if (!HasComp<PacifiedComponent>(user) || !IsPacifismBlocked(uid))
+                return false;
+
+            _popupSystem.PopupEntity(Loc.GetString("pacified-cannot-arm-explosive", ("device", uid)), user, user);
+            return true;
+        }
+
+        public bool TryPacifiedBlockLinkedArm(EntityUid source, string port, EntityUid user)
+        {
+            if (!HasComp<PacifiedComponent>(user))
+                return false;
+
+            if (!_signalSystem.TryGetLinkedSinks(source, port, out var sinks) || !sinks.Any(IsPacifismBlocked))
+                return false;
+
+            _popupSystem.PopupEntity(Loc.GetString("pacified-cannot-arm-explosive", ("device", source)), user, user);
+            return true;
+        }
+
+        private void OnExplosiveAttemptPacifiedThrow(Entity<ExplosiveComponent> ent, ref AttemptPacifiedThrowEvent args) => args.Cancel();
+
+        private void OnPacifismBlockedAttemptThrow(Entity<PacifismBlockedComponent> ent, ref AttemptPacifiedThrowEvent args) => args.Cancel();
+
+        private void OnPayloadCaseAttemptPacifiedThrow(Entity<PayloadCaseComponent> ent, ref AttemptPacifiedThrowEvent args)
+        {
+            if (IsPacifismBlocked(ent))
+                args.Cancel();
+        }
+
+        private bool IsPacifismBlocked(EntityUid uid)
+        {
+            if (HasComp<ExplosiveComponent>(uid) || HasComp<PacifismBlockedComponent>(uid))
+                return true;
+
+            if (!TryComp<ContainerManagerComponent>(uid, out var containerManager))
+                return false;
+
+            foreach (var container in containerManager.Containers.Values)
+            {
+                if (container.ContainedEntities.Any(IsPacifismBlocked))
+                    return true;
+            }
+
+            return false;
         }
 
         private void OnImplantTrigger(EntityUid uid, TriggerImplantActionComponent component, ActivateImplantEvent args)

@@ -683,13 +683,19 @@
         volume: -5
         maxDistance: 5
 
-# Wim - imma be honest, this is a joke but i also would love to manifest wim
+# Wim - unique Legion dog companion.
 - type: entity
   name: Wim
   id: MisfitsMobPetWim
   parent: N14MobPetDogLegion
   description: A husky-wolf mix reaching most people to their hips. Wears a torn NCR tarp as a collar, with some etching inside.
   components:
+  - type: RandomMetadataExcluded # Keep Wim's name instead of a random Legion dog name.
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: wolf
+      sprite: _Misfits/Mobs/Pets/wim.rsi
   - type: WimDogTranslator
   - type: Emoting
   - type: MobThresholds # #Misfits Add - allow revival by medics
@@ -722,3 +728,84 @@
   - type: NpcFactionMember
     factions:
       - Wastelander
+
+# #Misfits Add - Enclave Eyebot companion, issued to Enclave scientist roles.
+# Inherits the full pet eyebot package (rechargeable laser, radio, languages, robot body)
+# from N14MobPetEyebot and only overrides the sprite/faction/ghost-role identity.
+- type: entity
+  name: Enclave Eyebot
+  id: MisfitsMobPetEyebotEnclave
+  parent: N14MobPetEyebot
+  description: A standard pre-war military Eyebot re-chassied in Enclave black, its optical sensor glowing green. A small piece of the old world reclaimed in service to the Enclave.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Enclave
+  - type: GhostRole
+    name: ghost-role-information-misfits-pet-eyebot-enclave-name
+    description: ghost-role-information-misfits-pet-eyebot-enclave-description
+    rules: ghost-role-component-default-rules
+    makeSentient: false
+    allowMovement: true
+  - type: GhostRoleJob
+    job: EnclaveEyebot
+  - type: Sprite
+    sprite: _Misfits/Mobs/Pets/eyebot_enclave.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: icon
+    - state: shadow_eyebot
+
+# #Misfits Add - Enclave Cyberdog companion, purchasable by Enclave scientist roles.
+# Cybernetic mutt (no RadiationReceiver, like the Washington BoS cyberdog) with an Enclave
+# olive chassis and green optics. Inherits the organic dog package from N14MobPetDog.
+- type: entity
+  name: Enclave Cyberdog
+  id: MisfitsMobPetDogEnclave
+  parent: N14MobPetDog
+  description: A butchered but overall not-too-rusted cybernetic dog, its chassis re-finished in Enclave olive. A loyal killing machine, and at least it's immune to radiation.
+  components:
+  - type: RandomMetadata
+    nameSegments: [names_N14pet_dog]
+  - type: NpcFactionMember
+    factions:
+    - Enclave
+  - type: GhostRole
+    name: ghost-role-information-misfits-pet-dog-enclave-name
+    description: ghost-role-information-misfits-pet-dog-enclave-description
+    rules: ghost-role-component-default-rules
+    makeSentient: false
+    allowMovement: true
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dog
+      sprite: _Misfits/Mobs/Pets/dog_enclave.rsi
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dog
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Critical
+      160: Dead
+  - type: LanguageKnowledge
+    speaks:
+    - N14Dog
+    - N14Robot
+    understands:
+    - N14Dog
+    - N14Insect
+    - English
+    - Chinese
+    - Latin
+    - Tribal
+    - N14Robot
+    - N14BrotherBeep
+    - Sign

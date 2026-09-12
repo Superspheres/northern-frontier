@@ -161,3 +161,7 @@
       id: MisfitsLoadoutHeadHeadAHPhelmet
     - type: loadout
       id: MisfitsLoadoutHeadKhanHelmet
+    - type: loadout
+      id: MisfitsLoadoutHeadKhanFurHelmet
+    - type: loadout
+      id: MisfitsLoadoutHeadKhanFullHelmet

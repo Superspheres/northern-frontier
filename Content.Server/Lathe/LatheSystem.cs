@@ -12,6 +12,7 @@ using Content.Server.Stack;
 using Content.Shared.Atmos;
 using Content.Shared._Misfits.Special;
 using Content.Shared._Misfits.Special.Components;
+using Content.Shared._Misfits.Talents.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -615,6 +616,11 @@ namespace Content.Server.Lathe
 
         private bool CanUseLatheWithIntelligence(EntityUid user)
         {
+            // #Misfits Fix - Ghosts (admin ghosts included) never carry SPECIAL, so the
+            // intelligence gate would lock them out of every workbench.
+            if (!_special.UsesSpecialStats(user))
+                return true;
+
             return TryComp<SpecialComponent>(user, out var special) &&
                    _special.GetEffective(user, SpecialStat.Intelligence, special) > 3;
         }
@@ -629,6 +635,10 @@ namespace Content.Server.Lathe
             var delta = SharedSpecialSystem.GetCurvedEffectDelta(intelligence);
             var modifier = -delta * tuning.IntelligenceLatheTimeMultiplierPerPoint;
             var multiplier = 1f + modifier;
+
+            // #Misfits Add - talent tree: Swift Learner shaves production time.
+            if (HasComp<TraitSwiftLearnerComponent>(user.Value))
+                multiplier *= 0.90f;
 
             return baseTime * MathF.Max(0.1f, multiplier);
         }

@@ -9,18 +9,19 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Gatherable;
 
 public sealed partial class GatherableSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private DestructibleSystem _destructible = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -47,20 +48,32 @@ public sealed partial class GatherableSystem : EntitySystem
         if (_whitelistSystem.IsWhitelistFailOrNull(gatherable.Comp.ToolWhitelist, args.User))
             return;
 
-        Gather(args.Target, args.User, gatherable.Comp);
+        // ActivateInWorldInteraction raises a contact event after this handler. Defer destruction until
+        // that interaction has finished so the normal contact/forensics path sees a valid entity.
+        Gather(args.Target, args.User, gatherable.Comp, deferDestruction: true);
         args.Handled = true;
     }
-
-    public void Gather(EntityUid gatheredUid, EntityUid? gatherer = null, GatherableComponent? component = null)
+    public void Gather(EntityUid gatheredUid, EntityUid? gatherer = null, GatherableComponent? component = null,
+        bool deferDestruction = false)
     {
         if (!Resolve(gatheredUid, ref component))
             return;
 
         if (TryComp<SoundOnGatherComponent>(gatheredUid, out var soundComp))
             _audio.PlayPvs(soundComp.Sound, Transform(gatheredUid).Coordinates);
-
         // Complete the gathering process
-        _destructible.DestroyEntity(gatheredUid);
+        if (deferDestruction)
+        {
+            Timer.Spawn(0, () =>
+            {
+                if (Exists(gatheredUid))
+                    _destructible.DestroyEntity(gatheredUid);
+            });
+        }
+        else
+        {
+            _destructible.DestroyEntity(gatheredUid);
+        }
 
         // Spawn the loot!
         if (component.Loot == null)
@@ -77,11 +90,11 @@ public sealed partial class GatherableSystem : EntitySystem
             }
             var getLoot = _proto.Index(table);
             var spawnLoot = getLoot.GetSpawns(_random);
-            
+
             // #Misfits Fix - Prevent ArgumentOutOfRangeException when spawnLoot is empty
             if (spawnLoot.Count == 0)
                 continue;
-                
+
             var spawnPos = pos.Offset(_random.NextVector2(component.GatherOffset));
             Spawn(spawnLoot[0], spawnPos);
         }

@@ -103,6 +103,11 @@
   - type: Stamina
     critThreshold: 1000 # 10x human
     decay: 30   # 10x recovery
+  # #Misfits Add - innate fireman carry. A mutant hauls a body one-handed; carrying or
+  # dragging someone costs them no speed. Only the two player mobs inherit from here
+  # (player supermutant and nightkin) - hostile NPCs sit on the N14MobBaseHostile chain.
+  # The FiremanCarry trait is hidden from these species so the -2 points aren't wasted.
+  - type: CanFiremanCarry
   # Misfits Change - radiation is absorbed as healing fuel rather than damage.
   # healFactor 0.1 (default) ≈ 2× super stimpack rate in a moderate rad zone (~50 rads/sec).
   # healCap scaled to SM health: 360 = 90% of 400 dead threshold (vs 90 = 90% of 100 crit for humans).
@@ -123,6 +128,12 @@
     heavyDamageBaseModifier: 1
     heavyStaminaCost: 0
     maxTargets: 1
+  # Player supermutants use the vocalizations of the existing NPC variants.
+  - type: Vocal
+    sounds:
+      Male: MisfitsSuperMutantEmotes
+      Female: MisfitsSuperMutantEmotes
+      Unsexed: MisfitsSuperMutantEmotes
   # Misfits Change - 2x multiplier on all outgoing melee damage (unarmed + wielded weapons).
   - type: Oni
     modifiers:
@@ -147,6 +158,11 @@
   - type: FootstepVolumeModifier
     sprintVolumeModifier: 15
     walkVolumeModifier: 15
+  - type: Butcherable
+    butcheringType: Spike # big fellas still need a spike
+    spawned:
+    - id: N14FoodMeatSupermutant
+      amount: 5
 
 - type: entity
   save: false
