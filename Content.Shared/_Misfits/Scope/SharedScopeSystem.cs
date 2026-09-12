@@ -10,6 +10,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
+using Content.Shared.Overlays.Switchable;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
@@ -221,12 +222,14 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         args.Handled = true;
 
-        // Cycle to the next zoom level, wrapping around
-        if (scope.Comp.CurrentZoomLevel >= scope.Comp.ZoomLevels.Count - 1)
-            scope.Comp.CurrentZoomLevel = 0;
-        else
-            ++scope.Comp.CurrentZoomLevel;
+        if (TryComp<ScopingComponent>(args.Performer, out var scoping))
+        {
+            ChangeZoomLevel(scope, (args.Performer, scoping), 1, wrap: true);
+            return;
+        }
 
+        ValidateCurrentZoomLevel(scope);
+        scope.Comp.CurrentZoomLevel = (scope.Comp.CurrentZoomLevel + 1) % scope.Comp.ZoomLevels.Count;
         var zoomLevel = GetCurrentZoomLevel(scope);
         if (zoomLevel.Name != null)
         {
@@ -355,6 +358,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
         scoping.AllowMovement = zoomLevel.AllowMovement;
+        ApplyScopeVision(scope, (user, scoping));
         Dirty(user, scoping);
 
         // If this is a scope attachment inside a gun, mark the gun too
@@ -394,6 +398,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (scope.Comp.User is not { } user)
             return false;
 
+        if (TryComp<ScopingComponent>(user, out var scoping))
+            RestoreScopeVision((user, scoping));
+
         RemCompDeferred<ScopingComponent>(user);
 
         // Clean up GunScopingComponent if this was an attachment scope
@@ -415,6 +422,108 @@ public abstract partial class SharedScopeSystem : EntitySystem
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, false);
         _contentEye.ResetZoom(user);
         return true;
+    }
+
+    private void ChangeZoomLevel(
+        Entity<ScopeComponent> scope,
+        Entity<ScopingComponent> user,
+        int direction,
+        bool wrap = false)
+    {
+        ValidateCurrentZoomLevel(scope);
+        var next = scope.Comp.CurrentZoomLevel + Math.Sign(direction);
+
+        if (wrap)
+            next = (next + scope.Comp.ZoomLevels.Count) % scope.Comp.ZoomLevels.Count;
+        else
+            next = Math.Clamp(next, 0, scope.Comp.ZoomLevels.Count - 1);
+
+        if (next == scope.Comp.CurrentZoomLevel)
+            return;
+
+        scope.Comp.CurrentZoomLevel = next;
+        var zoomLevel = GetCurrentZoomLevel(scope);
+        user.Comp.AllowMovement = zoomLevel.AllowMovement;
+
+        if (scope.Comp.ScopingDirection is { } directionFacing)
+        {
+            user.Comp.EyeOffset = GetScopeOffset(scope, directionFacing);
+            _contentEye.SetZoom(user, Vector2.One * zoomLevel.Zoom, true);
+            UpdateOffset(user);
+            MoveRelay(scope, user.Comp.EyeOffset);
+        }
+
+        if (zoomLevel.Name != null)
+        {
+            _popup.PopupClient(
+                Loc.GetString("n14-action-popup-scope-cycle-zoom", ("zoom", zoomLevel.Name)),
+                user, user);
+        }
+
+        Dirty(scope);
+        Dirty(user);
+    }
+
+    private void ApplyScopeVision(Entity<ScopeComponent> scope, Entity<ScopingComponent> user)
+    {
+        if (!TryComp<ScopeVisionComponent>(scope, out var vision) || vision.Mode == ScopeVisionMode.None)
+            return;
+
+        user.Comp.VisionMode = vision.Mode;
+
+        if (vision.Mode == ScopeVisionMode.NightVision)
+        {
+            user.Comp.AddedVisionComponent = !TryComp<NightVisionComponent>(user, out var nightVision);
+            nightVision ??= EnsureComp<NightVisionComponent>(user);
+            user.Comp.VisionWasActive = nightVision.IsActive;
+            nightVision.IsActive = true;
+            Dirty(user.Owner, nightVision);
+            RaiseVisionRefresh(user.Owner, nightVision);
+        }
+        else
+        {
+            user.Comp.AddedVisionComponent = !TryComp<ThermalVisionComponent>(user, out var thermal);
+            thermal ??= EnsureComp<ThermalVisionComponent>(user);
+            user.Comp.VisionWasActive = thermal.IsActive;
+            thermal.IsActive = true;
+            Dirty(user.Owner, thermal);
+            RaiseVisionRefresh(user.Owner, thermal);
+        }
+    }
+
+    private void RestoreScopeVision(Entity<ScopingComponent> user)
+    {
+        if (user.Comp.VisionMode == ScopeVisionMode.NightVision &&
+            TryComp<NightVisionComponent>(user, out var nightVision))
+        {
+            if (user.Comp.AddedVisionComponent)
+                RemCompDeferred<NightVisionComponent>(user);
+            else
+            {
+                nightVision.IsActive = user.Comp.VisionWasActive;
+                Dirty(user.Owner, nightVision);
+                RaiseVisionRefresh(user.Owner, nightVision);
+            }
+        }
+        else if (user.Comp.VisionMode == ScopeVisionMode.Thermal &&
+                 TryComp<ThermalVisionComponent>(user, out var thermal))
+        {
+            if (user.Comp.AddedVisionComponent)
+                RemCompDeferred<ThermalVisionComponent>(user);
+            else
+            {
+                thermal.IsActive = user.Comp.VisionWasActive;
+                Dirty(user.Owner, thermal);
+                RaiseVisionRefresh(user.Owner, thermal);
+            }
+        }
+    }
+
+    private void RaiseVisionRefresh<T>(EntityUid user, T component)
+        where T : SwitchableOverlayComponent
+    {
+        var ev = new SwitchableOverlayToggledEvent(user, component.IsActive);
+        RaiseLocalEvent(user, ref ev);
     }
 
     private void UnscopeGun(Entity<GunScopingComponent> gun)
@@ -453,19 +562,20 @@ public abstract partial class SharedScopeSystem : EntitySystem
         // For attachment scopes, resolve to the active (gun) entity
         if (scope.Comp.Attachment)
         {
-            if (!TryGetActiveEntity(scope, out var activeEnt))
+            if (TryGetActiveEntity(scope, out var activeEnt))
+            {
+                ent = activeEnt;
+            }
+            else if (!scope.Comp.UseInHand)
             {
                 var msgError = Loc.GetString("n14-action-popup-scoping-must-attach", ("scope", scope.Owner));
                 _popup.PopupClient(msgError, user, user);
                 return false;
             }
-
-            ent = activeEnt;
         }
 
         // Must be held in active hand (unless it's an attachment inside a container)
-        if (!_hands.TryGetActiveItem(user, out var heldItem) ||
-            (!scope.Comp.Attachment && heldItem != scope.Owner))
+        if (!_hands.TryGetActiveItem(user, out var heldItem) || heldItem != ent)
         {
             var msgError = Loc.GetString("n14-action-popup-scoping-user-must-hold", ("scope", ent));
             _popup.PopupClient(msgError, user, user);

@@ -128,6 +128,9 @@
   id: RifleScope # #Misfits Fix: uncommented — used by N14JunkGunpartsRifleScope
 
 - type: Tag
+  id: N14FirearmMuzzleAttachment
+
+- type: Tag
   id: SprayPainter
 
 - type: Tag

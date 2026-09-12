@@ -410,3 +410,17 @@ AGENTS.md
 .dotnet/.dotnet/10.0.107.dotnetFirstUseSentinel
 .dotnet/.dotnet/10.0.107.aspNetCertificateSentinel
 .github/prompts/add-misfits-item.prompt.md
+work/misfits-weapons/build.mjs
+work/misfits-weapons/final-previews/Ammo & Calibers.png
+work/misfits-weapons/final-previews/Legacy Reference.png
+work/misfits-weapons/final-previews/Overview.png
+work/misfits-weapons/final-previews/Planned Ammo.png
+work/misfits-weapons/final-previews/Planned Weapons.png
+work/misfits-weapons/final-previews/Weapons.png
+work/misfits-weapons/inspect.mjs
+work/misfits-weapons/inspection/(OLD sheet only for reference).png
+work/misfits-weapons/inspection/Caliber BallisticsDamage Stats.png
+work/misfits-weapons/inspection/Weapon Stats.png
+outputs/misfits-weapons-organized/Misfits Weapon Stats - Organized.xlsx
+outputs/misfits-weapons-organized/Misfits Weapon Stats - Organized.xlsx.inspect.ndjson
+.codex-work/misfits-weapons/inspect.mjs

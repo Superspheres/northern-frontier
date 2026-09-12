@@ -29,6 +29,21 @@ public partial class SharedScopeSystem
         SubscribeLocalEvent<ScopingComponent, KnockedDownEvent>(OnKnockedDown);
         SubscribeLocalEvent<ScopingComponent, StunnedEvent>(OnStunned);
         SubscribeLocalEvent<ScopingComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<ScopingComponent, ScopeZoomInputEvent>(OnScopeZoomInput);
+    }
+
+    private void OnScopeZoomInput(Entity<ScopingComponent> user, ref ScopeZoomInputEvent args)
+    {
+        args.Handled = true;
+
+        if (user.Comp.Scope is not { } scopeUid ||
+            !TryComp<ScopeComponent>(scopeUid, out var scope) ||
+            scope.ZoomLevels.Count <= 1)
+        {
+            return;
+        }
+
+        ChangeZoomLevel((scopeUid, scope), user, args.Direction);
     }
 
     /// <summary>

@@ -29,4 +29,13 @@ public sealed partial class ScopingComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public bool AllowMovement;
+
+    [ViewVariables, AutoNetworkedField]
+    public ScopeVisionMode VisionMode;
+
+    [ViewVariables, AutoNetworkedField]
+    public bool AddedVisionComponent;
+
+    [ViewVariables, AutoNetworkedField]
+    public bool VisionWasActive;
 }

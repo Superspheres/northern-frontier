@@ -40,8 +40,15 @@ public sealed class MeleeSoundSystem : EntitySystem
 
         // hitting can obv destroy an entity so we play at coords and not following them
         var coords = Transform(targetUid).Coordinates;
+        // An event-provided sound is an explicit override and must take precedence over
+        // material and damage-type sounds (for example, a mounted bayonet thrust).
+        if (hitSoundOverride != null)
+        {
+            _audio.PlayPredicted(hitSoundOverride, coords, userUid, AudioParams.Default.WithVariation(DamagePitchVariation));
+            playedSound = true;
+        }
         // Play sound based off of highest damage type.
-        if (TryComp<MeleeSoundComponent>(targetUid, out var damageSoundComp))
+        else if (TryComp<MeleeSoundComponent>(targetUid, out var damageSoundComp))
         {
             if (damageType == null && damageSoundComp.NoDamageSound != null)
             {
@@ -63,12 +70,7 @@ public sealed class MeleeSoundSystem : EntitySystem
         // Use weapon sounds if the thing being hit doesn't specify its own sounds.
         if (!playedSound)
         {
-            if (hitSoundOverride != null)
-            {
-                _audio.PlayPredicted(hitSoundOverride, coords, userUid, AudioParams.Default.WithVariation(DamagePitchVariation));
-                playedSound = true;
-            }
-            else if (hitSound != null)
+            if (hitSound != null)
             {
                 _audio.PlayPredicted(hitSound, coords, userUid, AudioParams.Default.WithVariation(DamagePitchVariation));
                 playedSound = true;

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Firearm attachment sprites created for the Misfits project",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "suppressor-horizontal"
+    },
+    {
+      "name": "suppressor-diagonal"
+    },
+    {
+      "name": "bayonet-horizontal"
+    },
+    {
+      "name": "bayonet-diagonal"
+    }
+  ]
+}

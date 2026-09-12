@@ -4,6 +4,7 @@ using Content.Shared.Administration.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.Ghost;
 using Content.Shared.Input;
+using Content.Shared._Misfits.Scope;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
@@ -85,6 +86,9 @@ public abstract class SharedContentEyeSystem : EntitySystem
 
     private void ZoomOut(ICommonSession? session)
     {
+        if (TryHandleScopeZoom(session, -1))
+            return;
+
         // #Misfits Change — bail out if player zoom is disabled server-side (prevents meta via extended view range).
         if (!_allowPlayerZoom)
             return;
@@ -95,12 +99,25 @@ public abstract class SharedContentEyeSystem : EntitySystem
 
     private void ZoomIn(ICommonSession? session)
     {
+        if (TryHandleScopeZoom(session, 1))
+            return;
+
         // #Misfits Change — bail out if player zoom is disabled server-side.
         if (!_allowPlayerZoom)
             return;
 
         if (TryComp(session?.AttachedEntity, out ContentEyeComponent? eye))
             SetZoom(session.AttachedEntity.Value, eye.TargetZoom / ZoomMod, eye: eye);
+    }
+
+    private bool TryHandleScopeZoom(ICommonSession? session, int direction)
+    {
+        if (session?.AttachedEntity is not { } user)
+            return false;
+
+        var ev = new ScopeZoomInputEvent(direction);
+        RaiseLocalEvent(user, ref ev);
+        return ev.Handled;
     }
 
     private Vector2 Clamp(Vector2 zoom, ContentEyeComponent component)

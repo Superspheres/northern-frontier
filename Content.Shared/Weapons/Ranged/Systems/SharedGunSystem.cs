@@ -180,6 +180,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Permanently adds a selectable fire mode while preserving the gun's current selection.
+    /// </summary>
+    public void AddFireMode(EntityUid uid, SelectiveFire mode, GunComponent? component = null)
+    {
+        if (!Resolve(uid, ref component) || (component.AvailableModes & mode) != 0)
+            return;
+
+        component.AvailableModes |= mode;
+        Dirty(uid, component);
+    }
+
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
         gunEntity = default;

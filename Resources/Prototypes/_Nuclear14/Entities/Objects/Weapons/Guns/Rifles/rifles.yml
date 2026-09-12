@@ -19,6 +19,20 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: FirearmAttachmentHost
+    muzzleSlot:
+      name: Muzzle attachment
+      priority: 3
+      insertOnInteract: true
+      ejectOnInteract: false
+      ejectOnUse: false
+      disableEject: true
+      ejectVerbText: Remove muzzle attachment
+      insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+      ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+      whitelist:
+        tags:
+        - N14FirearmMuzzleAttachment
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -253,6 +267,24 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: FirearmAttachmentHost
+    visualOrientation: Horizontal
+    enableOpticSlot: true
+    # The attachment art uses its lower-left pixel as the mounting origin.
+    muzzleVisualOffset: 0.96875, 0.46875
+    opticSlot:
+      name: Optic
+      priority: 4
+      insertOnInteract: true
+      ejectOnInteract: false
+      ejectOnUse: false
+      disableEject: true
+      whitelist:
+        tags:
+        - RifleScope
+  - type: FirearmSearCompatible
+    allowBurst: true
+    allowFullAuto: true
   - type: Gun
     minAngle: 21
     maxAngle: 45
@@ -266,7 +298,6 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    - Burst # Corvax-Add
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -310,6 +341,20 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: FirearmAttachmentHost
+    visualOrientation: Horizontal
+    muzzleVisualOffset: 0.96875, 0.46875
+  - type: Scope
+    requireWielding: true
+    zoomLevels:
+    - name: 4x
+      zoom: 1.0
+      offset: 15
+      allowMovement: false
+      doAfter: 0.8
+  - type: FirearmSearCompatible
+    allowBurst: true
+    allowFullAuto: true
   - type: Gun
     minAngle: 21 # Corvax-Change
     maxAngle: 38 # Corvax-Change

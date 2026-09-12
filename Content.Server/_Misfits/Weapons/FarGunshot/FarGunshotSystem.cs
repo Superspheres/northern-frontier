@@ -1,5 +1,6 @@
 // #Misfits Add - Far gunshot system. Plays a distant "boom" for players beyond PVS range of the shooter.
 // Inspired by a similar directional far-sound concept from stalker-14-EN, built independently for N14.
+using Content.Shared._Misfits.Weapons.Attachments;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.Audio;
 using Robust.Server.Player;
@@ -47,7 +48,9 @@ public sealed class FarGunshotSystem : EntitySystem
     private void OnAmmoShot(EntityUid gunUid, FarGunshotComponent comp, AmmoShotEvent args)
     {
         // Suppressed guns (silencers) skip the distant echo entirely.
-        if (comp.Suppressed)
+        var suppressed = new IsGunSuppressedEvent(comp.Suppressed);
+        RaiseLocalEvent(gunUid, ref suppressed);
+        if (suppressed.Suppressed)
             return;
 
         // Misfits Fix: rate-limit so rapid-fire weapons don't iterate all player sessions every bullet.
